@@ -14,7 +14,7 @@ export class SicherheitsCheckPage implements OnInit {
 
   sicherheitsCheckForm: FormGroup;
   dienstleistung = '';
-  dienstleistungen = [ {text: 'putzen', value: 'A'} ];
+  dienstleistungen = [ {text: 'Andere...', value: 'A'} ];
 
   constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService, private pickerCtrl: PickerController) {
     this.sicherheitsCheckForm = this.fb.group({
@@ -120,7 +120,7 @@ export class SicherheitsCheckPage implements OnInit {
   ngOnInit() {
   }
 
-  async showBasicPicker() {
+  async showDlPicker() {
     let opts: PickerOptions = {
       buttons: [
         {

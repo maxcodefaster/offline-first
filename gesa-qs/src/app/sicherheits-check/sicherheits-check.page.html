@@ -30,10 +30,15 @@
             <ion-label position="floating">Kunde / Ort</ion-label>
             <ion-input clearInput type="text" formControlName="kunde"></ion-input>
         </ion-item>
-        <ion-item (click)="showBasicPicker()">
+
+        <ion-item (click)="showDlPicker()">
             <ion-label>Dienstleistung</ion-label>
             <ion-label color="primary">{{dienstleistung}}</ion-label>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
+        </ion-item>
+        <ion-item *ngIf="dienstleistung === 'Andere...'">
+            <ion-label position="floating">Benutzerdefinierte Dienstleistung</ion-label>
+            <ion-input clearInput type="text" formControlName="dienstleistung_custom"></ion-input>
         </ion-item>
 
         <ion-text>
