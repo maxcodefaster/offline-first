@@ -1,0 +1,597 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-buttons slot="secondary">
+            <ion-button routerLink="/archive">
+                <ion-icon slot="icon-only" name="archive"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-title>Sicherheits-Check</ion-title>
+
+        <ion-buttons slot="primary">
+            <ion-button>
+                <ion-icon slot="icon-only" name="settings"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+    <form [formGroup]="sicherheitsCheckForm" id="sicherheitsCheckForm">
+        <ion-text>
+            <h3>Basis Informationen</h3>
+        </ion-text>
+        <ion-item>
+            <ion-label position="floating">Kunde / Ort</ion-label>
+            <ion-input clearInput type="text" formControlName="kunde"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Datum</ion-label>
+            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="datum"></ion-datetime>
+        </ion-item>
+
+        <ion-text>
+            <h3>Hat der Kunde eine eigene ASI Schulung verlangt?</h3>
+        </ion-text>
+        <ion-radio-group formControlName="asi_schulung">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="asi_schulung_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Hat der Teamleiter die PSA festgelegt?</h3>
+        </ion-text>
+        <ion-radio-group formControlName="psa_festgelegt">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="psa_festgelegt_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Liegen die Betriebsanweisungen BA (Service-Handbuch) vor?</h3>
+        </ion-text>
+        <ion-radio-group formControlName="ba_vorhanden">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="ba_vorhanden_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Sind sich die Mitarbeiter über die Gefährdungen bewusst?</h3>
+        </ion-text>
+        <ion-radio-group formControlName="gefährdungen_bewusst">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="gefährdungen_bewusst_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Hat jeder Mitarbeiter eine Erstunterweisung / die jährliche ASI Schulung erhalten?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="erstunterweisung">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="erstunterweisung_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Ist ein Ersthelfer vor Ort oder ASI Dienst vom Kunden?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="ersthelfer_vor_ort">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="ersthelfer_vor_ort_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Sind alle Mitarbeiter arbeitsmedizinisch untersucht (z.B. G24)?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="medizinisch_untersucht">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="medizinisch_untersucht_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Sind alle prüfungsbedürftigen Geräte mit Prüfplakette (BGV A3) versehen?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="prüfplakette">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="prüfplakette_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Halten sich die Mitarbeiter an das Ess-/ Trink- und Alkoholverbot währende dem Arbeiten?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="verbote">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="verbote_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Sind Gesundheitsausweise / Werksausweise vorhanden?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="ausweise">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="ausweise_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Wird die Hebebühne nur von Mitarbeitern mit ensprechender Ausbildung bedient?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="hebebühne">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="hebebühne_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Ist ein Erste-Hilfe Rucksack / Box / Tasche mit Verbanskasten & ASI-Ausstattung vor Ort?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="verbandskasten">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="verbandskasten_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Trägt jeder Mitarbeiter...
+            </h3>
+        </ion-text>
+        <ion-text>
+            <h5>
+                ... Sicherheitsbekleidung?
+            </h5>
+        </ion-text>
+        <ion-radio-group formControlName="sicherheitsbekleidung">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="sicherheitsbekleidung_ft">
+            </ion-textarea>
+        </ion-item>
+        <ion-text>
+            <h5>
+                ... entsprechende Arbeitshandschuhe?
+            </h5>
+        </ion-text>
+        <ion-radio-group formControlName="handschuhe">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="handschuhe_ft">
+            </ion-textarea>
+        </ion-item>
+        <ion-text>
+            <h5>
+                ... die Arbeitsschutzbrille?
+            </h5>
+        </ion-text>
+        <ion-radio-group formControlName="schutzbrille">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="schutzbrille_ft">
+            </ion-textarea>
+        </ion-item>
+        <ion-text>
+            <h5>
+                ... eine Atemschutzmaske?
+            </h5>
+        </ion-text>
+        <ion-radio-group formControlName="schutzmaske">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="schutzmaske_ft">
+            </ion-textarea>
+        </ion-item>
+        <ion-text>
+            <h5>
+                ... der über 3m Höhe arbeitet einen geprüften Fanggurt?
+            </h5>
+        </ion-text>
+        <ion-radio-group formControlName="fanggurt">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="fanggurt_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Falls die PSA nicht getragen wurde, erfolgt eine erneute Unterweisung?
+            </h3>
+        </ion-text>
+        <ion-radio-group formControlName="erneute_unterweisung">
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="primary">Ja</ion-label>
+                        <ion-radio value="ja"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="secondary">Nein</ion-label>
+                        <ion-radio value="nein"></ion-radio>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label color="tertiary">n.e.</ion-label>
+                        <ion-radio value="n.e."></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-radio-group>
+        <ion-item>
+            <ion-textarea placeholder="Notiz..." formControlName="erneute_unterweisung_ft">
+            </ion-textarea>
+        </ion-item>
+    </form>
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" form="sicherheitsCheckForm">
+    <ion-fab-button type="submit" (click)="saveSicherheitsCheck()">
+        <ion-icon name="send"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

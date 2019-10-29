@@ -1,0 +1,7 @@
+{
+  "name": "gesa-qs",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

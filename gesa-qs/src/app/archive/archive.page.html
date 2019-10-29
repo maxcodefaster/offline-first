@@ -1,0 +1,47 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-buttons slot="secondary">
+            <ion-button routerLink="/" routerDirection="back">
+                <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-title>Formular-Archiv</ion-title>
+
+        <ion-buttons slot="primary">
+            <ion-button>
+                <ion-icon slot="icon-only" name="settings"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-card *ngFor="let formular of formulare">
+            <ion-item>
+                <ion-label>{{formular.kunde}}</ion-label>
+                <ion-label>{{formular.dateCreated | date}}</ion-label>
+                <ion-button fill="outline" slot="end">View</ion-button>
+            </ion-item>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            Dienstleistung: {{formular.dienstleistung}}
+                        </ion-col>
+                        <ion-col>
+                            Teamleiter: {{formular.teamleiter}}
+                        </ion-col>
+                        <ion-col>
+                            Techniker: {{formular.techniker}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+        <ion-item>
+            <ion-label></ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>
