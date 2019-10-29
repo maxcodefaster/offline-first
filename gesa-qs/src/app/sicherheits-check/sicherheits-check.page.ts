@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SicherheitsCheckService } from '../services/sicherheits-check.service';
+import { PickerController } from '@ionic/angular';
+import { PickerOptions, PickerButton } from '@ionic/core';
 
 
 @Component({
@@ -11,8 +13,10 @@ import { SicherheitsCheckService } from '../services/sicherheits-check.service';
 export class SicherheitsCheckPage implements OnInit {
 
   sicherheitsCheckForm: FormGroup;
+  dienstleistung = '';
+  dienstleistungen = [ {text: 'putzen', value: 'A'} ];
 
-  constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService) {
+  constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService, private pickerCtrl: PickerController) {
     this.sicherheitsCheckForm = this.fb.group({
       datum: new FormControl('', [
         Validators.required,
@@ -114,6 +118,32 @@ export class SicherheitsCheckPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async showBasicPicker() {
+    let opts: PickerOptions = {
+      buttons: [
+        {
+          text: 'Zurück',
+          role: 'cancel'
+        },
+        {
+          text: 'OK'
+        }
+      ],
+      columns: [
+        {
+          name: 'Dienstleistungen',
+          options: this.dienstleistungen,
+        }
+      ]
+    };
+    let picker = await this.pickerCtrl.create(opts);
+    picker.present();
+    picker.onDidDismiss().then(async data => {
+      let col = await picker.getColumn('Dienstleistungen');
+      this.dienstleistung = col.options[col.selectedIndex].text;
+    });
   }
 
   saveSicherheitsCheck() {

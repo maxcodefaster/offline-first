@@ -22,12 +22,18 @@
             <h3>Basis Informationen</h3>
         </ion-text>
         <ion-item>
+            <ion-label position="floating">Datum</ion-label>
+            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="datum" doneText="Ok" cancelText="Zurück">
+            </ion-datetime>
+        </ion-item>
+        <ion-item>
             <ion-label position="floating">Kunde / Ort</ion-label>
             <ion-input clearInput type="text" formControlName="kunde"></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-label position="floating">Datum</ion-label>
-            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="datum"></ion-datetime>
+        <ion-item (click)="showBasicPicker()">
+            <ion-label>Dienstleistung</ion-label>
+            <ion-label color="primary">{{dienstleistung}}</ion-label>
+            <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
 
         <ion-text>
