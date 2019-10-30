@@ -7,6 +7,7 @@ import { TechnikerService } from '../services/techniker.service';
 import { PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -25,9 +26,9 @@ export class SicherheitsCheckPage implements OnInit {
   dienstleistungen = [{ text: 'Andere...', value: 'A' }];
 
   constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
-              private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
-              private technikerService: TechnikerService, private pickerCtrl: PickerController,
-              private alertController: AlertController) {
+    private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
+    private technikerService: TechnikerService, private pickerCtrl: PickerController,
+    private alertController: AlertController, private toastController: ToastController) {
     this.sicherheitsCheckForm = this.fb.group({
       datum: new FormControl('', [
         Validators.required,
@@ -36,6 +37,12 @@ export class SicherheitsCheckPage implements OnInit {
         Validators.required,
       ]),
       dienstleistung: new FormControl('', [
+        Validators.required,
+      ]),
+      teamleiter: new FormControl('', [
+        Validators.required,
+      ]),
+      techniker: new FormControl('', [
         Validators.required,
       ]),
       asi_schulung: new FormControl('n.e.', [
@@ -131,6 +138,9 @@ export class SicherheitsCheckPage implements OnInit {
     });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.sicherheitsCheckForm.controls; }
+
   ngOnInit() {
     this.getResources();
   }
@@ -200,6 +210,7 @@ export class SicherheitsCheckPage implements OnInit {
       }
     });
   }
+
   async showTlPicker() {
     const opts: PickerOptions = {
       buttons: [
@@ -252,6 +263,22 @@ export class SicherheitsCheckPage implements OnInit {
     });
   }
 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Formular übermittelt',
+      duration: 4000,
+      buttons: [
+        {
+          text: 'OK',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    toast.present();
+  }
+
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
       header: 'Fügen Sie eine andere Dienstleistung hinzu',
@@ -292,13 +319,27 @@ export class SicherheitsCheckPage implements OnInit {
       const iso = this.getDateISOString();
       form.dateCreated = iso;
       // save to Database
-      this.sicherheitsCheckService.saveSicherheitsChecks(form);
+      this.sicherheitsCheckService.saveSicherheitsChecks(form).then((res: any) => {
+        if (res.ok) {
+          this.presentToast();
+          this.resetForm(this.sicherheitsCheckForm);
+        }
+      });
     }
-
   }
 
   getDateISOString(): string {
     return new Date().toISOString();
+  }
+
+  resetForm(form: FormGroup) {
+    form.reset();
+    this.dienstleistung = '';
+    this.techniker = '';
+    this.teamleiter = '';
+    Object.keys(form.controls).forEach(key => {
+      form.get(key).setErrors(null);
+    });
   }
 
 

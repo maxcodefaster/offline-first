@@ -29,24 +29,27 @@
         <ion-item>
             <ion-label position="floating">Kunde / Ort</ion-label>
             <ion-input clearInput type="text" formControlName="kunde"></ion-input>
+            <ion-note *ngIf="!f.kunde.valid && (f.kunde.touched)" color="danger">Dieses Feld ist benötigt</ion-note>
         </ion-item>
 
         <ion-item (click)="showDlPicker()">
             <ion-label>Dienstleistung</ion-label>
             <ion-label color="primary">{{dienstleistung}}</ion-label>
-            <ion-input style="display: none;" [value]="dienstleistung" type="text" formControlName="dienstleistung"></ion-input>
+            <ion-input style="display: none" [value]="dienstleistung" type="text" formControlName="dienstleistung"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
 
         <ion-item (click)="showTlPicker()">
-            <ion-label>Überprüfter Teamleiter</ion-label>
+            <ion-label>Teamleiter</ion-label>
             <ion-label color="primary">{{teamleiter}}</ion-label>
+            <ion-input style="display: none" [value]="teamleiter" type="text" formControlName="teamleiter"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
 
         <ion-item (click)="showTechnikerPicker()">
-            <ion-label>Überprüfter Servicetechniker</ion-label>
+            <ion-label>Servicetechniker</ion-label>
             <ion-label color="primary">{{techniker}}</ion-label>
+            <ion-input style="display: none" [value]="techniker" type="text" formControlName="techniker"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
 

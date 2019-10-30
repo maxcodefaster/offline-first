@@ -84,10 +84,10 @@ export class SicherheitsCheckService {
       updatedDoc.unterschrift_teamleiter = sicherheitsCheck.unterschrift_teamleiter;
       updatedDoc.unterschrift_techniker = sicherheitsCheck.unterschrift_techniker;
 
-      this.dataService.updateDoc(updatedDoc);
+      return this.dataService.updateDoc(updatedDoc);
 
     } else {
-      this.dataService.createDoc({
+      return this.dataService.createDoc({
         kunde: sicherheitsCheck.kunde,
         author: sicherheitsCheck.author,
         dateCreated: sicherheitsCheck.dateCreated,
