@@ -34,11 +34,20 @@
         <ion-item (click)="showDlPicker()">
             <ion-label>Dienstleistung</ion-label>
             <ion-label color="primary">{{dienstleistung}}</ion-label>
+            <ion-input style="display: none;" [value]="dienstleistung" type="text" formControlName="dienstleistung"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
-        <ion-item *ngIf="dienstleistung === 'Andere...'">
-            <ion-label position="floating">Benutzerdefinierte Dienstleistung</ion-label>
-            <ion-input clearInput type="text" formControlName="dienstleistung_custom"></ion-input>
+
+        <ion-item (click)="showTlPicker()">
+            <ion-label>Überprüfter Teamleiter</ion-label>
+            <ion-label color="primary">{{teamleiter}}</ion-label>
+            <ion-button slot="end" fill="clear">Auswählen</ion-button>
+        </ion-item>
+
+        <ion-item (click)="showTechnikerPicker()">
+            <ion-label>Überprüfter Servicetechniker</ion-label>
+            <ion-label color="primary">{{techniker}}</ion-label>
+            <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
 
         <ion-text>

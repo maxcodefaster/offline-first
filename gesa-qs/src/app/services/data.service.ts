@@ -15,6 +15,7 @@ export class DataService {
 
     initDatabase(remote): void {
 
+
         this.db = new PouchDB('gesaqsdb', {
             auto_compaction: true
         });

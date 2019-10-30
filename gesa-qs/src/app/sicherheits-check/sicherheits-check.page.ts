@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SicherheitsCheckService } from '../services/sicherheits-check.service';
+import { DienstleistungService } from '../services/dienstleistung.service';
+import { TeamleiterService } from '../services/teamleiter.service';
+import { TechnikerService } from '../services/techniker.service';
 import { PickerController } from '@ionic/angular';
-import { PickerOptions, PickerButton } from '@ionic/core';
+import { PickerOptions } from '@ionic/core';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -14,14 +18,24 @@ export class SicherheitsCheckPage implements OnInit {
 
   sicherheitsCheckForm: FormGroup;
   dienstleistung = '';
-  dienstleistungen = [ {text: 'Andere...', value: 'A'} ];
+  techniker = '';
+  teamleiter = '';
+  teamleiterList = [];
+  technikerList = [];
+  dienstleistungen = [{ text: 'Andere...', value: 'A' }];
 
-  constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService, private pickerCtrl: PickerController) {
+  constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
+              private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
+              private technikerService: TechnikerService, private pickerCtrl: PickerController,
+              private alertController: AlertController) {
     this.sicherheitsCheckForm = this.fb.group({
       datum: new FormControl('', [
         Validators.required,
       ]),
       kunde: new FormControl('', [
+        Validators.required,
+      ]),
+      dienstleistung: new FormControl('', [
         Validators.required,
       ]),
       asi_schulung: new FormControl('n.e.', [
@@ -118,10 +132,47 @@ export class SicherheitsCheckPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getResources();
+  }
+
+  getResources() {
+    this.getDiensleistungen();
+    this.getTeamleiter();
+    this.getTechniker();
+  }
+
+  getDiensleistungen() {
+    this.dienstleistungService.init();
+
+    this.dienstleistungService.getDienstleistung().subscribe((dienstleistung: { name: string, type: string }[]) => {
+      for (const item of dienstleistung) {
+        this.dienstleistungen.push({ text: item.name, value: item.name });
+      }
+    });
+  }
+
+  getTeamleiter() {
+    this.teamleiterService.init();
+
+    this.teamleiterService.getTeamleiter().subscribe((teamleiter: { name: string, type: string }[]) => {
+      for (const item of teamleiter) {
+        this.teamleiterList.push({ text: item.name, value: item.name });
+      }
+    });
+  }
+
+  getTechniker() {
+    this.technikerService.init();
+
+    this.technikerService.getTechniker().subscribe((techniker: { name: string, type: string }[]) => {
+      for (const item of techniker) {
+        this.technikerList.push({ text: item.name, value: item.name });
+      }
+    });
   }
 
   async showDlPicker() {
-    let opts: PickerOptions = {
+    const opts: PickerOptions = {
       buttons: [
         {
           text: 'Zurück',
@@ -138,16 +189,104 @@ export class SicherheitsCheckPage implements OnInit {
         }
       ]
     };
-    let picker = await this.pickerCtrl.create(opts);
+    const picker = await this.pickerCtrl.create(opts);
     picker.present();
     picker.onDidDismiss().then(async data => {
-      let col = await picker.getColumn('Dienstleistungen');
+      const col = await picker.getColumn('Dienstleistungen');
       this.dienstleistung = col.options[col.selectedIndex].text;
+      if (this.dienstleistung === 'Andere...') {
+        this.dienstleistung = '';
+        this.presentAlertPrompt();
+      }
+    });
+  }
+  async showTlPicker() {
+    const opts: PickerOptions = {
+      buttons: [
+        {
+          text: 'Zurück',
+          role: 'cancel'
+        },
+        {
+          text: 'OK'
+        }
+      ],
+      columns: [
+        {
+          name: 'Teamleiter',
+          options: this.teamleiterList,
+        }
+      ]
+    };
+    const picker = await this.pickerCtrl.create(opts);
+    picker.present();
+    picker.onDidDismiss().then(async data => {
+      const col = await picker.getColumn('Teamleiter');
+      this.teamleiter = col.options[col.selectedIndex].text;
     });
   }
 
-  saveSicherheitsCheck() {
+  async showTechnikerPicker() {
+    const opts: PickerOptions = {
+      buttons: [
+        {
+          text: 'Zurück',
+          role: 'cancel'
+        },
+        {
+          text: 'OK'
+        }
+      ],
+      columns: [
+        {
+          name: 'Servicetechniker',
+          options: this.technikerList,
+        }
+      ]
+    };
+    const picker = await this.pickerCtrl.create(opts);
+    picker.present();
+    picker.onDidDismiss().then(async data => {
+      const col = await picker.getColumn('Servicetechniker');
+      this.techniker = col.options[col.selectedIndex].text;
+    });
+  }
 
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      header: 'Fügen Sie eine andere Dienstleistung hinzu',
+      inputs: [
+        {
+          name: 'custom_dl',
+          type: 'text',
+          placeholder: 'Dienstleistung'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Zurück',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: data => {
+            console.log('Confirm Ok');
+            if (data.custom_dl) {
+              this.dienstleistung = data.custom_dl;
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  // save to Database
+  saveSicherheitsCheck() {
     if (!this.sicherheitsCheckForm.invalid) {
       const form = this.sicherheitsCheckForm.value;
       const iso = this.getDateISOString();
