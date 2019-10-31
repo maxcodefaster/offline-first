@@ -352,5 +352,4 @@ export class SicherheitsCheckPage implements OnInit {
     });
   }
 
-
 }

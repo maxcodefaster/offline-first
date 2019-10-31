@@ -127,6 +127,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('psa_festgelegt')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="psa_festgelegt_ft">
             </ion-textarea>
@@ -157,6 +160,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('ba_vorhanden')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="ba_vorhanden_ft">
             </ion-textarea>
@@ -187,6 +193,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('gefährdungen_bewusst')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="gefährdungen_bewusst_ft">
             </ion-textarea>
@@ -218,6 +227,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('erstunterweisung')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="erstunterweisung_ft">
             </ion-textarea>
@@ -249,6 +261,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('ersthelfer_vor_ort')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="ersthelfer_vor_ort_ft">
             </ion-textarea>
@@ -280,6 +295,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('medizinisch_untersucht')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="medizinisch_untersucht_ft">
             </ion-textarea>
@@ -311,6 +329,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('prüfplakette')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="prüfplakette_ft">
             </ion-textarea>
@@ -342,6 +363,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('verbote')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="verbote_ft">
             </ion-textarea>
@@ -373,6 +397,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('ausweise')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="ausweise_ft">
             </ion-textarea>
@@ -404,6 +431,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('hebebühne')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="hebebühne_ft">
             </ion-textarea>
@@ -435,6 +465,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('verbandskasten')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="verbandskasten_ft">
             </ion-textarea>
@@ -471,6 +504,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('sicherheitsbekleidung')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="sicherheitsbekleidung_ft">
             </ion-textarea>
@@ -502,6 +538,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('handschuhe')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="handschuhe_ft">
             </ion-textarea>
@@ -533,6 +572,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('schutzbrille')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="schutzbrille_ft">
             </ion-textarea>
@@ -564,6 +606,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('schutzmaske')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="schutzmaske_ft">
             </ion-textarea>
@@ -595,6 +640,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('fanggurt')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="fanggurt_ft">
             </ion-textarea>
@@ -626,6 +674,9 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('erneute_unterweisung')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="erneute_unterweisung_ft">
             </ion-textarea>
