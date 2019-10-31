@@ -21,39 +21,55 @@
         <ion-text>
             <h3>Basis Informationen</h3>
         </ion-text>
-        <ion-item>
-            <ion-label position="floating">Datum</ion-label>
+        <ion-item [ngClass]="{error_warn : hasFormError('datum')}">
+            <ion-label position="fixed">Datum</ion-label>
             <ion-datetime displayFormat="DD.MM.YYYY" formControlName="datum" doneText="Ok" cancelText="Zurück">
             </ion-datetime>
         </ion-item>
-        <ion-item>
-            <ion-label position="floating">Kunde / Ort</ion-label>
-            <ion-input clearInput type="text" formControlName="kunde"></ion-input>
-            <ion-note *ngIf="!f.kunde.valid && (f.kunde.touched)" color="danger">Dieses Feld ist benötigt</ion-note>
-        </ion-item>
+        <ion-note *ngIf="hasFormError('datum')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
 
-        <ion-item (click)="showDlPicker()">
+        <ion-item [ngClass]="{error_warn : hasFormError('kunde')}">
+            <ion-label position="fixed">Kunde / Ort</ion-label>
+            <ion-input clearInput type="text" formControlName="kunde"></ion-input>
+        </ion-item>
+        <ion-note *ngIf="hasFormError('kunde')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
+
+        <ion-item (click)="showDlPicker()" [ngClass]="{error_warn : hasFormError('dienstleistung')}">
             <ion-label>Dienstleistung</ion-label>
             <ion-label color="primary">{{dienstleistung}}</ion-label>
-            <ion-input style="display: none" [value]="dienstleistung" type="text" formControlName="dienstleistung"></ion-input>
+            <ion-input style="display: none" [value]="dienstleistung" type="text" formControlName="dienstleistung">
+            </ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
+        <ion-note *ngIf="hasFormError('dienstleistung')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
 
-        <ion-item (click)="showTlPicker()">
+        <ion-item (click)="showTlPicker()" [ngClass]="{error_warn : hasFormError('teamleiter')}">
             <ion-label>Teamleiter</ion-label>
             <ion-label color="primary">{{teamleiter}}</ion-label>
             <ion-input style="display: none" [value]="teamleiter" type="text" formControlName="teamleiter"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
+        <ion-note *ngIf="hasFormError('teamleiter')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
 
-        <ion-item (click)="showTechnikerPicker()">
+        <ion-item (click)="showTechnikerPicker()" [ngClass]="{error_warn : hasFormError('techniker')}">
             <ion-label>Servicetechniker</ion-label>
             <ion-label color="primary">{{techniker}}</ion-label>
             <ion-input style="display: none" [value]="techniker" type="text" formControlName="techniker"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
         </ion-item>
+        <ion-note *ngIf="hasFormError('techniker')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('asi_schulung')}">
             <h3>Hat der Kunde eine eigene ASI Schulung verlangt?</h3>
         </ion-text>
         <ion-radio-group formControlName="asi_schulung">
@@ -78,12 +94,15 @@
                 </ion-col>
             </ion-row>
         </ion-radio-group>
+        <ion-note *ngIf="hasFormError('asi_schulung')" class="fadeInWarn" color="danger">
+            ! Dieses Feld wird benötigt
+        </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="asi_schulung_ft">
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('psa_festgelegt')}">
             <h3>Hat der Teamleiter die PSA festgelegt?</h3>
         </ion-text>
         <ion-radio-group formControlName="psa_festgelegt">
@@ -113,7 +132,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('ba_vorhanden')}">
             <h3>Liegen die Betriebsanweisungen BA (Service-Handbuch) vor?</h3>
         </ion-text>
         <ion-radio-group formControlName="ba_vorhanden">
@@ -143,7 +162,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('gefährdungen_bewusst')}">
             <h3>Sind sich die Mitarbeiter über die Gefährdungen bewusst?</h3>
         </ion-text>
         <ion-radio-group formControlName="gefährdungen_bewusst">
@@ -173,7 +192,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('erstunterweisung')}">
             <h3>Hat jeder Mitarbeiter eine Erstunterweisung / die jährliche ASI Schulung erhalten?
             </h3>
         </ion-text>
@@ -204,7 +223,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('ersthelfer_vor_ort')}">
             <h3>Ist ein Ersthelfer vor Ort oder ASI Dienst vom Kunden?
             </h3>
         </ion-text>
@@ -235,7 +254,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('medizinisch_untersucht')}">
             <h3>Sind alle Mitarbeiter arbeitsmedizinisch untersucht (z.B. G24)?
             </h3>
         </ion-text>
@@ -266,7 +285,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('prüfplakette')}">
             <h3>Sind alle prüfungsbedürftigen Geräte mit Prüfplakette (BGV A3) versehen?
             </h3>
         </ion-text>
@@ -297,7 +316,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('verbote')}">
             <h3>Halten sich die Mitarbeiter an das Ess-/ Trink- und Alkoholverbot währende dem Arbeiten?
             </h3>
         </ion-text>
@@ -328,7 +347,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('ausweise')}">
             <h3>Sind Gesundheitsausweise / Werksausweise vorhanden?
             </h3>
         </ion-text>
@@ -359,7 +378,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('hebebühne')}">
             <h3>Wird die Hebebühne nur von Mitarbeitern mit ensprechender Ausbildung bedient?
             </h3>
         </ion-text>
@@ -390,7 +409,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('verbandskasten')}">
             <h3>Ist ein Erste-Hilfe Rucksack / Box / Tasche mit Verbanskasten & ASI-Ausstattung vor Ort?
             </h3>
         </ion-text>
@@ -425,7 +444,7 @@
             <h3>Trägt jeder Mitarbeiter...
             </h3>
         </ion-text>
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('sicherheitsbekleidung')}">
             <h5>
                 ... Sicherheitsbekleidung?
             </h5>
@@ -456,7 +475,7 @@
             <ion-textarea placeholder="Notiz..." formControlName="sicherheitsbekleidung_ft">
             </ion-textarea>
         </ion-item>
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('handschuhe')}">
             <h5>
                 ... entsprechende Arbeitshandschuhe?
             </h5>
@@ -487,7 +506,7 @@
             <ion-textarea placeholder="Notiz..." formControlName="handschuhe_ft">
             </ion-textarea>
         </ion-item>
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('schutzbrille')}">
             <h5>
                 ... die Arbeitsschutzbrille?
             </h5>
@@ -518,7 +537,7 @@
             <ion-textarea placeholder="Notiz..." formControlName="schutzbrille_ft">
             </ion-textarea>
         </ion-item>
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('schutzmaske')}">
             <h5>
                 ... eine Atemschutzmaske?
             </h5>
@@ -549,7 +568,7 @@
             <ion-textarea placeholder="Notiz..." formControlName="schutzmaske_ft">
             </ion-textarea>
         </ion-item>
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('fanggurt')}">
             <h5>
                 ... der über 3m Höhe arbeitet einen geprüften Fanggurt?
             </h5>
@@ -581,7 +600,7 @@
             </ion-textarea>
         </ion-item>
 
-        <ion-text>
+        <ion-text [ngClass]="{error_warn : hasFormError('erneute_unterweisung')}">
             <h3>Falls die PSA nicht getragen wurde, erfolgt eine erneute Unterweisung?
             </h3>
         </ion-text>

@@ -24,6 +24,7 @@ export class SicherheitsCheckPage implements OnInit {
   teamleiterList = [];
   technikerList = [];
   dienstleistungen = [{ text: 'Andere...', value: 'A' }];
+  submitted = false;
 
   constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
     private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
@@ -314,6 +315,7 @@ export class SicherheitsCheckPage implements OnInit {
 
   // save to Database
   saveSicherheitsCheck() {
+    this.submitted = true;
     if (!this.sicherheitsCheckForm.invalid) {
       const form = this.sicherheitsCheckForm.value;
       const iso = this.getDateISOString();
@@ -332,11 +334,19 @@ export class SicherheitsCheckPage implements OnInit {
     return new Date().toISOString();
   }
 
+  hasFormError(formField) {
+    if (!this.f[formField].valid && this.submitted) {
+      return true;
+    }
+    return false;
+  }
+
   resetForm(form: FormGroup) {
     form.reset();
     this.dienstleistung = '';
     this.techniker = '';
     this.teamleiter = '';
+    this.submitted = false;
     Object.keys(form.controls).forEach(key => {
       form.get(key).setErrors(null);
     });
