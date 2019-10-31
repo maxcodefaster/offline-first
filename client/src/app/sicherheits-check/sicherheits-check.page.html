@@ -22,7 +22,7 @@
             <h3>Basis Informationen</h3>
         </ion-text>
         <ion-item [ngClass]="{error_warn : hasFormError('datum')}">
-            <ion-label position="fixed">Datum</ion-label>
+            <ion-label slot="start" position="fixed">Datum</ion-label>
             <ion-datetime displayFormat="DD.MM.YYYY" formControlName="datum" doneText="Ok" cancelText="Zurück">
             </ion-datetime>
         </ion-item>
@@ -31,15 +31,15 @@
         </ion-note>
 
         <ion-item [ngClass]="{error_warn : hasFormError('kunde')}">
-            <ion-label position="fixed">Kunde / Ort</ion-label>
+            <ion-label slot="start" position="fixed">Kunde / Ort</ion-label>
             <ion-input clearInput type="text" formControlName="kunde"></ion-input>
         </ion-item>
         <ion-note *ngIf="hasFormError('kunde')" class="fadeInWarn" color="danger">
             ! Dieses Feld wird benötigt
         </ion-note>
 
-        <ion-item (click)="showDlPicker()" [ngClass]="{error_warn : hasFormError('dienstleistung')}">
-            <ion-label>Dienstleistung</ion-label>
+        <ion-item (click)="showDlPicker()" [ngClass]="{error_warn : hasFormError('dienstleistung')}" style="--border-style: none;">
+            <ion-label slot="start">Dienstleistung </ion-label>
             <ion-label color="primary">{{dienstleistung}}</ion-label>
             <ion-input style="display: none" [value]="dienstleistung" type="text" formControlName="dienstleistung">
             </ion-input>
@@ -49,8 +49,8 @@
             ! Dieses Feld wird benötigt
         </ion-note>
 
-        <ion-item (click)="showTlPicker()" [ngClass]="{error_warn : hasFormError('teamleiter')}">
-            <ion-label>Teamleiter</ion-label>
+        <ion-item (click)="showTlPicker()" [ngClass]="{error_warn : hasFormError('teamleiter')}" style="--border-style: none;">
+            <ion-label slot="start">Teamleiter</ion-label>
             <ion-label color="primary">{{teamleiter}}</ion-label>
             <ion-input style="display: none" [value]="teamleiter" type="text" formControlName="teamleiter"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
@@ -59,8 +59,8 @@
             ! Dieses Feld wird benötigt
         </ion-note>
 
-        <ion-item (click)="showTechnikerPicker()" [ngClass]="{error_warn : hasFormError('techniker')}">
-            <ion-label>Servicetechniker</ion-label>
+        <ion-item (click)="showTechnikerPicker()" [ngClass]="{error_warn : hasFormError('techniker')}" style="--border-style: none;">
+            <ion-label slot="start">Servicetechniker</ion-label>
             <ion-label color="primary">{{techniker}}</ion-label>
             <ion-input style="display: none" [value]="techniker" type="text" formControlName="techniker"></ion-input>
             <ion-button slot="end" fill="clear">Auswählen</ion-button>
@@ -679,6 +679,14 @@
         </ion-note>
         <ion-item>
             <ion-textarea placeholder="Notiz..." formControlName="erneute_unterweisung_ft">
+            </ion-textarea>
+        </ion-item>
+
+        <ion-text>
+            <h3>Bemerkung</h3>
+        </ion-text>
+        <ion-item>
+            <ion-textarea placeholder="Bemerkungen..." formControlName="bemerkung">
             </ion-textarea>
         </ion-item>
     </form>

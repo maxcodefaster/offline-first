@@ -136,6 +136,8 @@ export class SicherheitsCheckPage implements OnInit {
       ]),
       erneute_unterweisung_ft: new FormControl('', [
       ]),
+      bemerkung: new FormControl('', [
+      ]),
     });
   }
 
