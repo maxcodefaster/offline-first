@@ -1,0 +1,11 @@
+<div *ngIf="formData">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>{{formData.kunde}} {{formData.dateCreated | date}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        {{formData | json}}
+    </ion-content>
+</div>

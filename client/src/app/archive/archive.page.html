@@ -22,7 +22,7 @@
             <ion-item>
                 <ion-label>{{formular.kunde}}</ion-label>
                 <ion-label>{{formular.dateCreated | date}}</ion-label>
-                <ion-button fill="outline" slot="end">View</ion-button>
+                <ion-button fill="outline" slot="end" [href]="'/view-sicherheits-check/'+formular._id">Ansehen</ion-button>
             </ion-item>
             <ion-card-content>
                 <ion-grid>

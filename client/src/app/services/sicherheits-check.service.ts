@@ -27,6 +27,10 @@ export class SicherheitsCheckService {
 
   }
 
+  getSingleSicherheitsCheck(id) {
+    return this.dataService.db.get(id);
+  }
+
   getSicherheitsChecks(): BehaviorSubject<object[]> {
     return this.sicherheitsCheckSubject;
   }

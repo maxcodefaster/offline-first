@@ -1,30 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SignaturePadModule } from 'angular2-signaturepad';
-
-import { SicherheitsCheckPage } from './sicherheits-check.page';
+import { ViewSicherheitsCheckPage } from './view-sicherheits-check.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: SicherheitsCheckPage
+    component: ViewSicherheitsCheckPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
-    SignaturePadModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SicherheitsCheckPage]
+  declarations: [ViewSicherheitsCheckPage]
 })
-export class SicherheitsCheckPageModule {}
+export class ViewSicherheitsCheckPageModule {}
