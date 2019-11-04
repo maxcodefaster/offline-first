@@ -1,11 +1,176 @@
 <div *ngIf="formData">
-    <ion-header>
+    <ion-header translucent>
         <ion-toolbar>
+            <ion-buttons slot="secondary">
+                <ion-button routerLink="/archive" routerDirection="back">
+                    <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+
             <ion-title>{{formData.kunde}} {{formData.dateCreated | date}}</ion-title>
+
+            <!-- <ion-buttons slot="primary">
+                <ion-button>
+                    <ion-icon slot="icon-only" name="settings"></ion-icon>
+                </ion-button>
+            </ion-buttons> -->
         </ion-toolbar>
     </ion-header>
 
-    <ion-content>
-        {{formData | json}}
+    <ion-content fullscreen class="ion-padding">
+        <!-- <p> {{formData | json}}
+        </p> -->
+        <ion-list>
+            <ion-list-header>
+                Basis Informationen
+            </ion-list-header>
+
+            <ion-item-group>
+                <ion-item>
+                    <ion-label>Dienstleistung:</ion-label>
+                    <ion-label slot="end">{{formData.dienstleistung}}</ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Teamleiter:</ion-label>
+                    <ion-label slot="end">{{formData.teamleiter}}</ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Techniker:</ion-label>
+                    <ion-label slot="end">{{formData.techniker}}</ion-label>
+                </ion-item>
+
+                <ion-list-header>
+                    Hat der Kunde eine eigene ASI Schulung verlangt?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.asi_schulung}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.asi_schulung_ft">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.asi_schulung_ft}}</ion-label>
+                    </ion-item>
+                </div>
+
+                <ion-list-header>
+                    Hat der Teamleiter die PSA festgelegt?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.psa_festgelegt}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.psa_festgelegt_ft ">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.psa_festgelegt_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Liegen die Betriebsanweisungen BA (Service-Handbuch) vor?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.ba_vorhanden}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.ba_vorhanden_ft ">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.ba_vorhanden_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Sind sich die Mitarbeiter über die Gefährdungen bewusst?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.gefaehrdungen_bewusst}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.gefaehrdungen_bewusst_ft ">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.gefaehrdungen_bewusst_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Hat jeder Mitarbeiter eine Erstunterweisung / die jährliche ASI Schulung erhalten?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.erstunterweisung}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.erstunterweisung_ft">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.erstunterweisung_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Ist ein Ersthelfer vor Ort oder ASI Dienst vom Kunden?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.ersthelfer_vor_ort}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.ersthelfer_vor_ort_ft">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.ersthelfer_vor_ort_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Sind alle Mitarbeiter arbeitsmedizinisch untersucht (z.B. G24)=
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.medizinisch_untersucht}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.medizinisch_untersucht_ft ">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.medizinisch_untersucht_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Sind alle prüfungsbedürftigen Geräte mit Prüfplakette (BGV A3) versehen?
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.pruefplakette}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.pruefplakette_ft ">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.pruefplakette_ft}}</ion-label>
+                    </ion-item>
+                </div>
+                <ion-list-header>
+                    Halten sich die Mitarbeiter an das Ess- / Trink- und Alkoholverbot während dem Arbeiten=
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>{{formData.verbote}}</ion-label>
+                </ion-item>
+                <div *ngIf="formData.verbote_ft ">
+                    <ion-list-header>
+                        Notiz:
+                    </ion-list-header>
+                    <ion-item>
+                        <ion-label>{{formData.verbote_ft}}</ion-label>
+                    </ion-item>
+                </div>
+
+            </ion-item-group>
+        </ion-list>
+
     </ion-content>
 </div>

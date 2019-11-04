@@ -53,16 +53,16 @@ export class SicherheitsCheckService {
       updatedDoc.psa_festgelegt_ft = sicherheitsCheck.psa_festgelegt_ft;
       updatedDoc.ba_vorhanden = sicherheitsCheck.ba_vorhanden;
       updatedDoc.ba_vorhanden_ft = sicherheitsCheck.ba_vorhanden_ft;
-      updatedDoc.gefährdungen_bewusst = sicherheitsCheck.gefährdungen_bewusst;
-      updatedDoc.gefährdungen_bewusst_ft = sicherheitsCheck.gefährdungen_bewusst_ft;
+      updatedDoc.geaehrdungen_bewusst = sicherheitsCheck.gefaehrdungen_bewusst;
+      updatedDoc.gefaehrdungen_bewusst_ft = sicherheitsCheck.gefaehrdungen_bewusst_ft;
       updatedDoc.erstunterweisung = sicherheitsCheck.erstunterweisung;
       updatedDoc.erstunterweisung_ft = sicherheitsCheck.erstunterweisung_ft;
       updatedDoc.ersthelfer_vor_ort = sicherheitsCheck.ersthelfer_vor_ort;
       updatedDoc.ersthelfer_vor_ort_ft = sicherheitsCheck.ersthelfer_vor_ort_ft;
       updatedDoc.medizinisch_untersucht = sicherheitsCheck.medizinisch_untersucht;
       updatedDoc.medizinisch_untersucht_ft = sicherheitsCheck.medizinisch_untersucht_ft;
-      updatedDoc.prüfplakette = sicherheitsCheck.prüfplakette;
-      updatedDoc.prüfplakette_ft = sicherheitsCheck.prüfplakette_ft;
+      updatedDoc.pruefplakette = sicherheitsCheck.pruefplakette;
+      updatedDoc.pruefplakette_ft = sicherheitsCheck.pruefplakette_ft;
       updatedDoc.verbote = sicherheitsCheck.verbote;
       updatedDoc.verbote_ft = sicherheitsCheck.verbote_ft;
       updatedDoc.ausweise = sicherheitsCheck.ausweise;
@@ -77,14 +77,14 @@ export class SicherheitsCheckService {
       updatedDoc.schutzmaske_ft = sicherheitsCheck.schutzmaske_ft;
       updatedDoc.fanggurt = sicherheitsCheck.fanggurt;
       updatedDoc.fanggurt_ft = sicherheitsCheck.fanggurt_ft;
-      updatedDoc.hebebühne = sicherheitsCheck.hebebühne;
-      updatedDoc.hebebühne_ft = sicherheitsCheck.hebebühne_ft;
+      updatedDoc.hebebuehne = sicherheitsCheck.hebebuehne;
+      updatedDoc.hebebuehne_ft = sicherheitsCheck.hebebuehne_ft;
       updatedDoc.verbandskasten = sicherheitsCheck.verbandskasten;
       updatedDoc.verbandskasten_ft = sicherheitsCheck.verbandskasten_ft;
       updatedDoc.erneute_unterweisung = sicherheitsCheck.erneute_unterweisung;
       updatedDoc.erneute_unterweisung_ft = sicherheitsCheck.erneute_unterweisung_ft;
       updatedDoc.bemerkung = sicherheitsCheck.bemerkung;
-      updatedDoc.unterschrift_prüfer = sicherheitsCheck.unterschrift_prüfer;
+      updatedDoc.unterschrift_pruefer = sicherheitsCheck.unterschrift_pruefer;
       updatedDoc.unterschrift_teamleiter = sicherheitsCheck.unterschrift_teamleiter;
       updatedDoc.unterschrift_techniker = sicherheitsCheck.unterschrift_techniker;
 
@@ -106,16 +106,16 @@ export class SicherheitsCheckService {
         psa_festgelegt_ft: sicherheitsCheck.psa_festgelegt_ft,
         ba_vorhanden: sicherheitsCheck.ba_vorhanden,
         ba_vorhanden_ft: sicherheitsCheck.ba_vorhanden_ft,
-        gefährdungen_bewusst: sicherheitsCheck.gefährdungen_bewusst,
-        gefährdungen_bewusst_ft: sicherheitsCheck.gefährdungen_bewusst_ft,
+        gefaehrdungen_bewusst: sicherheitsCheck.gefaehrdungen_bewusst,
+        gefaehrdungen_bewusst_ft: sicherheitsCheck.gefaehrdungen_bewusst_ft,
         erstunterweisung: sicherheitsCheck.erstunterweisung,
         erstunterweisung_ft: sicherheitsCheck.erstunterweisung_ft,
         ersthelfer_vor_ort: sicherheitsCheck.ersthelfer_vor_ort,
         ersthelfer_vor_ort_ft: sicherheitsCheck.ersthelfer_vor_ort_ft,
         medizinisch_untersucht: sicherheitsCheck.medizinisch_untersucht,
         medizinisch_untersucht_ft: sicherheitsCheck.medizinisch_untersucht_ft,
-        prüfplakette: sicherheitsCheck.prüfplakette,
-        prüfplakette_ft: sicherheitsCheck.prüfplakette_ft,
+        pruefplakette: sicherheitsCheck.pruefplakette,
+        pruefplakette_ft: sicherheitsCheck.pruefplakette_ft,
         verbote: sicherheitsCheck.verbote,
         verbote_ft: sicherheitsCheck.verbote_ft,
         ausweise: sicherheitsCheck.ausweise,
@@ -130,14 +130,14 @@ export class SicherheitsCheckService {
         schutzmaske_ft: sicherheitsCheck.schutzmaske_ft,
         fanggurt: sicherheitsCheck.fanggurt,
         fanggurt_ft: sicherheitsCheck.fanggurt_ft,
-        hebebühne: sicherheitsCheck.hebebühne,
-        hebebühne_ft: sicherheitsCheck.hebebühne_ft,
+        hebebuehne: sicherheitsCheck.hebebuehne,
+        hebebuehne_ft: sicherheitsCheck.hebebuehne_ft,
         verbandskasten: sicherheitsCheck.verbandskasten,
         verbandskasten_ft: sicherheitsCheck.verbandskasten_ft,
         erneute_unterweisung: sicherheitsCheck.erneute_unterweisung,
         erneute_unterweisung_ft: sicherheitsCheck.erneute_unterweisung_ft,
         bemerkung: sicherheitsCheck.bemerkung,
-        unterschrift_prüfer: sicherheitsCheck.unterschrift_prüfer,
+        unterschrift_pruefer: sicherheitsCheck.unterschrift_pruefer,
         unterschrift_teamleiter: sicherheitsCheck.unterschrift_teamleiter,
         unterschrift_techniker: sicherheitsCheck.unterschrift_techniker,
       });

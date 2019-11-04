@@ -62,10 +62,10 @@ export class SicherheitsCheckPage implements OnInit {
       ]),
       ba_vorhanden_ft: new FormControl('', [
       ]),
-      gefährdungen_bewusst: new FormControl('n.e.', [
+      gefaehrdungen_bewusst: new FormControl('n.e.', [
         Validators.required,
       ]),
-      gefährdungen_bewusst_ft: new FormControl('', [
+      gefaehrdungen_bewusst_ft: new FormControl('', [
       ]),
       erstunterweisung: new FormControl('n.e.', [
         Validators.required,
@@ -82,10 +82,10 @@ export class SicherheitsCheckPage implements OnInit {
       ]),
       medizinisch_untersucht_ft: new FormControl('', [
       ]),
-      prüfplakette: new FormControl('n.e.', [
+      pruefplakette: new FormControl('n.e.', [
         Validators.required,
       ]),
-      prüfplakette_ft: new FormControl('', [
+      pruefplakette_ft: new FormControl('', [
       ]),
       verbote: new FormControl('n.e.', [
         Validators.required,
@@ -97,10 +97,10 @@ export class SicherheitsCheckPage implements OnInit {
       ]),
       ausweise_ft: new FormControl('', [
       ]),
-      hebebühne: new FormControl('n.e.', [
+      hebebuehne: new FormControl('n.e.', [
         Validators.required,
       ]),
-      hebebühne_ft: new FormControl('', [
+      hebebuehne_ft: new FormControl('', [
       ]),
       verbandskasten: new FormControl('n.e.', [
         Validators.required,

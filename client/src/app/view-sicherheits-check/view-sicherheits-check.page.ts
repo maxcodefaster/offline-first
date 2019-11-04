@@ -11,7 +11,7 @@ export class ViewSicherheitsCheckPage implements OnInit {
 
   formData;
 
-  constructor(private route: ActivatedRoute, private sicherheitsCheckService: SicherheitsCheckService,) { }
+  constructor(private route: ActivatedRoute, private sicherheitsCheckService: SicherheitsCheckService, ) { }
 
   ngOnInit() {
     let formId = '';
