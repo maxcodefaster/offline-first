@@ -13,7 +13,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: './sicherheits-check/sicherheits-check.module#SicherheitsCheckPageModule'
+                        loadChildren: () => import('../sicherheits-check/sicherheits-check.module').then(m => m.SicherheitsCheckPageModule)
                     }
                 ]
             },
@@ -22,7 +22,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: './service-check/service-check.module#ServiceCheckPageModule'
+                        loadChildren: () => import('../service-check/service-check.module').then(m => m.ServiceCheckPageModule)
                     }
                 ]
             }
@@ -30,7 +30,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'home/sicherheits-check',
+        redirectTo: 'sicherheits-check',
         pathMatch: 'full'
     }
 ];

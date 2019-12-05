@@ -29,7 +29,7 @@ export class AppComponent {
     });
 
     this.zone.runOutsideAngular(() => {
-      this.dataService.initDatabase('http://127.0.0.1:5984/gesaqs');
+      this.dataService.initDatabase('http://localhost:5984/gesaqs');
     });
 
   }

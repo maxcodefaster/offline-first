@@ -5,8 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SignaturePadModule } from 'angular2-signaturepad';
-
 import { SicherheitsCheckPage } from './sicherheits-check.page';
 
 const routes: Routes = [
@@ -21,7 +19,6 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    SignaturePadModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],

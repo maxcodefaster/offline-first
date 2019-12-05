@@ -9,7 +9,6 @@ import { PickerOptions } from '@ionic/core';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 @Component({
   selector: 'app-sicherheits-check',
@@ -28,9 +27,9 @@ export class SicherheitsCheckPage implements OnInit {
   submitted = false;
 
   constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
-    private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
-    private technikerService: TechnikerService, private pickerCtrl: PickerController,
-    private alertController: AlertController, private toastController: ToastController, private router: Router) {
+              private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
+              private technikerService: TechnikerService, private pickerCtrl: PickerController,
+              private alertController: AlertController, private toastController: ToastController, private router: Router) {
     this.sicherheitsCheckForm = this.fb.group({
       datum: new FormControl('', [
         Validators.required,

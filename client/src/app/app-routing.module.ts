@@ -4,10 +4,10 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home/sicherheits-check', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
-  { path: 'sicherheits-check', loadChildren: './sicherheits-check/sicherheits-check.module#SicherheitsCheckPageModule' },
-  { path: 'service-check', loadChildren: './service-check/service-check.module#ServiceCheckPageModule' },
-  { path: 'archive', loadChildren: './archive/archive.module#ArchivePageModule' },
-  { path: 'view-sicherheits-check/:id', loadChildren: './view-sicherheits-check/view-sicherheits-check.module#ViewSicherheitsCheckPageModule' },
+  { path: 'sicherheits-check', loadChildren: () => import('./sicherheits-check/sicherheits-check.module').then(m => m.SicherheitsCheckPageModule) },
+  { path: 'service-check', loadChildren: () => import('./service-check/service-check.module').then(m => m.ServiceCheckPageModule) },
+  { path: 'archive', loadChildren: () => import('./archive/archive.module').then(m => m.ArchivePageModule) },
+  { path: 'view-sicherheits-check/:id', loadChildren: () => import('./view-sicherheits-check/view-sicherheits-check.module').then(m => m.ViewSicherheitsCheckPageModule)},
 ];
 
 @NgModule({
