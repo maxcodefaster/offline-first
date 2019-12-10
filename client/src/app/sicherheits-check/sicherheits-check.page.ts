@@ -28,10 +28,10 @@ export class SicherheitsCheckPage implements OnInit {
   public loading: any;
 
   constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
-              private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
-              private technikerService: TechnikerService, private pickerCtrl: PickerController,
-              private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
-              private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
+    private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
+    private technikerService: TechnikerService, private pickerCtrl: PickerController,
+    private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
+    private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
     this.sicherheitsCheckForm = this.fb.group({
       datum: new FormControl('', [
         Validators.required,
@@ -160,13 +160,13 @@ export class SicherheitsCheckPage implements OnInit {
         this.loading.dismiss();
         this.getResources();
 
+
+      }, (err) => {
+
+        this.loading.dismiss();
+        this.navCtrl.navigateRoot('/login');
+
       });
-
-    }, (err) => {
-
-      this.loading.dismiss();
-      this.navCtrl.navigateRoot('/login');
-
     });
 
   }
