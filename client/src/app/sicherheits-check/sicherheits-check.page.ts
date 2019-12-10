@@ -4,11 +4,11 @@ import { SicherheitsCheckService } from '../services/sicherheits-check.service';
 import { DienstleistungService } from '../services/dienstleistung.service';
 import { TeamleiterService } from '../services/teamleiter.service';
 import { TechnikerService } from '../services/techniker.service';
-import { PickerController } from '@ionic/angular';
+import { PickerController, LoadingController, AlertController, ToastController, NavController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
-import { AlertController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sicherheits-check',
@@ -25,11 +25,13 @@ export class SicherheitsCheckPage implements OnInit {
   technikerList = [];
   dienstleistungen = [{ text: 'Andere...', value: 'A' }];
   submitted = false;
+  public loading: any;
 
   constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
               private dienstleistungService: DienstleistungService, private teamleiterService: TeamleiterService,
               private technikerService: TechnikerService, private pickerCtrl: PickerController,
-              private alertController: AlertController, private toastController: ToastController, private router: Router) {
+              private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
+              private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
     this.sicherheitsCheckForm = this.fb.group({
       datum: new FormControl('', [
         Validators.required,
@@ -145,7 +147,28 @@ export class SicherheitsCheckPage implements OnInit {
   get f() { return this.sicherheitsCheckForm.controls; }
 
   ngOnInit() {
-    this.getResources();
+
+    this.loadingCtrl.create({
+      message: 'Authenticating...'
+    }).then((overlay) => {
+      this.loading = overlay;
+      this.loading.present();
+
+      this.authService.reauthenticate().then((res) => {
+
+        this.sicherheitsCheckService.init();
+        this.loading.dismiss();
+        this.getResources();
+
+      });
+
+    }, (err) => {
+
+      this.loading.dismiss();
+      this.navCtrl.navigateRoot('/login');
+
+    });
+
   }
 
   getResources() {
@@ -322,15 +345,15 @@ export class SicherheitsCheckPage implements OnInit {
       const form = this.sicherheitsCheckForm.value;
       const iso = this.getDateISOString();
       form.dateCreated = iso;
-      // save to Database
-      this.sicherheitsCheckService.saveSicherheitsChecks(form).then((res: any) => {
-        console.log(res);
-        if (res.ok) {
-          this.presentToast();
-          this.router.navigateByUrl('/view-sicherheits-check/' + res.id);
-          // this.resetForm(this.sicherheitsCheckForm);
-        }
-      });
+      form.author = this.userService.currentUser.user_id,
+        // save to Database
+        this.sicherheitsCheckService.saveSicherheitsChecks(form).then((res: any) => {
+          if (res.ok) {
+            this.presentToast();
+            this.router.navigateByUrl('/view-sicherheits-check/' + res.id);
+            // this.resetForm(this.sicherheitsCheckForm);
+          }
+        });
     }
   }
 
@@ -355,5 +378,10 @@ export class SicherheitsCheckPage implements OnInit {
       form.get(key).setErrors(null);
     });
   }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
 
 }

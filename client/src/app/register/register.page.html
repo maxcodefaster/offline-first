@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Account registrieren</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/login"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <form [formGroup]="registerForm" class="register-form">
+
+        <ion-item class="username-input">
+            <ion-label position="stacked">Username</ion-label>
+            <ion-input formControlName="username" type="text" required></ion-input>
+        </ion-item>
+
+        <ion-item class="email-input">
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input formControlName="email" type="email" required></ion-input>
+        </ion-item>
+
+        <ion-item class="password-input">
+            <ion-label position="stacked">Password</ion-label>
+            <ion-input formControlName="password" type="password" required></ion-input>
+        </ion-item>
+
+        <ion-item class="confirm-password-input">
+            <ion-label position="stacked">Confirm Password</ion-label>
+            <ion-input formControlName="confirmPassword" type="password" required></ion-input>
+        </ion-item>
+
+    </form>
+
+    <p class="submit-warning" *ngIf="!registerForm.valid">You must fill out all fields above correctly before you can create your account.</p>
+
+    <ion-button expand="block" color="primary" fill="solid" class="register-button" (click)="createAccount()">Create Account
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+    </ion-button>
+</ion-content>

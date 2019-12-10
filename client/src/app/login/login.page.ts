@@ -11,8 +11,8 @@ import { UserService } from '../services/user.service';
 })
 export class LoginPage implements OnInit {
 
-  public username = '';
-  public password = '';
+  public username: string;
+  public password: string;
   public failedAttempt = false;
   public loading: any;
 
@@ -27,7 +27,13 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.reauthenticate().then((res) => {
 
+      this.navCtrl.navigateRoot('/home/sicherheits-check');
+
+    }, (err) => {
+
+    });
   }
 
   openRegisterPage(): void {
@@ -50,20 +56,20 @@ export class LoginPage implements OnInit {
 
       this.authService.authenticate(credentials).subscribe((res: any) => {
 
-        console.log(res);
+        // console.log(res);
 
         if (typeof (res.token) !== 'undefined') {
 
           this.failedAttempt = false;
 
           this.zone.runOutsideAngular(() => {
-            this.dataService.initDatabase(res.userDBs.hangz);
+            this.dataService.initDatabase(res.userDBs.gesaqs);
           });
 
           this.userService.saveUserData(res);
 
           this.loading.dismiss().then(() => {
-            this.navCtrl.navigateRoot('/home/tabs/notices');
+            this.navCtrl.navigateRoot('/home/sicherheits-check');
           });
 
         }

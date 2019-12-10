@@ -28,9 +28,5 @@ export class AppComponent {
       this.splashScreen.hide();
     });
 
-    this.zone.runOutsideAngular(() => {
-      this.dataService.initDatabase('http://localhost:5984/gesaqs');
-    });
-
   }
 }

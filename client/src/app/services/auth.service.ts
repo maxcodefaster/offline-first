@@ -34,7 +34,6 @@ export class AuthService {
     this.http.post(SERVER_ADDRESS + 'auth/logout', {}, { headers }).subscribe((res) => { });
 
     this.dataService.db.destroy().then((res) => {
-
       this.dataService.db = null;
       this.userService.saveUserData(null);
       this.navCtrl.navigateRoot('/login');
@@ -62,6 +61,46 @@ export class AuthService {
     const encodedEmail = encodeURIComponent(email);
 
     return this.http.get(SERVER_ADDRESS + 'auth/validate-email/' + encodedEmail);
+
+  }
+
+  reauthenticate() {
+    return new Promise((resolve, reject) => {
+
+      if (this.dataService.db === null) {
+
+        this.userService.getUserData().then((userData) => {
+
+          if (userData !== null) {
+
+            const now = new Date();
+            const expires = new Date(userData.expires);
+
+            if (expires > now) {
+              this.userService.currentUser = userData;
+
+              this.zone.runOutsideAngular(() => {
+                this.dataService.initDatabase(userData.userDBs.gesaqs);
+              });
+
+              resolve(true);
+
+            } else {
+              reject(true);
+            }
+
+          } else {
+            reject(true);
+          }
+
+        });
+
+      } else {
+        resolve(true);
+
+      }
+
+    });
 
   }
 

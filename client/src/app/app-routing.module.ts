@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'archive', loadChildren: () => import('./archive/archive.module').then(m => m.ArchivePageModule) },
   { path: 'view-sicherheits-check/:id', loadChildren: () => import('./view-sicherheits-check/view-sicherheits-check.module').then(m => m.ViewSicherheitsCheckPageModule) },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
 ];
 
 @NgModule({
