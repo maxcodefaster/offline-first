@@ -53,7 +53,7 @@ export class RegisterPage implements OnInit {
           console.log(res);
           if (typeof (res.token) !== 'undefined') {
 
-            this.dataService.initDatabase(res.userDBs.gesaqs);
+            this.dataService.initDatabase(res);
             this.userService.saveUserData(res);
 
             this.navCtrl.navigateRoot('/home/sicherheits-check');

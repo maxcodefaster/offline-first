@@ -36,6 +36,7 @@ export class SicherheitsCheckService {
   }
 
   saveSicherheitsChecks(sicherheitsCheck) {
+    console.log(sicherheitsCheck.author);
 
     if (sicherheitsCheck.doc) {
 

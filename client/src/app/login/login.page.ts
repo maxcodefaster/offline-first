@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
           this.failedAttempt = false;
 
           this.zone.runOutsideAngular(() => {
-            this.dataService.initDatabase(res.userDBs.gesaqs);
+            this.dataService.initDatabase(res);
           });
 
           this.userService.saveUserData(res);

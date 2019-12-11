@@ -80,7 +80,7 @@ export class AuthService {
               this.userService.currentUser = userData;
 
               this.zone.runOutsideAngular(() => {
-                this.dataService.initDatabase(userData.userDBs.gesaqs);
+                this.dataService.initDatabase(userData);
               });
 
               resolve(true);

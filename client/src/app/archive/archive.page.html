@@ -1,13 +1,14 @@
 <ion-header translucent>
     <ion-toolbar>
-        <ion-buttons slot="secondary">
-            <ion-buttons slot="start">
-                <ion-back-button defaultHref="/"></ion-back-button>
-            </ion-buttons>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
 
         <ion-title>Formular-Archiv</ion-title>
 
+        <ion-buttons slot="end">
+            {{user}}
+        </ion-buttons>
         <!-- <ion-buttons slot="primary">
             <ion-button>
                 <ion-icon slot="icon-only" name="settings"></ion-icon>
@@ -27,6 +28,9 @@
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
+                        <ion-col>
+                            Autor: {{formular.author}}
+                        </ion-col>
                         <ion-col>
                             Dienstleistung: {{formular.dienstleistung}}
                         </ion-col>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,9 @@ export class DataService {
     public db: PouchDB = null;
     private remote: string;
 
-    constructor() {
+    constructor(
+        private userService: UserService,
+    ) {
 
     }
 
@@ -20,7 +23,7 @@ export class DataService {
             auto_compaction: true
         });
 
-        this.remote = remote;
+        this.remote = remote.userDBs.gesaqs;
 
         this.initRemoteSync();
 
@@ -30,10 +33,13 @@ export class DataService {
 
         const options = {
             live: true,
-            retry: true
+            retry: true,
+            filter: 'app/after_author',
         };
 
-        this.db.sync(this.remote, options);
+        this.db.sync(this.remote, options, ).on('change', result => {
+            console.log(result);
+        });
 
     }
 
