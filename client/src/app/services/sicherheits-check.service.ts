@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SicherheitsCheckService {
 
+  dbname = 'gesaqs';
   sicherheitsCheckSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
   constructor(private dataService: DataService, private zone: NgZone) {
@@ -17,7 +18,7 @@ export class SicherheitsCheckService {
 
     this.emitSicherheitsChecks();
 
-    this.dataService.db.changes({live: true, since: 'now', include_docs: true}).on('change', (change) => {
+    this.dataService.dbs[this.dbname].changes({live: true, since: 'now', include_docs: true}).on('change', (change) => {
 
             if (change.doc.type === 'sicherheitsCheck' || change.deleted) {
                 this.emitSicherheitsChecks();
@@ -28,7 +29,7 @@ export class SicherheitsCheckService {
   }
 
   getSingleSicherheitsCheck(id) {
-    return this.dataService.db.get(id);
+    return this.dataService.dbs[this.dbname].get(id);
   }
 
   getSicherheitsChecks(): BehaviorSubject<object[]> {
@@ -89,7 +90,7 @@ export class SicherheitsCheckService {
       updatedDoc.unterschrift_teamleiter = sicherheitsCheck.unterschrift_teamleiter;
       updatedDoc.unterschrift_techniker = sicherheitsCheck.unterschrift_techniker;
 
-      return this.dataService.updateDoc(updatedDoc);
+      return this.dataService.updateDoc(updatedDoc, this.dbname);
 
     } else {
       return this.dataService.createDoc({
@@ -141,13 +142,13 @@ export class SicherheitsCheckService {
         unterschrift_pruefer: sicherheitsCheck.unterschrift_pruefer,
         unterschrift_teamleiter: sicherheitsCheck.unterschrift_teamleiter,
         unterschrift_techniker: sicherheitsCheck.unterschrift_techniker,
-      });
+      }, this.dbname);
     }
 
   }
 
   deleteSicherheitsCheck(sicherheitsCheck): void {
-    this.dataService.deleteDoc(sicherheitsCheck);
+    this.dataService.deleteDoc(sicherheitsCheck, this.dbname);
   }
 
   emitSicherheitsChecks(): void {
@@ -159,7 +160,7 @@ export class SicherheitsCheckService {
         descending: true
       };
 
-      this.dataService.db.query('sicherheitsCheck/by_date_created', options).then((data) => {
+      this.dataService.dbs[this.dbname].query('sicherheitsCheck/by_date_created', options).then((data) => {
 
         const sicherheitsChecks = data.rows.map(row => {
           return row.doc;

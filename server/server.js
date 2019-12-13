@@ -1,17 +1,18 @@
-var express = require('express');
-var https = require('https');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var SuperLogin = require('@wwoods/superlogin');
+const express = require('express');
+const https = require('https');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const SuperLogin = require('@wwoods/superlogin');
+const nano = require('nano')('http://localhost:5984');
 
-var app = express();
+const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-var config = {
+const config = {
     dbServer: {
         protocol: 'http://',
         host: '127.0.0.1:5984',
@@ -38,7 +39,8 @@ var config = {
     },
     userDBs: {
         defaultDBs: {
-            shared: ['gesaqs']
+            shared: ['gesaqs'],
+            private: ['private']
         }
     },
     providers: {
@@ -47,9 +49,23 @@ var config = {
 };
 
 // Initialize SuperLogin 
-var superlogin = new SuperLogin(config);
+const superlogin = new SuperLogin(config);
 
 // Mount SuperLogin's routes to our app 
 app.use('/auth', superlogin.router);
 
 app.listen(process.env.PORT || 8080);
+
+// Create superlogin event emitter
+superlogin.on('login', function(userDoc, provider) {
+    const opts = {
+        continous: true,
+        create_target: true
+    };
+    // console.log('User: ' + JSON.stringify(userDoc) + ' logged in with ' + provider);
+    nano.db.replication.enable(userDoc.userDBs.gesaqs, 'admin-database', opts).then((body) => {
+        return nano.db.replication.query(body.id);
+    }).then((response) => {
+        console.log(response);
+    });
+});

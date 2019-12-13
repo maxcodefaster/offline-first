@@ -33,15 +33,18 @@ export class AuthService {
 
     this.http.post(SERVER_ADDRESS + 'auth/logout', {}, { headers }).subscribe((res) => { });
 
-    this.dataService.db.destroy().then((res) => {
-      this.dataService.db = null;
-      this.userService.saveUserData(null);
-      this.navCtrl.navigateRoot('/login');
-
-    }, (err) => {
-      console.log('could not destroy db');
-    });
-
+    // tslint:disable-next-line: forin
+    for (const db in this.dataService.dbs) {
+      const dbRemote = this.dataService.dbs[db];
+      dbRemote.destroy().then((res) => {
+        this.dataService.dbs = null;
+      }
+        , (err) => {
+          console.log('could not destroy db');
+        });
+    }
+    this.userService.saveUserData(null);
+    this.navCtrl.navigateRoot('/login');
   }
 
   register(details) {
@@ -67,7 +70,7 @@ export class AuthService {
   reauthenticate() {
     return new Promise((resolve, reject) => {
 
-      if (this.dataService.db === null) {
+      if (this.dataService.dbs === null) {
 
         this.userService.getUserData().then((userData) => {
 

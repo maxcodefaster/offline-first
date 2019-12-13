@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TechnikerService {
 
+  dbname = 'gesaqs';
   technikerSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
   constructor(private dataService: DataService, private zone: NgZone) {
@@ -17,7 +18,7 @@ export class TechnikerService {
 
     this.emitTechniker();
 
-    this.dataService.db.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+    this.dataService.dbs[this.dbname].changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
 
       if (change.doc.type === 'techniker' || change.deleted) {
         this.emitTechniker();
@@ -39,19 +40,19 @@ export class TechnikerService {
 
       updatedDoc.name = techniker.name;
 
-      this.dataService.updateDoc(updatedDoc);
+      this.dataService.updateDoc(updatedDoc, this.dbname);
 
     } else {
       this.dataService.createDoc({
         name: techniker.name,
         type: 'techniker',
-      });
+      }, this.dbname);
     }
 
   }
 
   deleteTechniker(techniker): void {
-    this.dataService.deleteDoc(techniker);
+    this.dataService.deleteDoc(techniker, this.dbname);
   }
 
   emitTechniker(): void {
@@ -63,7 +64,7 @@ export class TechnikerService {
         descending: false
       };
 
-      this.dataService.db.query('techniker/by_name', options).then((data) => {
+      this.dataService.dbs[this.dbname].query('techniker/by_name', options).then((data) => {
         const techniker = data.rows.map(row => {
           return row.doc;
         });

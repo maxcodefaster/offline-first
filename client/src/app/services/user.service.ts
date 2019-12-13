@@ -8,9 +8,7 @@ export class UserService {
 
   public currentUser: any = false;
 
-  constructor(public storage: Storage) {
-    console.log('Hello UserProvider Provider');
-  }
+  constructor(public storage: Storage) {}
 
   saveUserData(data): void {
     this.currentUser = data;

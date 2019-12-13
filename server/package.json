@@ -7,7 +7,7 @@
         "start": "node server.js"
     },
     "dependencies": {
-        "@wwoods/superlogin": "github:woods/superlogin",
+        "@wwoods/superlogin": "github:wwoods/superlogin",
         "body-parser": "^1.17.2",
         "cors": "^2.8.3",
         "couch-pwd": "github:zemirco/couch-pwd",
@@ -15,6 +15,7 @@
         "express": "^4.15.3",
         "https": "^1.0.0",
         "method-override": "^2.3.9",
-        "morgan": "^1.8.2"
+        "morgan": "^1.8.2",
+        "nano": "^8.1.0"
     }
 }

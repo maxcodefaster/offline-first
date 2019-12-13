@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TeamleiterService {
 
+  dbname = 'gesaqs';
   teamleiterSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
   constructor(private dataService: DataService, private zone: NgZone) {
@@ -17,7 +18,7 @@ export class TeamleiterService {
 
     this.emitTeamleiter();
 
-    this.dataService.db.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+    this.dataService.dbs[this.dbname].changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
 
       if (change.doc.type === 'teamleiter' || change.deleted) {
         this.emitTeamleiter();
@@ -39,19 +40,19 @@ export class TeamleiterService {
 
       updatedDoc.name = teamleiter.name;
 
-      this.dataService.updateDoc(updatedDoc);
+      this.dataService.updateDoc(updatedDoc, this.dbname);
 
     } else {
       this.dataService.createDoc({
         name: teamleiter.name,
         type: 'teamleiter',
-      });
+      }, this.dbname);
     }
 
   }
 
   deleteTeamleiter(teamleiter): void {
-    this.dataService.deleteDoc(teamleiter);
+    this.dataService.deleteDoc(teamleiter, this.dbname);
   }
 
   emitTeamleiter(): void {
@@ -63,7 +64,7 @@ export class TeamleiterService {
         descending: false
       };
 
-      this.dataService.db.query('teamleiter/by_name', options).then((data) => {
+      this.dataService.dbs[this.dbname].query('teamleiter/by_name', options).then((data) => {
         const teamleiter = data.rows.map(row => {
           return row.doc;
         });
