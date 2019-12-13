@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SicherheitsCheckService {
 
-  dbname = 'gesaqs';
+  dbname = 'private';
   sicherheitsCheckSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
   constructor(private dataService: DataService, private zone: NgZone) {

@@ -53,7 +53,7 @@ export class DataService {
             }).on('denied', err => {
                 console.log('denied ' + err);
             }).on('complete', info => {
-                console.log('complete ' + info);
+                console.log('complete ' + JSON.stringify(info));
             }).on('error', err => {
                 console.log('error ' + err);
             });

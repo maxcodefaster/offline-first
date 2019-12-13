@@ -57,15 +57,24 @@ app.use('/auth', superlogin.router);
 app.listen(process.env.PORT || 8080);
 
 // Create superlogin event emitter
-superlogin.on('login', function(userDoc, provider) {
+superlogin.on('signup', function(userDoc, provider) {
     const opts = {
-        continous: true,
-        create_target: true
+        continuous: true,
+        create_target: true,
     };
-    // console.log('User: ' + JSON.stringify(userDoc) + ' logged in with ' + provider);
-    nano.db.replication.enable(userDoc.userDBs.gesaqs, 'admin-database', opts).then((body) => {
+    // console.log(userDoc);
+    const regex = /^private\$.+$/;
+    let privateDB;
+    for (let dbs in userDoc.personalDBs) {
+        console.log(dbs)
+        if (regex.test(dbs)) {
+            privateDB = dbs;
+        }
+    }
+    console.log(privateDB);
+    nano.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
         return nano.db.replication.query(body.id);
     }).then((response) => {
-        console.log(response);
+        // console.log(response);
     });
 });

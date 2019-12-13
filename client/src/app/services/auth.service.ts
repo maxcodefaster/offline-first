@@ -35,14 +35,14 @@ export class AuthService {
 
     // tslint:disable-next-line: forin
     for (const db in this.dataService.dbs) {
-      const dbRemote = this.dataService.dbs[db];
-      dbRemote.destroy().then((res) => {
-        this.dataService.dbs = null;
+      this.dataService.dbs[db].destroy().then((res) => {
+        console.log(res);
       }
-        , (err) => {
-          console.log('could not destroy db');
-        });
+      , (err) => {
+        console.log('could not destroy db');
+      });
     }
+    this.dataService.dbs = null;
     this.userService.saveUserData(null);
     this.navCtrl.navigateRoot('/login');
   }
