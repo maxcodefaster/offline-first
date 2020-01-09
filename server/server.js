@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const SuperLogin = require('@wwoods/superlogin');
-const nano = require('nano')('http://localhost:5984');
+const nano = require('nano')('http://admin:couchdb@localhost:5984');
 
 const app = express();
 app.use(logger('dev'));
@@ -16,8 +16,9 @@ const config = {
     dbServer: {
         protocol: 'http://',
         host: '127.0.0.1:5984',
-        //user: 'admin',
-        //password: 'password',
+        user: 'admin',
+        password: 'couchdb',
+        cloudant: false,
         userDB: 'gesaqs-users',
         couchAuthDB: '_users'
     },
@@ -25,7 +26,8 @@ const config = {
         maxFailedLogins: 5,
         lockoutTime: 600,
         tokenLife: 604800, // one week
-        loginOnRegistration: true
+        loginOnRegistration: false,
+        defaultRoles: ['user']
     },
     mailer: {
         fromEmail: 'gmail.user@gmail.com',
@@ -46,6 +48,10 @@ const config = {
     providers: {
         local: true
     },
+    userModel: {
+        whitelist: ['isAdmin'],
+        isAdmin: false,
+    },
 };
 
 // Initialize SuperLogin 
@@ -58,11 +64,17 @@ app.listen(process.env.PORT || 8080);
 
 // Create superlogin event emitter
 superlogin.on('signup', function(userDoc, provider) {
+    console.log(JSON.stringify(userDoc));
     const opts = {
         continuous: true,
         create_target: true,
+        // exclude design documents
+        selector: {
+            "_id": {
+                "$regex": "^(?!_design\/)",
+            }
+        }
     };
-    // console.log(userDoc);
     const regex = /^private\$.+$/;
     let privateDB;
     for (let dbs in userDoc.personalDBs) {
@@ -71,8 +83,15 @@ superlogin.on('signup', function(userDoc, provider) {
             privateDB = dbs;
         }
     }
-    console.log(privateDB);
+    // Enable replication from userDB to adminDB
     nano.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
+        return nano.db.replication.query(body.id);
+    }).then((response) => {
+        // console.log(response);
+    });
+
+    // Replicate design documents to private DB
+    nano.db.replicate('gesa-user-resources', privateDB).then((body) => {
         return nano.db.replication.query(body.id);
     }).then((response) => {
         // console.log(response);

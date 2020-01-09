@@ -30,6 +30,11 @@
             <ion-input formControlName="confirmPassword" type="password" required></ion-input>
         </ion-item>
 
+        <ion-item>
+            <ion-checkbox checked="false" formControlName="isAdmin" color="primary" slot="start"></ion-checkbox>
+            <ion-label>Admin</ion-label>
+        </ion-item>
+
     </form>
 
     <p class="submit-warning" *ngIf="!registerForm.valid">You must fill out all fields above correctly before you can create your account.</p>

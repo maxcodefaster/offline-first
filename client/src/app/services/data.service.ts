@@ -49,7 +49,7 @@ export class DataService {
             this.dbs[db].sync(dbRemote, options).on('change', info => {
                 console.log(info);
             }).on('active', () => {
-                console.log('resume');
+                // console.log('resume');
             }).on('denied', err => {
                 console.log('denied ' + err);
             }).on('complete', info => {

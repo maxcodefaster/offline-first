@@ -28,7 +28,8 @@ export class RegisterPage implements OnInit {
       username: ['', Validators.compose([Validators.maxLength(16), Validators.pattern('[a-zA-Z0-9]*'), Validators.required])],
       email: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
       password: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      confirmPassword: ['', Validators.compose([Validators.maxLength(30), Validators.required])]
+      confirmPassword: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+      isAdmin: [false, Validators.compose([Validators.required])]
     });
 
   }
@@ -47,6 +48,8 @@ export class RegisterPage implements OnInit {
 
         this.loading = overlay;
         this.loading.present();
+
+        console.log(JSON.stringify(this.registerForm.value));
 
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
 
