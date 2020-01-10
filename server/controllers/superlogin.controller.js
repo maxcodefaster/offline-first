@@ -1,6 +1,16 @@
 const nano = require('nano')('http://admin:couchdb@localhost:5984');
+const superloginConfig = require('../config/superlogin.config.js');
+const SuperLogin = require('@wwoods/superlogin');
+
 // Create superlogin event emitter
-module.exports = superlogin => {
+module.exports.initSuperLogin = app => {
+
+    // Initialize SuperLogin 
+    const superlogin = new SuperLogin(superloginConfig);
+
+    // Mount SuperLogin's routes to our app 
+    app.use('/auth', superlogin.router);
+
     superlogin.on('signup', function(userDoc, provider) {
         console.log(JSON.stringify(userDoc));
         const opts = {
