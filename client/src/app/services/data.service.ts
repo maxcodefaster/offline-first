@@ -22,7 +22,7 @@ export class DataService {
         this.remoteName = Object.keys(remote.userDBs);
         this.dbs = {};
 
-        // save PouchDB instances and address
+        // save PouchDB instances and remote address
         for (let i = 0; i < this.remoteName.length; i++) {
             this.dbs[this.remoteName[i]] =
                 new PouchDB(this.remoteName[i], {
