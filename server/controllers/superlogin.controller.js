@@ -13,6 +13,8 @@ module.exports.initSuperLogin = app => {
 
     superlogin.on('signup', function(userDoc, provider) {
         console.log(JSON.stringify(userDoc));
+
+        // opts for replication
         const opts = {
             continuous: true,
             create_target: true,
@@ -23,6 +25,8 @@ module.exports.initSuperLogin = app => {
                 }
             }
         };
+
+        // get private DB name
         const regex = /^private\$.+$/;
         let privateDB;
         for (let dbs in userDoc.personalDBs) {
@@ -31,12 +35,6 @@ module.exports.initSuperLogin = app => {
                 privateDB = dbs;
             }
         }
-        // Enable replication from userDB to adminDB
-        nano.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
-            return nano.db.replication.query(body.id);
-        }).then((response) => {
-            // console.log(response);
-        });
 
         // Replicate design documents to private DB
         nano.db.replicate('gesa-user-resources', privateDB).then((body) => {
@@ -44,5 +42,21 @@ module.exports.initSuperLogin = app => {
         }).then((response) => {
             // console.log(response);
         });
+
+        if (userDoc.isAdmin) {
+            // Replicate AdminDB to AdminUsers
+            nano.db.replication.enable('admin-database', privateDB, opts).then((body) => {
+                return nano.db.replication.query(body.id);
+            }).then((response) => {
+                // console.log(response);
+            });
+        } else {
+            // Enable replication from userDB to adminDB
+            nano.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
+                return nano.db.replication.query(body.id);
+            }).then((response) => {
+                // console.log(response);
+            });
+        }
     })
 }
