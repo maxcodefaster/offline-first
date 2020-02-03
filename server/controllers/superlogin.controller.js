@@ -1,6 +1,6 @@
 const nano = require('nano')('http://admin:couchdb@localhost:5984');
 const superloginConfig = require('../config/superlogin.config.js');
-const SuperLogin = require('@wwoods/superlogin');
+const SuperLogin = require('superlogin');
 
 // Create superlogin event emitter
 module.exports.initSuperLogin = app => {
