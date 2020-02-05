@@ -1,6 +1,6 @@
 const nano = require('nano')('http://' + process.env.COUCHDB_ADMIN + ':' + process.env.COUCHDB_PW + '@' + process.env.COUCHDB_HOST);
 const superloginConfig = require('../config/superlogin.config.js');
-const SuperLogin = require('@wwoods/superlogin');
+const SuperLogin = require('superlogin');
 
 // Create superlogin event emitter
 module.exports.initSuperLogin = app => {
