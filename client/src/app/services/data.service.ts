@@ -13,9 +13,7 @@ export class DataService {
 
     constructor(
         private userService: UserService,
-    ) {
-
-    }
+    ) { }
 
     initDatabase(remote): void {
         this.remoteAddress = Object.values(remote.userDBs);

@@ -1,16 +1,16 @@
 <ion-header translucent>
     <ion-toolbar>
-        <ion-buttons slot="secondary">
-            <ion-button>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/archive">
                 <ion-icon slot="icon-only" name="archive"></ion-icon>
             </ion-button>
         </ion-buttons>
 
-        <ion-title>Service-Check</ion-title>
+        <ion-title>Tab 2: Blank Page</ion-title>
 
-        <ion-buttons slot="primary">
-            <ion-button>
-                <ion-icon slot="icon-only" name="settings"></ion-icon>
+        <ion-buttons slot="end">
+            <ion-button (click)="logout()" class="logout-button">
+                <ion-icon slot="icon-only" name="log-out"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>

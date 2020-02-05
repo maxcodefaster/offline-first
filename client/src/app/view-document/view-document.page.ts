@@ -14,14 +14,14 @@ export class ViewDocumentPage implements OnInit {
   constructor(private route: ActivatedRoute, private sicherheitsCheckService: StandardFormService, ) { }
 
   ngOnInit() {
-    let formId = '';
+    let documentId = '';
     this.route.paramMap.subscribe((params: ParamMap) => {
-      formId = params.get('id');
+      documentId = params.get('id');
     });
-    this.getForm(formId);
+    this.getDocument(documentId);
   }
 
-  getForm(id) {
+  getDocument(id) {
     this.sicherheitsCheckService.getSingleSicherheitsCheck(id).then((res: any) => {
       this.formData = res;
     });

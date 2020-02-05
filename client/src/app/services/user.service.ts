@@ -12,11 +12,11 @@ export class UserService {
 
   saveUserData(data): void {
     this.currentUser = data;
-    this.storage.set('gesaQSUserData', data);
+    this.storage.set('userData', data);
   }
 
   getUserData(): Promise<any> {
-    return this.storage.get('gesaQSUserData');
+    return this.storage.get('userData');
   }
 
 }

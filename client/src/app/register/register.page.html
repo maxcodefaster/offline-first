@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Account registrieren</ion-title>
+        <ion-title>Register account</ion-title>
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/login"></ion-back-button>
         </ion-buttons>
@@ -26,7 +26,7 @@
         </ion-item>
 
         <ion-item class="confirm-password-input">
-            <ion-label position="stacked">Confirm Password</ion-label>
+            <ion-label position="stacked">Confirm password</ion-label>
             <ion-input formControlName="confirmPassword" type="password" required></ion-input>
         </ion-item>
 
@@ -39,7 +39,7 @@
 
     <p class="submit-warning" *ngIf="!registerForm.valid">You must fill out all fields above correctly before you can create your account.</p>
 
-    <ion-button expand="block" color="primary" fill="solid" class="register-button" (click)="createAccount()">Create Account
+    <ion-button expand="block" color="primary" fill="solid" class="register-button" (click)="createAccount()">Create account
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
     </ion-button>
 </ion-content>
