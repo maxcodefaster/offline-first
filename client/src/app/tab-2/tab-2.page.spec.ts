@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewSicherheitsCheckPage } from './view-sicherheits-check.page';
+import { Tab2Page as Tab2Page } from './tab-2.page';
 
-describe('ViewSicherheitsCheckPage', () => {
-  let component: ViewSicherheitsCheckPage;
-  let fixture: ComponentFixture<ViewSicherheitsCheckPage>;
+describe('Tab2Page', () => {
+  let component: Tab2Page;
+  let fixture: ComponentFixture<Tab2Page>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewSicherheitsCheckPage ],
+      declarations: [ Tab2Page ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewSicherheitsCheckPage);
+    fixture = TestBed.createComponent(Tab2Page);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

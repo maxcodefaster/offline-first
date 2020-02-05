@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewSicherheitsCheckPage } from './view-sicherheits-check.page';
+import { Tab2Page } from './tab-2.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ViewSicherheitsCheckPage
+    component:Tab2Page
   }
 ];
 
@@ -18,9 +18,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ViewSicherheitsCheckPage]
+  declarations: [Tab2Page]
 })
-export class ViewSicherheitsCheckPageModule {}
+export class Tab2PageModule {}

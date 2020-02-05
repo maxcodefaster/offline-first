@@ -19,7 +19,7 @@
 <ion-content fullscreen class="ion-padding">
     <form [formGroup]="standardForm" id="standardForm">
         <ion-text>
-            <h3>Basis Informationen</h3>
+            <h3>Basic Form</h3>
         </ion-text>
         <ion-item [ngClass]="{error_warn : hasFormError('datum')}">
             <ion-label slot="start" position="fixed">Datum</ion-label>
@@ -27,22 +27,22 @@
             </ion-datetime>
         </ion-item>
         <ion-note *ngIf="hasFormError('datum')" class="fadeInWarn" color="danger">
-            ! Dieses Feld wird benötigt
+            ! Please fill out this field
         </ion-note>
 
         <ion-item [ngClass]="{error_warn : hasFormError('kunde')}">
-            <ion-label slot="start" position="fixed">Kunde / Ort</ion-label>
+            <ion-label slot="start" position="fixed">Titel</ion-label>
             <ion-input clearInput type="text" formControlName="kunde"></ion-input>
         </ion-item>
         <ion-note *ngIf="hasFormError('kunde')" class="fadeInWarn" color="danger">
-            ! Dieses Feld wird benötigt
+            ! Please fill out this field
         </ion-note>
 
         <ion-text>
-            <h3>Bemerkung</h3>
+            <h3>Note</h3>
         </ion-text>
         <ion-item>
-            <ion-textarea placeholder="Bemerkungen..." formControlName="bemerkung">
+            <ion-textarea placeholder="Notes..." formControlName="bemerkung">
             </ion-textarea>
         </ion-item>
     </form>

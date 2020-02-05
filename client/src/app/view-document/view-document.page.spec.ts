@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServiceCheckPage } from './service-check.page';
+import { ViewDocumentPage as ViewDocumentPage } from './view-document.page';
 
-describe('ServiceCheckPage', () => {
-  let component: ServiceCheckPage;
-  let fixture: ComponentFixture<ServiceCheckPage>;
+describe('ViewDocumentPage', () => {
+  let component: ViewDocumentPage;
+  let fixture: ComponentFixture<ViewDocumentPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServiceCheckPage ],
+      declarations: [ ViewDocumentPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ServiceCheckPage);
+    fixture = TestBed.createComponent(ViewDocumentPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

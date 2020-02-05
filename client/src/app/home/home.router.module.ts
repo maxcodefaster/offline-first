@@ -18,11 +18,11 @@ const routes: Routes = [
                 ]
             },
             {
-                path: 'service-check',
+                path: 'tab-2',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('../service-check/service-check.module').then(m => m.ServiceCheckPageModule)
+                        loadChildren: () => import('../tab-2/tab-2.module').then(m => m.Tab2PageModule)
                     }
                 ]
             }

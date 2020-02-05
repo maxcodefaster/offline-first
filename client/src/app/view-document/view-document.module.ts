@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ServiceCheckPage } from './service-check.page';
+import { ViewDocumentPage } from './view-document.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ServiceCheckPage
+    component: ViewDocumentPage
   }
 ];
 
@@ -18,10 +18,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ServiceCheckPage]
+  declarations: [ViewDocumentPage]
 })
-export class ServiceCheckPageModule {}
+export class ViewDocumentPageModule {}

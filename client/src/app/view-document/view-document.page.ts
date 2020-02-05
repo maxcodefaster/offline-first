@@ -3,11 +3,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { SicherheitsCheckService } from '../services/sicherheits-check.service';
 
 @Component({
-  selector: 'app-view-sicherheits-check',
-  templateUrl: './view-sicherheits-check.page.html',
-  styleUrls: ['./view-sicherheits-check.page.scss'],
+  selector: 'app-view-document',
+  templateUrl: './view-document.page.html',
+  styleUrls: ['./view-document.page.scss'],
 })
-export class ViewSicherheitsCheckPage implements OnInit {
+export class ViewDocumentPage implements OnInit {
 
   formData;
 
