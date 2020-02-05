@@ -4,21 +4,34 @@ const SuperLogin = require('@wwoods/superlogin');
 
 // Create superlogin event emitter
 module.exports.initSuperLogin = app => {
+    // Dev option to destroy all databases ! Use with caution ! Delete those lines in production
+    // nano.db.list().then((body) => {
+    //     // body is an array
+    //     body.forEach((db) => {
+    //         nano.db.destroy(db).then((body) => {
+    //             console.log(db + 'destroyed');
+    //         })
+    //     });
+    // });
 
     // Initialize SuperLogin 
     const superlogin = new SuperLogin(superloginConfig);
     console.log('Superlogin loaded');
 
-    // Create admin-database & user-resources database
-    nano.db.create('admin-database', function (err, body) {
-        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
-    });
-    nano.db.create('user-resources', function (err, body) {
-        (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
-    });
-
     // Mount SuperLogin's routes to our app 
     app.use('/auth', superlogin.router);
+
+
+    // Create admin-database & user-resources database
+    nano.db.create('admin-database', function (err, data) {
+        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+    });
+    nano.db.create('user-resources', function (err, data) {
+        (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
+    });
+    nano.db.create('_replicator', function (err, data) {
+        (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
+    });
 
     superlogin.on('signup', function (userDoc, provider) {
         console.log(JSON.stringify(userDoc));
@@ -50,6 +63,8 @@ module.exports.initSuperLogin = app => {
             return nano.db.replication.query(body.id);
         }).then((response) => {
             // console.log(response);
+        }).catch((err) => {
+            console.log(err);
         });
 
         if (userDoc.isAdmin) {
@@ -58,14 +73,18 @@ module.exports.initSuperLogin = app => {
                 return nano.db.replication.query(body.id);
             }).then((response) => {
                 // console.log(response);
-            });
+            }).catch((err) => {
+                console.log(err);
+            });;
         } else {
             // Enable replication from userDB to adminDB
             nano.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
                 return nano.db.replication.query(body.id);
             }).then((response) => {
                 // console.log(response);
-            });
+            }).catch((err) => {
+                console.log(err);
+            });;
         }
     })
 }

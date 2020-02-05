@@ -1,5 +1,5 @@
 {
-    "name": "gesa-server",
+    "name": "couchdb-server",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",

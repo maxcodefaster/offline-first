@@ -12,8 +12,7 @@ module.exports = {
         maxFailedLogins: 5,
         lockoutTime: 600,
         tokenLife: 604800, // one week
-        loginOnRegistration: false,
-        defaultRoles: ['user']
+        loginOnRegistration: true,
     },
     mailer: {
         fromEmail: 'gmail.user@gmail.com',
