@@ -1,4 +1,4 @@
-const nano = require('nano')('http://admin:couchdb@localhost:5984');
+const nano = require('nano')('http://'+process.env.COUCHDB_ADMIN+':'+process.env.COUCHDB_PW+'@'+process.env.COUCHDB_HOST);
 const superloginConfig = require('../config/superlogin.config.js');
 const SuperLogin = require('@wwoods/superlogin');
 
@@ -7,6 +7,7 @@ module.exports.initSuperLogin = app => {
 
     // Initialize SuperLogin 
     const superlogin = new SuperLogin(superloginConfig);
+    console.log('Superlogin loaded');
 
     // Mount SuperLogin's routes to our app 
     app.use('/auth', superlogin.router);
@@ -37,7 +38,7 @@ module.exports.initSuperLogin = app => {
         }
 
         // Replicate design documents to private DB
-        nano.db.replicate('gesa-user-resources', privateDB).then((body) => {
+        nano.db.replicate('user-resources', privateDB).then((body) => {
             return nano.db.replication.query(body.id);
         }).then((response) => {
             // console.log(response);

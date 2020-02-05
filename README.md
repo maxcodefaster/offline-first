@@ -8,6 +8,7 @@ This project is a template to build an offline first web application with authen
 - Capacitor as native app wrapper
 
 ## Installation
-Install the client dependencies by `cd client` and running `npm install`. To install server dependencies you have to include the `--no-optional` flag to the npm install command. Start the client framework by running `ionic serve`, the server can be started by running `nodemon server.js`. Note: You should install the ionic cli & nodemon globally.
+Requirements: Installed Ionic Cli, NodeJS, Nodemon and CouchDB locally. Disable the cors policy in couchdb and register an admin (credentials can be edited in the .env file, have a look at the env.config.json in the server/config folder).
 
+Install the client dependencies by `cd client` and running `npm install`. To install server dependencies you have to include the `--no-optional` flag to the npm install command. Start the client framework by running `ionic serve`, the server can be started by running `nodemon server.js`.
 

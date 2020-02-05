@@ -1,11 +1,11 @@
 module.exports = {
     dbServer: {
         protocol: 'http://',
-        host: '127.0.0.1:5984',
-        user: 'admin',
-        password: 'couchdb',
+        host: process.env.COUCHDB_HOST,
+        user: process.env.COUCHDB_ADMIN,
+        password: process.env.COUCHDB_PW,
         cloudant: false,
-        userDB: 'gesaqs-users',
+        userDB: 'users',
         couchAuthDB: '_users'
     },
     security: {
@@ -27,7 +27,7 @@ module.exports = {
     },
     userDBs: {
         defaultDBs: {
-            shared: ['gesaqs'],
+            shared: ['shared'],
             private: ['private']
         }
     },
