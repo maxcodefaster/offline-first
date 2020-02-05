@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { SicherheitsCheckService } from '../services/sicherheits-check.service';
+import { StandardFormService as StandardFormService } from '../services/sicherheits-check.service';
 import { LoadingController, AlertController, ToastController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-sicherheits-check',
-  templateUrl: './sicherheits-check.page.html',
-  styleUrls: ['./sicherheits-check.page.scss'],
+  selector: 'app-tab-1',
+  templateUrl: './tab-1.page.html',
+  styleUrls: ['./tab-1.page.scss'],
 })
-export class SicherheitsCheckPage implements OnInit {
+export class Tab1Page implements OnInit {
 
   standardForm: FormGroup;
   submitted = false;
   public loading: any;
 
-  constructor(private fb: FormBuilder, private sicherheitsCheckService: SicherheitsCheckService,
+  constructor(private fb: FormBuilder, private sicherheitsCheckService: StandardFormService,
               private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
               private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
     this.standardForm = this.fb.group({

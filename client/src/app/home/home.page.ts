@@ -12,7 +12,6 @@ export class HomePage {
   constructor(public platform: Platform, ) {
     if (!this.platform.is('mobile')) {
       this.slot = 'top';
-      console.log(this.slot);
     }
   }
 

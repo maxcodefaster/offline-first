@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.authService.reauthenticate().then((res) => {
 
-      this.navCtrl.navigateRoot('/home/sicherheits-check');
+      this.navCtrl.navigateRoot('/home/tab-1');
 
     }, (err) => {
 
@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
           this.userService.saveUserData(res);
 
           this.loading.dismiss().then(() => {
-            this.navCtrl.navigateRoot('/home/sicherheits-check');
+            this.navCtrl.navigateRoot('/home/tab-1');
           });
 
         }

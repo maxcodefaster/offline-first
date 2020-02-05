@@ -5,8 +5,9 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SicherheitsCheckService {
+export class StandardFormService {
 
+  // Define which database to access
   dbname = 'private';
   sicherheitsCheckSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
@@ -30,8 +31,6 @@ export class SicherheitsCheckService {
   }
 
   saveSicherheitsChecks(sicherheitsCheck) {
-    console.log(sicherheitsCheck.author);
-
     if (sicherheitsCheck.doc) {
       const updatedDoc = sicherheitsCheck.doc;
       updatedDoc.kunde = sicherheitsCheck.kunde;
@@ -55,14 +54,11 @@ export class SicherheitsCheckService {
   }
 
   emitSicherheitsChecks(): void {
-
     this.zone.run(() => {
-
       const options = {
         include_docs: true,
         descending: true
       };
-
       this.dataService.dbs[this.dbname].query('sicherheitsCheck/by_date_created', options).then((data) => {
         const sicherheitsChecks = data.rows.map(row => {
           return row.doc;
@@ -71,9 +67,7 @@ export class SicherheitsCheckService {
       }).catch((err) => {
         console.log(err);
       });
-
     });
-
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SicherheitsCheckService } from '../services/sicherheits-check.service';
+import { StandardFormService as StandardFormService } from '../services/sicherheits-check.service';
 import { AuthService } from '../services/auth.service';
 import { LoadingController, NavController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
@@ -15,7 +15,7 @@ export class ArchivePage implements OnInit {
   public loading: any;
   user;
 
-  constructor(private sicherheitsCheckService: SicherheitsCheckService, private userService: UserService,
+  constructor(private sicherheitsCheckService: StandardFormService, private userService: UserService,
     private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) { }
 
 

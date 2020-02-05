@@ -9,11 +9,11 @@ const routes: Routes = [
         component: HomePage,
         children: [
             {
-                path: 'sicherheits-check',
+                path: 'tab-1',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('../sicherheits-check/sicherheits-check.module').then(m => m.SicherheitsCheckPageModule)
+                        loadChildren: () => import('../tab-1/tab-1.module').then(m => m.Tab1PageModule)
                     }
                 ]
             },
@@ -30,7 +30,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'sicherheits-check',
+        redirectTo: 'tab-1',
         pathMatch: 'full'
     }
 ];

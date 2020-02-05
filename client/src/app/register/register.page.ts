@@ -59,7 +59,7 @@ export class RegisterPage implements OnInit {
             this.dataService.initDatabase(res);
             this.userService.saveUserData(res);
 
-            this.navCtrl.navigateRoot('/home/sicherheits-check');
+            this.navCtrl.navigateRoot('/home/tab-1');
 
           }
 
