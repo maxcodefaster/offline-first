@@ -1,4 +1,4 @@
-const nano = require('nano')('http://'+process.env.COUCHDB_ADMIN+':'+process.env.COUCHDB_PW+'@'+process.env.COUCHDB_HOST);
+const nano = require('nano')('http://' + process.env.COUCHDB_ADMIN + ':' + process.env.COUCHDB_PW + '@' + process.env.COUCHDB_HOST);
 const superloginConfig = require('../config/superlogin.config.js');
 const SuperLogin = require('@wwoods/superlogin');
 
@@ -9,10 +9,18 @@ module.exports.initSuperLogin = app => {
     const superlogin = new SuperLogin(superloginConfig);
     console.log('Superlogin loaded');
 
+    // Create admin-database & user-resources database
+    nano.db.create('admin-database', function (err, body) {
+        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+    });
+    nano.db.create('user-resources', function (err, body) {
+        (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
+    });
+
     // Mount SuperLogin's routes to our app 
     app.use('/auth', superlogin.router);
 
-    superlogin.on('signup', function(userDoc, provider) {
+    superlogin.on('signup', function (userDoc, provider) {
         console.log(JSON.stringify(userDoc));
 
         // opts for replication
