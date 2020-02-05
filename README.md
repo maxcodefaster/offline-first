@@ -4,7 +4,7 @@ This project is a template to build an offline first web application with authen
 - CouchDB as remote server database
 - PouchDB as local database
 - Superlogin for user authentication and roles
-- Nano for buisness logic
+- Nano for business logic
 - Capacitor as native app wrapper
 
 ## Installation
