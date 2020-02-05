@@ -1,4 +1,7 @@
 ## About
+
+[A more detailed documentation is available here](https://maxperience.blog/post/webdev-endgame-2020/)
+
 This project is a template to build an offline first web application with authentication, that can be ported easily to other platforms (Android, iOS, Electron). It runs on the following technologies:
 - Ionic Angular as frontend framework
 - CouchDB as remote server database
