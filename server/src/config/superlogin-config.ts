@@ -1,9 +1,9 @@
 export const superloginConfig = {
     dbServer: {
         protocol: 'http://',
-        host: process.env.COUCHDB_HOST,
-        user: process.env.COUCHDB_ADMIN,
-        password: process.env.COUCHDB_PW,
+        host: 'localhost:5984',
+        user: 'admin',
+        password: 'couchdb',
         cloudant: false,
         userDB: 'users',
         couchAuthDB: '_users'

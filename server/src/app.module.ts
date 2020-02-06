@@ -1,15 +1,18 @@
-import { Module, NestModule, MiddlewareConsumer, Inject } from '@nestjs/common';
+import { Module, Inject } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+
 
 import { superloginConfig } from './config/superlogin-config';
 import { SuperloginModule } from './superlogin/superlogin-module';
 
 import { SuperloginController } from './superlogin/superlogin.controller';
-import { loginHandler } from './login-handler';
+import { signupHandler } from './superlogin/signup-handler';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     SuperloginModule.forRoot(superloginConfig),
   ],
   controllers: [AppController, SuperloginController],
@@ -18,6 +21,6 @@ import { loginHandler } from './login-handler';
 export class AppModule {
 
   constructor(@Inject('superlogin') private superlogin: any) {
-    this.superlogin.on('signup', loginHandler);
+    this.superlogin.on('signup', signupHandler);
   }
 }

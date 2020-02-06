@@ -1,10 +1,10 @@
 import * as nano from 'nano';
 
 const db: any = nano({
-    url: 'http://' + process.env.COUCHDB_ADMIN + ':' + process.env.COUCHDB_PW + '@' + process.env.COUCHDB_HOST
+    url: 'http://admin:couchdb@localhost:5984'
 });
 
-export const loginHandler = (userDoc, provider) => {
+export const signupHandler = (userDoc, provider) => {
 
     db.create('admin-database', function (err, data) {
         (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
