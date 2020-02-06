@@ -18,6 +18,6 @@ import { loginHandler } from './login-handler';
 export class AppModule {
 
   constructor(@Inject('superlogin') private superlogin: any) {
-    this.superlogin.on('signup', loginHandler(userDoc, provider));
+    this.superlogin.on('signup', loginHandler);
   }
 }
