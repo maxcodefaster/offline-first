@@ -1,25 +1,21 @@
 import { Controller } from '@nestjs/common';
-import superloginConfig from 'src/config/superlogin-config';
-import SuperLogin from '@maxcodefaster/superlogin';
 import * as Nano from 'nano';
 
 
 @Controller('superlogin')
 export class SuperloginController {
 
-    // // Mount SuperLogin's routes to our app 
-    // app.use('/auth', superlogin.router);
 
     // // Create admin-database & user-resources database
-    // nano.db.create('admin-database', function (err, data) {
-    //     (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
-    // });
-    // nano.db.create('user-resources', function (err, data) {
-    //     (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
-    // });
-    // nano.db.create('_replicator', function (err, data) {
-    //     (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
-    // });
+    nano.db.create('admin-database', function (err, data) {
+        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+    });
+    nano.db.create('user-resources', function (err, data) {
+        (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
+    });
+    nano.db.create('_replicator', function (err, data) {
+        (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
+    });
 
     // superlogin.on('signup', function (userDoc, provider) {
     //     console.log(JSON.stringify(userDoc));

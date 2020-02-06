@@ -1,6 +1,4 @@
-import { registerAs } from '@nestjs/config';
-
-export default registerAs('superloginConfig',() => ({
+export const superloginConfig = {
     dbServer: {
         protocol: 'http://',
         host: process.env.COUCHDB_HOST,
@@ -39,4 +37,4 @@ export default registerAs('superloginConfig',() => ({
         whitelist: ['isAdmin'],
         isAdmin: false,
     },
-  }));
+};

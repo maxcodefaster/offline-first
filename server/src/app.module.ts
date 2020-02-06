@@ -1,28 +1,23 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { Module, NestModule, MiddlewareConsumer, Inject } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import SuperloginConfig from './config/superlogin-config';
+import { superloginConfig } from './config/superlogin-config';
+import { SuperloginModule } from './superlogin/superlogin-module';
 
 import { SuperloginController } from './superlogin/superlogin.controller';
-import { superloginProvider } from './superlogin/superlogin';
-import { SuperloginMiddleware } from './superlogin/superlogin.middleware';
+import { loginHandler } from './login-handler';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [SuperloginConfig],
-    }),
+    SuperloginModule.forRoot(superloginConfig),
   ],
   controllers: [AppController, SuperloginController],
-  providers: [AppService, superloginProvider],
-  // providers: [AppService, SuperloginService],
+  providers: [AppService],
 })
-export class AppModule  implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(SuperloginMiddleware)
-      .forRoutes('auth');
+export class AppModule {
+
+  constructor(@Inject('superlogin') private superlogin: any) {
+    this.superlogin.on('signup', loginHandler(userDoc, provider));
   }
 }
