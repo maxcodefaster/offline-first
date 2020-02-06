@@ -8,6 +8,7 @@
     },
     "dependencies": {
         "@maxcodefaster/superlogin": "github:maxcodefaster/superlogin",
+        "@wwoods/superlogin": "github:maxcodefaster/superlogin",
         "body-parser": "^1.17.2",
         "cors": "^2.8.3",
         "couch-pwd": "github:zemirco/couch-pwd",
