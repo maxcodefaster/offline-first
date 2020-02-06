@@ -1,0 +1,21 @@
+{
+    "name": "couchdb-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "@maxcodefaster/superlogin": "github:maxcodefaster/superlogin",
+        "body-parser": "^1.17.2",
+        "cors": "^2.8.3",
+        "couch-pwd": "github:zemirco/couch-pwd",
+        "del": "^3.0.0",
+        "express": "^4.15.3",
+        "https": "^1.0.0",
+        "method-override": "^2.3.9",
+        "morgan": "^1.8.2",
+        "nano": "^8.1.0"
+    }
+}
