@@ -20,7 +20,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@maxcodefaster/nest-couchdb": "github:maxcodefaster/nest-couchdb",
     "@maxcodefaster/superlogin": "github:maxcodefaster/superlogin",
     "@nestjs/common": "^6.10.14",
     "@nestjs/config": "^0.2.2",
@@ -30,6 +29,7 @@
     "couch-pwd": "github:zemirco/couch-pwd",
     "del": "^3.0.0",
     "method-override": "^2.3.9",
+    "nano": "^8.1.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4"

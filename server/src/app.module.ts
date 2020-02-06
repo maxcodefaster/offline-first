@@ -2,8 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SuperloginController } from './superlogin/superlogin.controller';
+
 import SuperloginConfig from './config/superlogin-config';
+
+import { SuperloginController } from './superlogin/superlogin.controller';
+import { superloginProvider } from './superlogin/superlogin';
 
 @Module({
   imports: [
@@ -12,6 +15,7 @@ import SuperloginConfig from './config/superlogin-config';
     }),
   ],
   controllers: [AppController, SuperloginController],
-  providers: [AppService],
+  providers: [AppService, superloginProvider],
+  // providers: [AppService, SuperloginService],
 })
 export class AppModule {}
