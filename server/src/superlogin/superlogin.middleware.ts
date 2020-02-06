@@ -1,11 +1,13 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware, Inject } from '@nestjs/common';
+import { superloginProvider } from './superlogin';
 
 @Injectable()
 export class SuperloginMiddleware implements NestMiddleware {
 
-  constructor() {}
+  constructor(@Inject(superloginProvider) private readonly superlogin) {}
 
   use(req: any, res: any, next: () => void) {
+    this.superlogin.router;
     next();
   }
 }
