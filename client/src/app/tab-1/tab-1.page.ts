@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { PrivateDocService as PrivateDocService } from '../services/private-doc.service';
-import { LoadingController, AlertController, ToastController, NavController } from '@ionic/angular';
+import { PrivateDocService } from '../services/private-doc.service';
+import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
@@ -13,14 +13,21 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab1Page implements OnInit {
 
-  standardForm: FormGroup;
+  privateForm: FormGroup;
   submitted = false;
   public loading: any;
 
-  constructor(private fb: FormBuilder, private privateDocService: PrivateDocService,
-              private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
-              private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
-    this.standardForm = this.fb.group({
+  constructor(
+    private fb: FormBuilder,
+    private privateDocService: PrivateDocService,
+    private toastController: ToastController,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    private loadingCtrl: LoadingController,
+    private navCtrl: NavController
+  ) {
+    this.privateForm = this.fb.group({
       date: new FormControl('', [
         Validators.required,
       ]),
@@ -33,27 +40,20 @@ export class Tab1Page implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.standardForm.controls; }
+  get f() { return this.privateForm.controls; }
 
   ngOnInit() {
-
     this.loadingCtrl.create({
       message: 'Authenticating...'
     }).then((overlay) => {
       this.loading = overlay;
       this.loading.present();
-
       this.authService.reauthenticate().then((res) => {
-
         this.privateDocService.init();
         this.loading.dismiss();
-
-
       }, (err) => {
-
         this.loading.dismiss();
         this.navCtrl.navigateRoot('/login');
-
       });
     });
 
@@ -61,7 +61,7 @@ export class Tab1Page implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Formular übermittelt',
+      message: 'Doc transmitted',
       duration: 4000,
       buttons: [
         {
@@ -78,8 +78,8 @@ export class Tab1Page implements OnInit {
   // save to Database
   saveForm() {
     this.submitted = true;
-    if (!this.standardForm.invalid) {
-      const form = this.standardForm.value;
+    if (!this.privateForm.invalid) {
+      const form = this.privateForm.value;
       const iso = this.getDateISOString();
       form.dateCreated = iso;
       form.author = this.userService.currentUser.user_id,

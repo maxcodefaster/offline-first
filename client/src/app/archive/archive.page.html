@@ -15,20 +15,33 @@
 <ion-content>
     <ion-list>
         <ion-card *ngFor="let doc of privateDocs">
+
             <ion-item>
-                <ion-label>{{doc.title}}</ion-label>
-                <ion-label>{{doc.dateCreated | date}}</ion-label>
-                <ion-button fill="outline" slot="end" routerDirection="forward" [routerLink]="'/view-document/'+doc._id">Ansehen</ion-button>
+                <ion-avatar slot="start">
+                    <img src="https://api.adorable.io/avatars/100/{{doc.author}}">
+                </ion-avatar>
+                <h2>{{doc.author}}</h2>
             </ion-item>
+
             <ion-card-content>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col>
-                            Author: {{doc.author}}
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+
+                <div class="mega-text">
+                    <p>{{doc.title}}</p>
+                </div>
+
+                <!-- <p class="message-content">{{notice.message}}</p> -->
+
             </ion-card-content>
+
+            <div class="control-buttons">
+                <ion-button routerDirection="forward" [routerLink]="'/view-document/'+doc._id" slot="start" fill="clear"
+                    size="small">
+                    <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                    <div>view</div>
+                </ion-button>
+
+            </div>
+
         </ion-card>
     </ion-list>
 </ion-content>

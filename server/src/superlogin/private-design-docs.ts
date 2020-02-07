@@ -4,10 +4,10 @@ export const privateDesignDocuments = [
         language: 'javascript',
         views: {
             by_date_created: {
-                map: "function(doc){ if(doc.type == 'chat'){emit(doc.dateCreated);} }"
+                map: "function(doc){ if(doc.type == 'privateDoc'){emit(doc.dateCreated);} }"
             },
             by_date_updated: {
-                map: "function(doc){ if(doc.type == 'notice'){emit(doc.dateUpdated);} }"
+                map: "function(doc){ if(doc.type == 'privateDoc'){emit(doc.dateUpdated);} }"
             }
         }
     }

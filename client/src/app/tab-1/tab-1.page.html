@@ -6,7 +6,7 @@
             </ion-button>
         </ion-buttons>
 
-        <ion-title>Tab 1: Private Form</ion-title>
+        <ion-title>Private docs</ion-title>
 
         <ion-buttons slot="end">
             <ion-button (click)="logout()" class="logout-button">
@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-    <form [formGroup]="standardForm" id="standardForm">
+    <form [formGroup]="privateForm" id="privateForm">
         <ion-text>
             <h3>Basic Form</h3>
         </ion-text>
@@ -47,7 +47,7 @@
         </ion-item>
     </form>
 </ion-content>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" form="standardForm">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" form="privateForm">
     <ion-fab-button type="submit" (click)="saveForm()">
         <ion-icon name="send"></ion-icon>
     </ion-fab-button>

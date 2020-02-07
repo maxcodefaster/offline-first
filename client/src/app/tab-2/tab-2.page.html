@@ -2,11 +2,17 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-button routerLink="/archive">
-                <ion-icon slot="icon-only" name="archive"></ion-icon>
+                <ion-icon slot="icon-only" name="archive-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
 
-        <ion-title>Tab 2: Blank Page</ion-title>
+        <ion-title>Shared docs</ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="logout()" class="logout-button">
+                <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
 
     </ion-toolbar>
 </ion-header>
