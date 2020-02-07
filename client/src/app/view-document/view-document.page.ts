@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { StandardFormService } from '../services/sicherheits-check.service';
+import { PrivateDocService } from '../services/private-doc.service';
 
 @Component({
   selector: 'app-view-document',
@@ -11,7 +11,7 @@ export class ViewDocumentPage implements OnInit {
 
   formData;
 
-  constructor(private route: ActivatedRoute, private sicherheitsCheckService: StandardFormService, ) { }
+  constructor(private route: ActivatedRoute, private sicherheitsCheckService: PrivateDocService, ) { }
 
   ngOnInit() {
     let documentId = '';
@@ -22,7 +22,7 @@ export class ViewDocumentPage implements OnInit {
   }
 
   getDocument(id) {
-    this.sicherheitsCheckService.getSingleSicherheitsCheck(id).then((res: any) => {
+    this.sicherheitsCheckService.getSinglePrivateDoc(id).then((res: any) => {
       this.formData = res;
     });
   }

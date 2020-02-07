@@ -21,20 +21,20 @@
         <ion-text>
             <h3>Basic Form</h3>
         </ion-text>
-        <ion-item [ngClass]="{error_warn : hasFormError('datum')}">
-            <ion-label slot="start" position="fixed">Datum</ion-label>
-            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="datum" doneText="Ok" cancelText="Zurück">
+        <ion-item [ngClass]="{error_warn : hasFormError('date')}">
+            <ion-label slot="start" position="fixed">Date</ion-label>
+            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="date" doneText="Ok" cancelText="Zurück">
             </ion-datetime>
         </ion-item>
-        <ion-note *ngIf="hasFormError('datum')" class="fadeInWarn" color="danger">
+        <ion-note *ngIf="hasFormError('date')" class="fadeInWarn" color="danger">
             ! Please fill out this field
         </ion-note>
 
-        <ion-item [ngClass]="{error_warn : hasFormError('kunde')}">
+        <ion-item [ngClass]="{error_warn : hasFormError('title')}">
             <ion-label slot="start" position="fixed">Titel</ion-label>
-            <ion-input clearInput type="text" formControlName="kunde"></ion-input>
+            <ion-input clearInput type="text" formControlName="title"></ion-input>
         </ion-item>
-        <ion-note *ngIf="hasFormError('kunde')" class="fadeInWarn" color="danger">
+        <ion-note *ngIf="hasFormError('title')" class="fadeInWarn" color="danger">
             ! Please fill out this field
         </ion-note>
 
@@ -42,7 +42,7 @@
             <h3>Note</h3>
         </ion-text>
         <ion-item>
-            <ion-textarea placeholder="Notes..." formControlName="bemerkung">
+            <ion-textarea placeholder="Notes..." formControlName="note">
             </ion-textarea>
         </ion-item>
     </form>

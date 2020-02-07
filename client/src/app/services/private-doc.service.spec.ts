@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StandardFormService } from './sicherheits-check.service';
+import { PrivateDocService } from './private-doc.service';
 
 describe('SicherheitsCheckService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: StandardFormService = TestBed.get(StandardFormService);
+    const service: PrivateDocService = TestBed.get(PrivateDocService);
     expect(service).toBeTruthy();
   });
 });

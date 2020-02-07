@@ -14,13 +14,14 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-            "aot": true,
+                        "aot": false,
                         "outputPath": "www",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "assets": [{
+                        "assets": [
+                            {
                                 "glob": "**/*",
                                 "input": "src/assets",
                                 "output": "assets"
@@ -31,7 +32,8 @@
                                 "output": "./svg"
                             }
                         ],
-                        "styles": [{
+                        "styles": [
+                            {
                                 "input": "src/theme/variables.scss"
                             },
                             {
@@ -42,10 +44,12 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [{
-                                "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.prod.ts"
-                            }],
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -56,24 +60,24 @@
                             "vendorChunk": false,
                             "buildOptimizer": true,
                             "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ]
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ]
                         },
                         "ci": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "progress": false
                         }
                     }
@@ -107,7 +111,8 @@
                         "karmaConfig": "karma.conf.js",
                         "styles": [],
                         "scripts": [],
-                        "assets": [{
+                        "assets": [
+                            {
                                 "glob": "favicon.ico",
                                 "input": "src/",
                                 "output": "/"
@@ -134,7 +139,9 @@
                             "tsconfig.spec.json",
                             "e2e/tsconfig.json"
                         ],
-                        "exclude": ["**/node_modules/**"]
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
                     }
                 },
                 "e2e": {

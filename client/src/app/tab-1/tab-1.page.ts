@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { StandardFormService as StandardFormService } from '../services/sicherheits-check.service';
+import { PrivateDocService as PrivateDocService } from '../services/private-doc.service';
 import { LoadingController, AlertController, ToastController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
@@ -17,17 +17,17 @@ export class Tab1Page implements OnInit {
   submitted = false;
   public loading: any;
 
-  constructor(private fb: FormBuilder, private sicherheitsCheckService: StandardFormService,
+  constructor(private fb: FormBuilder, private sicherheitsCheckService: PrivateDocService,
               private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
               private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
     this.standardForm = this.fb.group({
-      datum: new FormControl('', [
+      date: new FormControl('', [
         Validators.required,
       ]),
-      kunde: new FormControl('', [
+      title: new FormControl('', [
         Validators.required,
       ]),
-      bemerkung: new FormControl('', [
+      note: new FormControl('', [
       ]),
     });
   }
@@ -84,7 +84,7 @@ export class Tab1Page implements OnInit {
       form.dateCreated = iso;
       form.author = this.userService.currentUser.user_id,
         // save to Database
-        this.sicherheitsCheckService.saveSicherheitsChecks(form).then((res: any) => {
+        this.sicherheitsCheckService.savePrivateDocs(form).then((res: any) => {
           console.log(res);
           if (res.ok) {
             this.presentToast();
