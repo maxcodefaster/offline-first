@@ -15,14 +15,51 @@ export const signupHandler = (userDoc, provider) => {
     //     });
     // });
 
-    couch.db.create('admin-database', function (err, data) {
-        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+    couch.db.get('user-resources', function (err, body) {
+        if (err) {
+            couch.db.create('user-resources', function (err, data) {
+                if (err) {
+                    console.log('user-resources: ' + err.reason)
+                } else {
+                    console.log('user-resources database created');
+                    const resources = couch.use('user-resources');
+                    const designDocument = {
+                        _id: '_design/privateDoc',
+                        language: 'javascript',
+                        views: {
+                            by_date_created: {
+                                map: "function(doc){ if(doc.type == 'chat'){emit(doc.dateCreated);} }"
+                            },
+                            by_date_updated: {
+                                map: "function(doc){ if(doc.type == 'notice'){emit(doc.dateUpdated);} }"
+                            }
+                        }
+                    }
+                    resources.insert(designDocument).then(
+                        result => {
+                            console.log(result);
+                        },
+                        err => {
+                            console.log(err.message);
+                        }
+                    );
+                }
+            });
+        }
     });
-    couch.db.create('user-resources', function (err, data) {
-        (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
+    couch.db.get('admin-database', function (err, body) {
+        if (err) {
+            couch.db.create('admin-database', function (err, data) {
+                (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+            });
+        }
     });
-    couch.db.create('_replicator', function (err, data) {
-        (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
+    couch.db.get('_replicator', function (err, body) {
+        if (err) {
+            couch.db.create('_replicator', function (err, data) {
+                (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
+            });
+        }
     });
 
     // opts for replication
