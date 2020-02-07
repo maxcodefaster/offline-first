@@ -1,3 +1,5 @@
+import { sharedDesignDocuments } from './shared-design-docs';
+import { privateDesignDocuments } from './private-design-docs';
 import * as nano from 'nano';
 
 const couch: any = nano({
@@ -7,15 +9,17 @@ const couch: any = nano({
 export const signupHandler = (userDoc, provider) => {
     //Dev option to destroy all databases ! Use with caution ! Delete those lines in production
     // couch.db.list().then((body) => {
-    //     // body is an array
     //     body.forEach((db) => {
     //         couch.db.destroy(db).then((body) => {
     //             console.log(db + 'destroyed');
     //         })
     //     });
     // });
+    // return;
 
+    // check if database structure has been initialized and if not create needed databases & insert docs
     couch.db.get('user-resources', function (err, body) {
+        console.log(body);
         if (err) {
             couch.db.create('user-resources', function (err, data) {
                 if (err) {
@@ -23,43 +27,33 @@ export const signupHandler = (userDoc, provider) => {
                 } else {
                     console.log('user-resources database created');
                     const resources = couch.use('user-resources');
-                    const designDocument = {
-                        _id: '_design/privateDoc',
-                        language: 'javascript',
-                        views: {
-                            by_date_created: {
-                                map: "function(doc){ if(doc.type == 'chat'){emit(doc.dateCreated);} }"
+                    for (let doc of privateDesignDocuments) {
+                        resources.insert(doc).then(
+                            result => {
+                                // console.log(result);
                             },
-                            by_date_updated: {
-                                map: "function(doc){ if(doc.type == 'notice'){emit(doc.dateUpdated);} }"
+                            err => {
+                                console.log(err.message);
                             }
-                        }
+                        );
                     }
-                    resources.insert(designDocument).then(
-                        result => {
-                            console.log(result);
-                        },
-                        err => {
-                            console.log(err.message);
-                        }
-                    );
                 }
             });
         }
-    });
-    couch.db.get('admin-database', function (err, body) {
-        if (err) {
-            couch.db.create('admin-database', function (err, data) {
-                (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
-            });
-        }
-    });
-    couch.db.get('_replicator', function (err, body) {
-        if (err) {
-            couch.db.create('_replicator', function (err, data) {
-                (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
-            });
-        }
+        couch.db.get('admin-database', function (err, body) {
+            if (err) {
+                couch.db.create('admin-database', function (err, data) {
+                    (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+                });
+            }
+        });
+        couch.db.get('_replicator', function (err, body) {
+            if (err) {
+                couch.db.create('_replicator', function (err, data) {
+                    (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
+                });
+            }
+        });
     });
 
     // opts for replication
