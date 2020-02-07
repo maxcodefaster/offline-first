@@ -5,6 +5,15 @@ const couch: any = nano({
 });
 
 export const signupHandler = (userDoc, provider) => {
+    //Dev option to destroy all databases ! Use with caution ! Delete those lines in production
+    // couch.db.list().then((body) => {
+    //     // body is an array
+    //     body.forEach((db) => {
+    //         couch.db.destroy(db).then((body) => {
+    //             console.log(db + 'destroyed');
+    //         })
+    //     });
+    // });
 
     couch.db.create('admin-database', function (err, data) {
         (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
@@ -17,54 +26,54 @@ export const signupHandler = (userDoc, provider) => {
     });
 
     // opts for replication
-        const opts = {
-            continuous: true,
-            create_target: true,
-            // exclude design documents
-            selector: {
-                "_id": {
-                    "$regex": "^(?!_design\/)",
-                }
-            }
-        };
-
-        // get private DB name
-        const regex = /^private\$.+$/;
-        let privateDB;
-        for (let dbs in userDoc.personalDBs) {
-            console.log(dbs)
-            if (regex.test(dbs)) {
-                privateDB = dbs;
+    const opts = {
+        continuous: true,
+        create_target: true,
+        // exclude design documents
+        selector: {
+            "_id": {
+                "$regex": "^(?!_design\/)",
             }
         }
+    };
 
-        // Replicate design documents to private DB
-        couch.db.replicate('user-resources', privateDB).then((body) => {
+    // get private DB name
+    const regex = /^private\$.+$/;
+    let privateDB;
+    for (let dbs in userDoc.personalDBs) {
+        console.log(dbs)
+        if (regex.test(dbs)) {
+            privateDB = dbs;
+        }
+    }
+
+    // Replicate design documents to private DB
+    couch.db.replicate('user-resources', privateDB).then((body) => {
+        return couch.db.replication.query(body.id);
+    }).then((response) => {
+        // console.log(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    if (userDoc.isAdmin) {
+        // Replicate AdminDB to AdminUsers
+        couch.db.replication.enable('admin-database', privateDB, opts).then((body) => {
             return couch.db.replication.query(body.id);
         }).then((response) => {
             // console.log(response);
         }).catch((err) => {
             console.log(err);
-        });
-
-        if (userDoc.isAdmin) {
-            // Replicate AdminDB to AdminUsers
-            couch.db.replication.enable('admin-database', privateDB, opts).then((body) => {
-                return couch.db.replication.query(body.id);
-            }).then((response) => {
-                // console.log(response);
-            }).catch((err) => {
-                console.log(err);
-            });;
-        } else {
-            // Enable replication from userDB to adminDB
-            couch.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
-                return couch.db.replication.query(body.id);
-            }).then((response) => {
-                // console.log(response);
-            }).catch((err) => {
-                console.log(err);
-            });;
-        }
+        });;
+    } else {
+        // Enable replication from userDB to adminDB
+        couch.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
+            return couch.db.replication.query(body.id);
+        }).then((response) => {
+            // console.log(response);
+        }).catch((err) => {
+            console.log(err);
+        });;
+    }
 
 }
