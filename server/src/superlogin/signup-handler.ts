@@ -41,7 +41,6 @@ export const signupHandler = (userDoc, provider) => {
     const regex = /^private\$.+$/;
     let privateDB;
     for (let dbs in userDoc.personalDBs) {
-        console.log(dbs)
         if (regex.test(dbs)) {
             privateDB = dbs;
         }
