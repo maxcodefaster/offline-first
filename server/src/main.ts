@@ -4,8 +4,8 @@ import { SuperloginModule } from './superlogin/superlogin-module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  SuperloginModule.setup('/auth', app);
   app.enableCors();
+  SuperloginModule.setup('/auth', app);
   await app.listen(3000);
 }
 bootstrap();

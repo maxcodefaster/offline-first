@@ -6,6 +6,7 @@ const db: any = nano({
 
 export const signupHandler = (userDoc, provider) => {
 
+    console.log(userDoc);
     db.create('admin-database', function (err, data) {
         (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
     });
