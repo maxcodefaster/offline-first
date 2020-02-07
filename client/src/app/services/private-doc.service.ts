@@ -59,7 +59,7 @@ export class PrivateDocService {
         include_docs: true,
         descending: true
       };
-      this.dataService.dbs[this.dbname].query('sicherheitsCheck/by_date_created', options).then((data) => {
+      this.dataService.dbs[this.dbname].query('privateDoc/by_date_created', options).then((data) => {
         const standardDoc = data.rows.map(row => {
           return row.doc;
         });

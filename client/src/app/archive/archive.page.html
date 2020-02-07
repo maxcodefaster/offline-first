@@ -19,20 +19,17 @@
 
 <ion-content>
     <ion-list>
-        <ion-card *ngFor="let formular of formulare">
+        <ion-card *ngFor="let doc of privateDocs">
             <ion-item>
-                <ion-label>{{formular.kunde}}</ion-label>
-                <ion-label>{{formular.dateCreated | date}}</ion-label>
-                <ion-button fill="outline" slot="end" routerDirection="forward" [routerLink]="'/view-sicherheits-check/'+formular._id">Ansehen</ion-button>
+                <ion-label>{{doc.title}}</ion-label>
+                <ion-label>{{doc.dateCreated | date}}</ion-label>
+                <ion-button fill="outline" slot="end" routerDirection="forward" [routerLink]="'/view-document/'+doc._id">Ansehen</ion-button>
             </ion-item>
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
                         <ion-col>
-                            Author: {{formular.author}}
-                        </ion-col>
-                        <ion-col>
-                            Date: {{formular.techniker}}
+                            Author: {{doc.author}}
                         </ion-col>
                     </ion-row>
                 </ion-grid>

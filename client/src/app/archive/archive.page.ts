@@ -11,11 +11,11 @@ import { UserService } from '../services/user.service';
 })
 export class ArchivePage implements OnInit {
 
-  public formulare: object[] = [];
+  public privateDocs: object[] = [];
   public loading: any;
   user;
 
-  constructor(private sicherheitsCheckService: PrivateDocService, private userService: UserService,
+  constructor(private privateDocService: PrivateDocService, private userService: UserService,
     private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) { }
 
   ngOnInit() {
@@ -25,9 +25,9 @@ export class ArchivePage implements OnInit {
       this.loading = overlay;
       this.loading.present();
       this.authService.reauthenticate().then((res) => {
-        this.sicherheitsCheckService.init();
-        this.sicherheitsCheckService.getPrivateDocs().subscribe((formulare) => {
-          this.formulare = formulare;
+        this.privateDocService.init();
+        this.privateDocService.getPrivateDocs().subscribe((docs) => {
+          this.privateDocs = docs;
         });
         this.loading.dismiss();
       }, (err) => {

@@ -11,7 +11,7 @@ export class ViewDocumentPage implements OnInit {
 
   formData;
 
-  constructor(private route: ActivatedRoute, private sicherheitsCheckService: PrivateDocService, ) { }
+  constructor(private route: ActivatedRoute, private privateDocService: PrivateDocService, ) { }
 
   ngOnInit() {
     let documentId = '';
@@ -22,7 +22,7 @@ export class ViewDocumentPage implements OnInit {
   }
 
   getDocument(id) {
-    this.sicherheitsCheckService.getSinglePrivateDoc(id).then((res: any) => {
+    this.privateDocService.getSinglePrivateDoc(id).then((res: any) => {
       this.formData = res;
     });
   }

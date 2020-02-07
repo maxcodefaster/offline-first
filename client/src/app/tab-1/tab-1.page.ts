@@ -17,7 +17,7 @@ export class Tab1Page implements OnInit {
   submitted = false;
   public loading: any;
 
-  constructor(private fb: FormBuilder, private sicherheitsCheckService: PrivateDocService,
+  constructor(private fb: FormBuilder, private privateDocService: PrivateDocService,
               private alertController: AlertController, private toastController: ToastController, private router: Router, private userService: UserService,
               private authService: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController, ) {
     this.standardForm = this.fb.group({
@@ -45,7 +45,7 @@ export class Tab1Page implements OnInit {
 
       this.authService.reauthenticate().then((res) => {
 
-        this.sicherheitsCheckService.init();
+        this.privateDocService.init();
         this.loading.dismiss();
 
 
@@ -84,12 +84,11 @@ export class Tab1Page implements OnInit {
       form.dateCreated = iso;
       form.author = this.userService.currentUser.user_id,
         // save to Database
-        this.sicherheitsCheckService.savePrivateDocs(form).then((res: any) => {
+        this.privateDocService.savePrivateDocs(form).then((res: any) => {
           console.log(res);
           if (res.ok) {
             this.presentToast();
             this.router.navigateByUrl('/view-document/' + res.id);
-            // this.resetForm(this.sicherheitsCheckForm);
           }
         });
     }
