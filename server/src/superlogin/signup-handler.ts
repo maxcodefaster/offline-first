@@ -19,7 +19,6 @@ export const signupHandler = (userDoc, provider) => {
 
     // check if database structure has been initialized and if not create needed databases & insert docs
     couch.db.get('user-resources', function (err, body) {
-        console.log(body);
         if (err) {
             couch.db.create('user-resources', function (err, data) {
                 if (err) {
@@ -39,21 +38,35 @@ export const signupHandler = (userDoc, provider) => {
                     }
                 }
             });
+            couch.db.get('shared', function (err, body) {
+                console.log('shared database created');
+                const shared = couch.use('shared');
+                for (let doc of sharedDesignDocuments) {
+                    shared.insert(doc).then(
+                        result => {
+                            // console.log(result);
+                        },
+                        err => {
+                            console.log(err.message);
+                        }
+                    );
+                }
+            });
+            couch.db.get('admin-database', function (err, body) {
+                if (err) {
+                    couch.db.create('admin-database', function (err, data) {
+                        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
+                    });
+                }
+            });
+            couch.db.get('_replicator', function (err, body) {
+                if (err) {
+                    couch.db.create('_replicator', function (err, data) {
+                        (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
+                    });
+                }
+            });
         }
-        couch.db.get('admin-database', function (err, body) {
-            if (err) {
-                couch.db.create('admin-database', function (err, data) {
-                    (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
-                });
-            }
-        });
-        couch.db.get('_replicator', function (err, body) {
-            if (err) {
-                couch.db.create('_replicator', function (err, data) {
-                    (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
-                });
-            }
-        });
     });
 
     // opts for replication
