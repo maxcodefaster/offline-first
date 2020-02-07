@@ -1,19 +1,18 @@
 import * as nano from 'nano';
 
-const db: any = nano({
+const couch: any = nano({
     url: 'http://admin:couchdb@localhost:5984'
 });
 
 export const signupHandler = (userDoc, provider) => {
 
-    console.log(userDoc);
-    db.create('admin-database', function (err, data) {
+    couch.db.create('admin-database', function (err, data) {
         (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
     });
-    db.create('user-resources', function (err, data) {
+    couch.db.create('user-resources', function (err, data) {
         (err) ? console.log('user-resources: ' + err.reason) : console.log('user-resources database created');
     });
-    db.create('_replicator', function (err, data) {
+    couch.db.create('_replicator', function (err, data) {
         (err) ? console.log('_replicator: ' + err.reason) : console.log('_replicator database created');
     });
 
@@ -40,8 +39,8 @@ export const signupHandler = (userDoc, provider) => {
         }
 
         // Replicate design documents to private DB
-        db.replicate('user-resources', privateDB).then((body) => {
-            return db.replication.query(body.id);
+        couch.db.replicate('user-resources', privateDB).then((body) => {
+            return couch.db.replication.query(body.id);
         }).then((response) => {
             // console.log(response);
         }).catch((err) => {
@@ -50,8 +49,8 @@ export const signupHandler = (userDoc, provider) => {
 
         if (userDoc.isAdmin) {
             // Replicate AdminDB to AdminUsers
-            db.replication.enable('admin-database', privateDB, opts).then((body) => {
-                return db.replication.query(body.id);
+            couch.db.replication.enable('admin-database', privateDB, opts).then((body) => {
+                return couch.db.replication.query(body.id);
             }).then((response) => {
                 // console.log(response);
             }).catch((err) => {
@@ -59,8 +58,8 @@ export const signupHandler = (userDoc, provider) => {
             });;
         } else {
             // Enable replication from userDB to adminDB
-            db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
-                return db.replication.query(body.id);
+            couch.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
+                return couch.db.replication.query(body.id);
             }).then((response) => {
                 // console.log(response);
             }).catch((err) => {
