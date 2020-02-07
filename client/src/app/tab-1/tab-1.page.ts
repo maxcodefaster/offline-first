@@ -88,7 +88,7 @@ export class Tab1Page implements OnInit {
           console.log(res);
           if (res.ok) {
             this.presentToast();
-            this.router.navigateByUrl('/view-sicherheits-check/' + res.id);
+            this.router.navigateByUrl('/view-document/' + res.id);
             // this.resetForm(this.sicherheitsCheckForm);
           }
         });
