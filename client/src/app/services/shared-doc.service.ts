@@ -5,31 +5,31 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PrivateDocService {
+export class SharedDocService {
   // Define which database to access
-  dbname = 'private';
+  dbname = 'shared';
   privateDocSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
   constructor(private dataService: DataService, private zone: NgZone) {}
 
   init(): void {
-    this.emitPrivateDocs();
+    this.emitSharedDocs();
     this.dataService.dbs[this.dbname].changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
-      if (change.doc.type === 'privateDoc' || change.deleted) {
-        this.emitPrivateDocs();
+      if (change.doc.type === 'sharedDoc' || change.deleted) {
+        this.emitSharedDocs();
       }
     });
   }
 
-  getSinglePrivateDoc(id) {
+  getSingleSharedDoc(id) {
     return this.dataService.dbs[this.dbname].get(id);
   }
 
-  getPrivateDocs(): BehaviorSubject<object[]> {
+  getSharedDocs(): BehaviorSubject<object[]> {
     return this.privateDocSubject;
   }
 
-  savePrivateDocs(doc) {
+  saveSharedDocs(doc) {
     if (doc.doc) {
       const updatedDoc = doc.doc;
       updatedDoc.title = doc.title;
@@ -41,24 +41,24 @@ export class PrivateDocService {
         author: doc.author,
         dateCreated: doc.dateCreated,
         dateUpdated: doc.dateUpdated,
-        type: 'privateDoc',
+        type: 'sharedDoc',
         note: doc.note,
       }, this.dbname);
     }
 
   }
 
-  deletePrivateDoc(doc): void {
+  deleteSharedDoc(doc): void {
     this.dataService.deleteDoc(doc, this.dbname);
   }
 
-  emitPrivateDocs(): void {
+  emitSharedDocs(): void {
     this.zone.run(() => {
       const options = {
         include_docs: true,
         descending: true
       };
-      this.dataService.dbs[this.dbname].query('privateDoc/by_date_created', options).then((data) => {
+      this.dataService.dbs[this.dbname].query('sharedDoc/by_date_created', options).then((data) => {
         const standardDoc = data.rows.map(row => {
           return row.doc;
         });
