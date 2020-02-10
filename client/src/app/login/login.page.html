@@ -6,17 +6,17 @@
 
 <ion-content class="ion-padding">
     <ion-item class="username-input">
-        <ion-icon color="medium" item-start name="contact"></ion-icon>
+        <ion-icon color="medium" item-start name="person-outline"></ion-icon>
         <ion-input [(ngModel)]="username" type="text" placeholder="username"></ion-input>
     </ion-item>
 
     <ion-item class="password-input">
-        <ion-icon color="medium" item-start name="lock"></ion-icon>
+        <ion-icon color="medium" item-start name="key-outline"></ion-icon>
         <ion-input [(ngModel)]="password" type="password" placeholder="password"></ion-input>
     </ion-item>
 
     <ion-button expand="block" color="primary" fill="solid" class="login-button" (click)="login()">
-        <ion-icon slot="start" name="log-in"></ion-icon> Log In
+        <ion-icon slot="start" name="enter-outline"></ion-icon> Log In
     </ion-button>
 
     <p *ngIf="failedAttempt" color="warning" class="error-logging-in">
@@ -29,7 +29,7 @@
 
     <ion-button color="dark" expand="block" fill="outline" (click)="openRegisterPage()" class="create-account-button">
         Create an Account
-        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
     </ion-button>
 
 </ion-footer>

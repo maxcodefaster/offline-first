@@ -1,54 +1,41 @@
 <ion-header translucent>
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-button routerLink="/archive">
-                <ion-icon slot="icon-only" name="archive"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-
         <ion-title>Private docs</ion-title>
-
         <ion-buttons slot="end">
             <ion-button (click)="logout()" class="logout-button">
-                <ion-icon slot="icon-only" name="log-out"></ion-icon>
+                <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen class="ion-padding">
-    <form [formGroup]="privateForm" id="privateForm">
-        <ion-text>
-            <h3>Basic Form</h3>
-        </ion-text>
-        <ion-item [ngClass]="{error_warn : hasFormError('date')}">
-            <ion-label slot="start" position="fixed">Date</ion-label>
-            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="date" doneText="Ok" cancelText="Zurück">
-            </ion-datetime>
-        </ion-item>
-        <ion-note *ngIf="hasFormError('date')" class="fadeInWarn" color="danger">
-            ! Please fill out this field
-        </ion-note>
-
-        <ion-item [ngClass]="{error_warn : hasFormError('title')}">
-            <ion-label slot="start" position="fixed">Titel</ion-label>
-            <ion-input clearInput type="text" formControlName="title"></ion-input>
-        </ion-item>
-        <ion-note *ngIf="hasFormError('title')" class="fadeInWarn" color="danger">
-            ! Please fill out this field
-        </ion-note>
-
-        <ion-text>
-            <h3>Note</h3>
-        </ion-text>
-        <ion-item>
-            <ion-textarea placeholder="Notes..." formControlName="note">
-            </ion-textarea>
-        </ion-item>
-    </form>
+<ion-content>
+    <ion-list>
+        <ion-card *ngFor="let doc of privateDocs">
+            <ion-item>
+                <ion-avatar slot="start">
+                    <img src="https://api.adorable.io/avatars/100/{{doc.author}}">
+                </ion-avatar>
+                <h2>{{doc.author}}</h2>
+            </ion-item>
+            <ion-card-content>
+                <div class="mega-text">
+                    <p>{{doc.title}}</p>
+                </div>
+                <p class="message-content">{{doc.note}}</p>
+            </ion-card-content>
+            <div class="control-buttons">
+                <ion-button routerDirection="forward" [routerLink]="'/view-document/'+doc._id" slot="start" fill="clear"
+                    size="small">
+                    <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                    <div>view</div>
+                </ion-button>
+            </div>
+        </ion-card>
+    </ion-list>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" form="privateForm">
-    <ion-fab-button type="submit" (click)="saveForm()">
-        <ion-icon name="send"></ion-icon>
+    <ion-fab-button (click)="openModal()">
+        <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
 </ion-fab>

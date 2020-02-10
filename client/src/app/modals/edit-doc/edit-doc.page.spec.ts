@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArchivePage } from './archive.page';
+import { EditDocPage } from './edit-doc.page';
 
-describe('ArchivePage', () => {
-  let component: ArchivePage;
-  let fixture: ComponentFixture<ArchivePage>;
+describe('EditDocPage', () => {
+  let component: EditDocPage;
+  let fixture: ComponentFixture<EditDocPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArchivePage ],
+      declarations: [ EditDocPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArchivePage);
+    fixture = TestBed.createComponent(EditDocPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

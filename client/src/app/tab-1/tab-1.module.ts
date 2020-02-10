@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { Tab1Page } from './tab-1.page';
+import { EditDocPage } from '../modals/edit-doc/edit-doc.page';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, EditDocPage]
 })
 export class Tab1PageModule {}
