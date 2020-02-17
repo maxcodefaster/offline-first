@@ -51,7 +51,8 @@ export class Tab1Page implements OnInit {
       component: EditDocPage,
       swipeToClose: true,
       componentProps: {
-        'doc': doc
+        'doc': doc,
+        'db': 'private'
       }
     }).then((modal) => {
       modal.present();

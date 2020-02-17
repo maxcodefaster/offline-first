@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-  <form [formGroup]="privateForm" id="privateForm">
+  <form [formGroup]="form" id="form">
     <ion-item [ngClass]="{error_warn : hasFormError('title')}">
       <ion-input type="text" formControlName="title" placeholder="Title"></ion-input>
     </ion-item>

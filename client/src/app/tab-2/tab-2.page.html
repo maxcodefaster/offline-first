@@ -11,12 +11,16 @@
 
 <ion-content>
     <ion-list>
-        <ion-card *ngFor="let doc of privateDocs">
+        <ion-card *ngFor="let doc of sharedDocs">
             <ion-item>
                 <ion-avatar slot="start">
                     <img src="https://api.adorable.io/avatars/100/{{doc.author}}">
                 </ion-avatar>
-                <h2>{{doc.author}}</h2>
+                <ion-label class="ion-text-wrap">{{doc.author | titlecase}}
+                    @{{doc.dateUpdated | date:'yyyy-mm-dd H:mm:ss'}}</ion-label>
+                <ion-button (click)="presentActionSheet(doc)" slot="end" fill="clear" size="small">
+                    <ion-icon slot="icon-only" name=ellipsis-vertical></ion-icon>
+                </ion-button>
             </ion-item>
             <ion-card-content>
                 <div class="mega-text">
@@ -24,13 +28,6 @@
                 </div>
                 <p class="message-content">{{doc.note}}</p>
             </ion-card-content>
-            <div class="control-buttons">
-                <ion-button routerDirection="forward" [routerLink]="'/view-document/'+doc._id" slot="start" fill="clear"
-                    size="small">
-                    <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-                    <div>view</div>
-                </ion-button>
-            </div>
         </ion-card>
     </ion-list>
 </ion-content>

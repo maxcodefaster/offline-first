@@ -28,8 +28,6 @@ export class DataService {
                 });
             this.dbs[this.remoteName[i]].address = this.remoteAddress[i];
         }
-
-        console.log(this.dbs);
         this.initRemoteSync();
     }
 
@@ -45,13 +43,13 @@ export class DataService {
             const dbRemote = this.dbs[db].address;
 
             this.dbs[db].sync(dbRemote, options).on('change', info => {
-                console.log(info);
+                // console.log(info);
             }).on('active', () => {
                 // console.log('resume');
             }).on('denied', err => {
-                console.log('denied ' + err);
+                // console.log('denied ' + err);
             }).on('complete', info => {
-                console.log('complete ' + JSON.stringify(info));
+                // console.log('complete ' + JSON.stringify(info));
             }).on('error', err => {
                 console.log('error ' + err);
             });

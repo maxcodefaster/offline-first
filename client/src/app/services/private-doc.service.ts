@@ -30,7 +30,6 @@ export class PrivateDocService {
   }
 
   savePrivateDocs(doc) {
-    console.log(doc)
     if (doc.doc) {
       const updatedDoc = doc.doc;
       updatedDoc.title = doc.title;

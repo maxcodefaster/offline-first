@@ -34,6 +34,7 @@ export class SharedDocService {
       const updatedDoc = doc.doc;
       updatedDoc.title = doc.title;
       updatedDoc.note = doc.note;
+      updatedDoc.dateUpdated = doc.dateUpdated;
       return this.dataService.updateDoc(updatedDoc, this.dbname);
     } else {
       return this.dataService.createDoc({
