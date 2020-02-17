@@ -51,5 +51,25 @@
 }
 
 .aligner-item {
-    margin: auto;
+  margin: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeInWarn {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+
+.error_warn {
+  color: red;
 }

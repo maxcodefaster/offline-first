@@ -5,7 +5,34 @@
                 <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
             </h1>
 
-            <ion-item>
+            <form [formGroup]="loginForm" id="loginForm">
+                <ion-item [ngClass]="{error_warn : hasFormError('username')}">
+                    <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+                    <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
+                </ion-item>
+                <ion-note *ngIf="hasFormError('username')" class="fadeInWarn" color="danger">
+                    Please enter your username
+                </ion-note>
+
+                <ion-item [ngClass]="{error_warn : hasFormError('password')}">
+                    <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+                    <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
+                </ion-item>
+                <ion-note *ngIf="hasFormError('password')" class="fadeInWarn" color="danger">
+                    Please enter your password
+                </ion-note>
+                <ion-button expand="block" color="primary" fill="solid" class="login-button" type="submit"
+                    (click)="login()">
+                    Log In
+                </ion-button>
+                <ion-note *ngIf="errMessage" class="fadeInWarn" color="danger">
+                    {{errMessage}}
+                </ion-note>
+            </form>
+
+
+
+            <!-- <ion-item>
                 <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
                 <ion-input [(ngModel)]="username" type="text" placeholder="Username"></ion-input>
             </ion-item>
@@ -13,16 +40,12 @@
             <ion-item>
                 <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
                 <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
-            </ion-item>
+            </ion-item> -->
 
-            <ion-button expand="block" color="primary" fill="solid" class="login-button" type="submit"
-                (click)="login()">
-                Log In
-            </ion-button>
 
-            <p *ngIf="failedAttempt" color="warning" class="error-logging-in">
+            <!-- <p *ngIf="failedAttempt" color="warning" class="error-logging-in">
                 Incorrect username or password!
-            </p>
+            </p> -->
 
             <hr class="hr-text" data-content="New here?" />
 

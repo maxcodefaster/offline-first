@@ -41,13 +41,11 @@ export class EditDocPage implements OnInit {
   get f() { return this.privateForm.controls; }
 
   ngOnInit() {
-
     if (typeof (this.navParams.get('doc')) !== 'undefined') {
       this.existingDoc = this.navParams.get('doc');
       this.title = this.existingDoc.title;
       this.note = this.existingDoc.message;
     }
-
   }
 
   // save to Database

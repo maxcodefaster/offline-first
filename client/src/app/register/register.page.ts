@@ -35,44 +35,30 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.authService.reauthenticate().then((res) => {
+      this.navCtrl.navigateRoot('/home/tab-1');
+    }, (err) => {
+    });
   }
 
   createAccount(): void {
-
     if (this.registerForm.valid) {
-
       this.loadingCtrl.create({
         message: 'Creating Account...'
       }).then((overlay) => {
-
         this.loading = overlay;
         this.loading.present();
-
-        console.log(JSON.stringify(this.registerForm.value));
-
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
-
-          console.log(res);
           if (typeof (res.token) !== 'undefined') {
-
             this.dataService.initDatabase(res);
             this.userService.saveUserData(res);
-
             this.navCtrl.navigateRoot('/home/tab-1');
-
           }
-
           this.loading.dismiss();
-
         }, (err) => {
           this.loading.dismiss();
         });
-
       });
-
     }
-
   }
-
 }
