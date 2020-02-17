@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
@@ -15,24 +15,41 @@ export class RegisterPage implements OnInit {
   public registerForm: any;
   private loading: any;
   submitted = false;
+  errMessage;
 
   constructor(
     private navCtrl: NavController,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
     private dataService: DataService,
     private loadingCtrl: LoadingController
   ) {
-
-    this.registerForm = this.formBuilder.group({
-      username: ['', Validators.compose([Validators.maxLength(16), Validators.pattern('[a-zA-Z0-9]*'), Validators.required])],
-      email: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      password: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      confirmPassword: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      isAdmin: [false, Validators.compose([Validators.required])]
+    this.registerForm = this.fb.group({
+      username: new FormControl('', [
+        Validators.maxLength(16),
+        Validators.pattern('[a-zA-Z0-9]*'),
+        Validators.required
+      ]),
+      email: new FormControl('', [
+        Validators.maxLength(30),
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl('', [
+        Validators.minLength(6),
+        Validators.maxLength(30),
+        Validators.required
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.minLength(6),
+        Validators.maxLength(30),
+        Validators.required
+      ]),
+      role: new FormControl(false, [
+        Validators.required
+      ])
     });
-
   }
 
   // convenience getter for easy access to form fields
@@ -54,7 +71,7 @@ export class RegisterPage implements OnInit {
 
   createAccount(): void {
     this.submitted = true;
-    if (this.registerForm.valid) {
+    if (!this.registerForm.invalid) {
       this.loadingCtrl.create({
         message: 'Creating Account...'
       }).then((overlay) => {
@@ -68,6 +85,7 @@ export class RegisterPage implements OnInit {
           }
           this.loading.dismiss();
         }, (err) => {
+          this.errMessage = err.error.message;
           this.loading.dismiss();
         });
       });

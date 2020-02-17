@@ -1,8 +1,3 @@
-.submit-warning {
-    text-align: center;
-    color: var(--ion-color-tertiary);
-}
-
 .hr-text {
     margin-top: 12px;
     margin-bottom: 12px;
@@ -65,8 +60,13 @@
     padding-left: 20px;
     padding-top: 3px;
   }
+
+  .fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
   
   .error_warn {
-    color: red;
+    color: var(--ion-color-tertiary);
   }
   

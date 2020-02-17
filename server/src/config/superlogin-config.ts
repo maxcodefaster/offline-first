@@ -34,7 +34,7 @@ export const superloginConfig = {
         local: true
     },
     userModel: {
-        whitelist: ['isAdmin'],
-        isAdmin: false,
+        whitelist: ['role'],
+        role: 'user',
     },
 };

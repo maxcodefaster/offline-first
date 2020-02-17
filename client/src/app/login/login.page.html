@@ -10,7 +10,7 @@
                     <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
                     <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
                 </ion-item>
-                <ion-note *ngIf="hasFormError('username')" class="fadeInWarn" color="danger">
+                <ion-note *ngIf="hasFormError('username')" class="fadeInWarn" color="tertiary">
                     Please enter your username
                 </ion-note>
 
@@ -18,7 +18,7 @@
                     <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
                     <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
                 </ion-item>
-                <ion-note *ngIf="hasFormError('password')" class="fadeInWarn" color="danger">
+                <ion-note *ngIf="hasFormError('password')" class="fadeInWarn" color="tertiary">
                     Please enter your password
                 </ion-note>
                 
@@ -26,7 +26,7 @@
                     (click)="login()">
                     Log In
                 </ion-button>
-                <ion-note *ngIf="errMessage" class="fadeInWarn" color="danger">
+                <ion-note *ngIf="errMessage" class="fadeInWarn" color="tertiary">
                     {{errMessage}}
                 </ion-note>
             </form>

@@ -1,12 +1,3 @@
-.error-logging-in {
-  padding: 10px;
-  text-align: center;
-  border: 2px solid var(--ion-color-tertiary);
-  border-radius: 3px;
-  margin-left: 2px;
-  margin-right: 2px;
-}
-
 .hr-text {
   margin-top: 12px;
   margin-bottom: 12px;
@@ -71,5 +62,5 @@
 }
 
 .error_warn {
-  color: red;
+  color: var(--ion-color-tertiary);
 }

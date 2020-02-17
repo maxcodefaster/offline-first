@@ -60,12 +60,12 @@ export class LoginPage implements OnInit {
 
   login(): void {
     this.submitted = true;
-    this.loadingCtrl.create({
-      message: 'Authenticating...'
-    }).then((overlay) => {
-      this.loading = overlay;
-      this.loading.present();
-      if (!this.loginForm.invalid) {
+    if (!this.loginForm.invalid) {
+      this.loadingCtrl.create({
+        message: 'Authenticating...'
+      }).then((overlay) => {
+        this.loading = overlay;
+        this.loading.present();
         this.authService.authenticate(this.loginForm.value).subscribe((res: any) => {
           if (typeof (res.token) !== 'undefined') {
             this.failedAttempt = false;
@@ -82,9 +82,7 @@ export class LoginPage implements OnInit {
           this.failedAttempt = true;
           this.errMessage = err.error.message;
         });
-      } else {
-        this.loading.dismiss();
-      }
-    });
+      });
+    }
   }
 }
