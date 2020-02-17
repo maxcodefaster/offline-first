@@ -30,7 +30,7 @@ export class AuthService {
     // tslint:disable-next-line: forin
     for (const db in this.dataService.dbs) {
       this.dataService.dbs[db].destroy().then((res) => {
-        console.log(res);
+        // console.log(res);
       }
         , (err) => {
           console.log('could not destroy db');

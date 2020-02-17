@@ -99,7 +99,7 @@ export const signupHandler = (userDoc, provider) => {
         console.log(err);
     });
 
-    if (userDoc.isAdmin) {
+    if (userDoc.role == 'Admin') {
         // Replicate AdminDB to AdminUsers
         couch.db.replication.enable('admin-database', privateDB, opts).then((body) => {
             return couch.db.replication.query(body.id);
