@@ -21,6 +21,7 @@
                 <ion-note *ngIf="hasFormError('password')" class="fadeInWarn" color="danger">
                     Please enter your password
                 </ion-note>
+                
                 <ion-button expand="block" color="primary" fill="solid" class="login-button" type="submit"
                     (click)="login()">
                     Log In
@@ -30,60 +31,11 @@
                 </ion-note>
             </form>
 
-
-
-            <!-- <ion-item>
-                <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
-                <ion-input [(ngModel)]="username" type="text" placeholder="Username"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
-                <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
-            </ion-item> -->
-
-
-            <!-- <p *ngIf="failedAttempt" color="warning" class="error-logging-in">
-                Incorrect username or password!
-            </p> -->
-
             <hr class="hr-text" data-content="New here?" />
 
             <ion-button color="secondary" expand="block" fill="outline" (click)="openRegisterPage()">
                 Create an Account
             </ion-button>
-
-            <!-- Just delete this -->
-            <!-- <ion-card class="ion-margin-top">
-        <ion-card-header>
-            <ion-card-subtitle>Cross Platform, realtime application with authentication</ion-card-subtitle>
-            <ion-card-title>Offline-first-template</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content>
-            This project is a template to build an offline first web application with authentication, that can be ported
-            easily to other platforms (Android, iOS, Electron). It runs on the following technologies:
-            <ul>
-                <li>Ionic Angular as frontend framework</li>
-                <li>NestJS as backend framework</li>
-                <li>CouchDB as remote server database</li>
-                <li>PouchDB as local database</li>
-                <li>Superlogin for user authentication and roles</li>
-                <li>Nano for business logic</li>
-                <li>Capacitor as native app wrapper</li>
-            </ul>
-            <h2>Installation</h2>
-            <p>Requirements: Installed Ionic Cli, NodeJS, NestJS and CouchDB locally. Disable the cors policy in couchdb
-                and register an admin (credentials can be edited in the .env file, have a look at the env.config.json in
-                the
-                server/config folder).</p><br>
-            <p>Install the client dependencies by <i>cd client</i> and running <i>npm install</i>. To install server
-                dependencies you
-                have to include the <i>--no-optional</i> flag to the <i>npm install</i> command. Start the client
-                framework by running <i>ionic serve</i>, the server can be started by running <i>npm run start:dev</i>.
-            </p>
-        </ion-card-content>
-    </ion-card> -->
         </div>
     </div>
 </ion-content>

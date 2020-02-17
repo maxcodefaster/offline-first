@@ -1,45 +1,66 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Register account</ion-title>
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="/login"></ion-back-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-    <form [formGroup]="registerForm" class="register-form">
+    <div class="aligner">
+        <div class="aligner-item">
+            <h1 class="brand">
+                <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
+            </h1>
 
-        <ion-item class="username-input">
-            <ion-label position="stacked">Username</ion-label>
-            <ion-input formControlName="username" type="text" required></ion-input>
-        </ion-item>
+            <form [formGroup]="registerForm" id="registerForm">
+                <ion-item [ngClass]="{error_warn : hasFormError('username')}">
+                    <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+                    <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
+                </ion-item>
+                <ion-note *ngIf="hasFormError('username')" class="fadeInWarn" color="danger">
+                    Please select an username
+                </ion-note>
 
-        <ion-item class="email-input">
-            <ion-label position="stacked">Email</ion-label>
-            <ion-input formControlName="email" type="email" required></ion-input>
-        </ion-item>
+                <ion-item [ngClass]="{error_warn : hasFormError('email')}">
+                    <ion-input type="text" formControlName="email" placeholder="E-mail"></ion-input>
+                    <ion-icon color="medium" slot="end" name="mail-outline"></ion-icon>
+                </ion-item>
+                <ion-note *ngIf="hasFormError('email')" class="fadeInWarn" color="danger">
+                    Please enter your email
+                </ion-note>
 
-        <ion-item class="password-input">
-            <ion-label position="stacked">Password</ion-label>
-            <ion-input formControlName="password" type="password" required></ion-input>
-        </ion-item>
+                <ion-item [ngClass]="{error_warn : hasFormError('password')}">
+                    <ion-input type="text" formControlName="password" placeholder="Password"></ion-input>
+                    <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
+                </ion-item>
+                <ion-note *ngIf="hasFormError('password')" class="fadeInWarn" color="danger">
+                    Please select a password
+                </ion-note>
 
-        <ion-item class="confirm-password-input">
-            <ion-label position="stacked">Confirm password</ion-label>
-            <ion-input formControlName="confirmPassword" type="password" required></ion-input>
-        </ion-item>
+                <ion-item [ngClass]="{error_warn : hasFormError('confirmPassword')}">
+                    <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm password">
+                    </ion-input>
+                    <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
+                </ion-item>
+                <ion-note *ngIf="hasFormError('confirmPassword')" class="fadeInWarn" color="danger">
+                    Please confirm your password
+                </ion-note>
 
-        <ion-item>
-            <ion-checkbox checked="false" formControlName="isAdmin" color="primary" slot="start"></ion-checkbox>
-            <ion-label>Admin</ion-label>
-        </ion-item>
+                <ion-item>
+                    <ion-checkbox checked="false" formControlName="isAdmin" color="primary" slot="start"></ion-checkbox>
+                    <ion-label>Admin</ion-label>
+                </ion-item>
 
-    </form>
+                <ion-button expand="block" color="primary" fill="solid" class="login-button" type="submit"
+                    (click)="createAccount()">
+                    Register
+                </ion-button>
+                <ion-note *ngIf="errMessage" class="fadeInWarn" color="danger">
+                    {{errMessage}}
+                </ion-note>
+            </form>
 
-    <p class="submit-warning" *ngIf="!registerForm.valid">You must fill out all fields above correctly before you can create your account.</p>
+            <hr class="hr-text" data-content="Already have an account?" />
 
-    <ion-button expand="block" color="primary" fill="solid" class="register-button" (click)="createAccount()">Create account
-        <ion-icon slot="end" name="arrow-forward"></ion-icon>
-    </ion-button>
+            <ion-button color="secondary" expand="block" fill="outline" defaultHref="/login">
+                Login
+            </ion-button>
+        </div>
+    </div>
 </ion-content>
+
+<p class="submit-warning" *ngIf="!registerForm.valid">You must fill out all fields above correctly before you can create
+    your account.</p>

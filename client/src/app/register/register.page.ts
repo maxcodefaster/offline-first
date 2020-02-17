@@ -14,6 +14,7 @@ export class RegisterPage implements OnInit {
 
   public registerForm: any;
   private loading: any;
+  submitted = false;
 
   constructor(
     private navCtrl: NavController,
@@ -34,6 +35,9 @@ export class RegisterPage implements OnInit {
 
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
+
   ngOnInit() {
     this.authService.reauthenticate().then((res) => {
       this.navCtrl.navigateRoot('/home/tab-1');
@@ -41,7 +45,15 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  hasFormError(formField) {
+    if (!this.f[formField].valid && this.submitted) {
+      return true;
+    }
+    return false;
+  }
+
   createAccount(): void {
+    this.submitted = true;
     if (this.registerForm.valid) {
       this.loadingCtrl.create({
         message: 'Creating Account...'
