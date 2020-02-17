@@ -57,8 +57,16 @@
   .fadeInWarn {
     animation-name: fadeIn;
     animation-duration: 1s;
-    padding-left: 20px;
+    padding-left: 15px;
     padding-top: 3px;
+  }
+
+  .fadeInWarnSubmit {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    padding-top: 5px;
+    font-size: 16px;
+    text-align: center;
   }
 
   .fadeIn {

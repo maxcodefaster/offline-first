@@ -85,7 +85,7 @@ export class RegisterPage implements OnInit {
           }
           this.loading.dismiss();
         }, (err) => {
-          this.errMessage = err.error.message;
+          this.errMessage = Object.values(err.error.validationErrors)[0];
           this.loading.dismiss();
         });
       });

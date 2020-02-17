@@ -42,7 +42,7 @@
 
                 <ion-item>
                     <ion-label color="medium">Role</ion-label>
-                    <ion-select formControlName="role">
+                    <ion-select formControlName="role" value="user" placeholder="User">
                         <ion-select-option value="user">User</ion-select-option>
                         <ion-select-option value="admin">Admin</ion-select-option>
                     </ion-select>
@@ -55,8 +55,8 @@
                     (click)="createAccount()">
                     Register
                 </ion-button>
-                <ion-note *ngIf="errMessage" class="fadeInWarn" color="tertiary">
-                    {{errMessage}}
+                <ion-note *ngIf="errMessage" class="fadeInWarnSubmit" color="tertiary">
+                    <p>{{errMessage}}</p>
                 </ion-note>
             </form>
 
