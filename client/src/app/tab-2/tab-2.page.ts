@@ -48,6 +48,7 @@ export class Tab2Page implements OnInit {
   async openModal(doc?) {
     const modal = await this.modalController.create({
       component: EditDocPage,
+      swipeToClose: true,
       componentProps: {
         'doc': doc
       }

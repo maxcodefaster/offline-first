@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrivateDocService } from '../services/private-doc.service';
-import { ModalController, LoadingController, NavController } from '@ionic/angular';
+import { ModalController, LoadingController, NavController, ActionSheetController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { EditDocPage } from '../modals/edit-doc/edit-doc.page';
 
@@ -21,6 +21,7 @@ export class Tab1Page implements OnInit {
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
+    public actionSheetController: ActionSheetController,
     private modalController: ModalController
   ) {
   }
@@ -48,12 +49,50 @@ export class Tab1Page implements OnInit {
   async openModal(doc?) {
     const modal = await this.modalController.create({
       component: EditDocPage,
+      swipeToClose: true,
       componentProps: {
         'doc': doc
       }
     }).then((modal) => {
       modal.present();
     });
+  }
+
+  async presentActionSheet(doc) {
+    console.log(doc);
+    const actionSheet = await this.actionSheetController.create({
+      header: doc.title + ' - ' + doc.type + ' by ' + doc.author,
+      buttons: [
+        {
+          text: 'Edit',
+          icon: 'pencil',
+          handler: () => {
+            this.openModal(doc);
+          }
+        }, {
+          text: 'Move to shared',
+          icon: 'share',
+          handler: () => {
+            console.log('Share clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            console.log('Delete clicked');
+          }
+        }, {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
+    });
+    await actionSheet.present();
   }
 
   logout(): void {

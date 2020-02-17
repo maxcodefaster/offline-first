@@ -13,11 +13,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EditDocPage implements OnInit {
 
-  public title: string = '';
-  public note: string = '';
+  title: string = '';
+  note: string = '';
   submitted = false;
-  public existingDoc: any = false;
+  existingDoc: any = false;
   privateForm: FormGroup;
+  modalTitel = 'Add document';
 
   constructor(
     private modalCtrl: ModalController,
@@ -41,10 +42,12 @@ export class EditDocPage implements OnInit {
   get f() { return this.privateForm.controls; }
 
   ngOnInit() {
+    console.log(this.navParams.get('doc'));
     if (typeof (this.navParams.get('doc')) !== 'undefined') {
       this.existingDoc = this.navParams.get('doc');
       this.title = this.existingDoc.title;
       this.note = this.existingDoc.message;
+      this.modalTitel = 'Edit document';
     }
   }
 

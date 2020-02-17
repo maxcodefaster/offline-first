@@ -2,7 +2,7 @@
 
   <ion-toolbar color="primary">
 
-    <ion-title>Edit / Add Doc</ion-title>
+    <ion-title>{{modalTitel}}</ion-title>
 
     <ion-buttons slot="end">
       <ion-button class="close-modal-button" (click)="close()">
@@ -30,7 +30,7 @@
     </ion-item>
     <ion-button expand="block" type="submit" (click)="saveForm()">
       <ion-icon name="save-outline" slot="start"></ion-icon>
-      Save Doc
+      Save document
     </ion-button>
   </form>
 </ion-content>
