@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { PrivateDocService } from 'src/app/services/private-doc.service';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-edit-doc-notice',
@@ -13,8 +11,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class EditDocPage implements OnInit {
 
-  title: string = '';
-  note: string = '';
   submitted = false;
   existingDoc: any = false;
   privateForm: FormGroup;
@@ -25,9 +21,7 @@ export class EditDocPage implements OnInit {
     private navParams: NavParams,
     private fb: FormBuilder,
     private privateDocService: PrivateDocService,
-    private router: Router,
     private userService: UserService,
-    private authService: AuthService,
   ) {
     this.privateForm = this.fb.group({
       title: new FormControl('', [
@@ -42,11 +36,13 @@ export class EditDocPage implements OnInit {
   get f() { return this.privateForm.controls; }
 
   ngOnInit() {
-    console.log(this.navParams.get('doc'));
     if (typeof (this.navParams.get('doc')) !== 'undefined') {
       this.existingDoc = this.navParams.get('doc');
-      this.title = this.existingDoc.title;
-      this.note = this.existingDoc.message;
+      console.log(this.existingDoc);
+      this.privateForm.patchValue({
+        title: this.existingDoc.title,
+        note: this.existingDoc.note
+      })
       this.modalTitel = 'Edit document';
     }
   }
@@ -57,11 +53,15 @@ export class EditDocPage implements OnInit {
     if (!this.privateForm.invalid) {
       const form = this.privateForm.value;
       const iso = this.getDateISOString();
-      form.dateCreated = iso;
       form.author = this.userService.currentUser.user_id,
         // save to Database
-        this.privateDocService.savePrivateDocs(form).then((res: any) => {
-          console.log(res);
+        this.privateDocService.savePrivateDocs({
+          doc: this.existingDoc,
+          title: form.title,
+          note: form.note,
+          dateCreated: iso,
+          dateUpdated: iso
+        }).then((res: any) => {
           if (res.ok) {
             this.close();
           }

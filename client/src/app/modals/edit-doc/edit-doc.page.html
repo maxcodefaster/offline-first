@@ -16,18 +16,17 @@
 <ion-content fullscreen class="ion-padding">
   <form [formGroup]="privateForm" id="privateForm">
     <ion-item [ngClass]="{error_warn : hasFormError('title')}">
-      <ion-label position="floating">Title</ion-label>
-      <ion-input clearInput type="text" formControlName="title"></ion-input>
+      <ion-input type="text" formControlName="title" placeholder="Title"></ion-input>
     </ion-item>
     <ion-note *ngIf="hasFormError('title')" class="fadeInWarn" color="danger">
-      ! Please fill out this field
+      Please fill out this field
     </ion-note>
 
     <ion-item>
-      <ion-label position="floating">Note</ion-label>
       <ion-textarea placeholder="type your message..." formControlName="note">
       </ion-textarea>
     </ion-item>
+
     <ion-button expand="block" type="submit" (click)="saveForm()">
       <ion-icon name="save-outline" slot="start"></ion-icon>
       Save document

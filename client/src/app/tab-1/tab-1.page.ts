@@ -59,7 +59,6 @@ export class Tab1Page implements OnInit {
   }
 
   async presentActionSheet(doc) {
-    console.log(doc);
     const actionSheet = await this.actionSheetController.create({
       header: doc.title + ' - ' + doc.type + ' by ' + doc.author,
       buttons: [
@@ -88,7 +87,6 @@ export class Tab1Page implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }]
     });

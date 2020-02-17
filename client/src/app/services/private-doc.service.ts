@@ -10,7 +10,7 @@ export class PrivateDocService {
   dbname = 'private';
   privateDocSubject: BehaviorSubject<object[]> = new BehaviorSubject([]);
 
-  constructor(private dataService: DataService, private zone: NgZone) {}
+  constructor(private dataService: DataService, private zone: NgZone) { }
 
   init(): void {
     this.emitPrivateDocs();
@@ -30,10 +30,12 @@ export class PrivateDocService {
   }
 
   savePrivateDocs(doc) {
+    console.log(doc)
     if (doc.doc) {
       const updatedDoc = doc.doc;
       updatedDoc.title = doc.title;
       updatedDoc.note = doc.note;
+      updatedDoc.dateUpdated = doc.dateUpdated;
       return this.dataService.updateDoc(updatedDoc, this.dbname);
     } else {
       return this.dataService.createDoc({

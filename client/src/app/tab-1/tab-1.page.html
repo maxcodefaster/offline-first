@@ -17,7 +17,7 @@
                     <img src="https://api.adorable.io/avatars/100/{{doc.author}}">
                 </ion-avatar>
                 <ion-label class="ion-text-wrap">{{doc.author | titlecase}}
-                    @{{doc.dateCreated | date:'yyyy-mm-dd H:mm:ss'}}</ion-label>
+                    @{{doc.dateUpdated | date:'yyyy-mm-dd H:mm:ss'}}</ion-label>
                 <ion-button (click)="presentActionSheet(doc)" slot="end" fill="clear" size="small">
                     <ion-icon slot="icon-only" name=ellipsis-vertical-outline></ion-icon>
                 </ion-button>
