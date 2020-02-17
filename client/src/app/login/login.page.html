@@ -1,35 +1,37 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Login</ion-title>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-    <ion-item class="username-input">
-        <ion-icon color="medium" item-start name="person-outline"></ion-icon>
-        <ion-input [(ngModel)]="username" type="text" placeholder="username"></ion-input>
-    </ion-item>
+    <div class="aligner">
+        <div class="aligner-item">
+            <h1 class="brand">
+                <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
+            </h1>
 
-    <ion-item class="password-input">
-        <ion-icon color="medium" item-start name="key-outline"></ion-icon>
-        <ion-input [(ngModel)]="password" type="password" placeholder="password"></ion-input>
-    </ion-item>
+            <ion-item>
+                <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
+                <ion-input [(ngModel)]="username" type="text" placeholder="Username"></ion-input>
+            </ion-item>
 
-    <ion-button expand="block" color="primary" fill="solid" class="login-button" (click)="login()">
-        <ion-icon slot="start" name="enter-outline"></ion-icon> Log In
-    </ion-button>
+            <ion-item>
+                <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
+                <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
+            </ion-item>
 
-    <p *ngIf="failedAttempt" color="warning" class="error-logging-in">
-        Incorrect username or password!
-    </p>
+            <ion-button expand="block" color="primary" fill="solid" class="login-button" type="submit"
+                (click)="login()">
+                Log In
+            </ion-button>
 
-    <ion-button color="secondary" expand="block" fill="solid" (click)="openRegisterPage()">
-        <ion-icon slot="start" name="person-add-outline"></ion-icon>
-        Create an Account
-    </ion-button>
+            <p *ngIf="failedAttempt" color="warning" class="error-logging-in">
+                Incorrect username or password!
+            </p>
 
-    <!-- Just delete this -->
-    <ion-card class="ion-margin-top">
+            <hr class="hr-text" data-content="New here?" />
+
+            <ion-button color="secondary" expand="block" fill="outline" (click)="openRegisterPage()">
+                Create an Account
+            </ion-button>
+
+            <!-- Just delete this -->
+            <!-- <ion-card class="ion-margin-top">
         <ion-card-header>
             <ion-card-subtitle>Cross Platform, realtime application with authentication</ion-card-subtitle>
             <ion-card-title>Offline-first-template</ion-card-title>
@@ -52,10 +54,13 @@
                 and register an admin (credentials can be edited in the .env file, have a look at the env.config.json in
                 the
                 server/config folder).</p><br>
-            <p>Install the client dependencies by <i>cd client</i> and running <i>npm install</i>. To install server dependencies you
+            <p>Install the client dependencies by <i>cd client</i> and running <i>npm install</i>. To install server
+                dependencies you
                 have to include the <i>--no-optional</i> flag to the <i>npm install</i> command. Start the client
                 framework by running <i>ionic serve</i>, the server can be started by running <i>npm run start:dev</i>.
             </p>
         </ion-card-content>
-    </ion-card>
+    </ion-card> -->
+        </div>
+    </div>
 </ion-content>

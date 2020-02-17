@@ -27,22 +27,22 @@ export class EditDocPage implements OnInit {
     private router: Router,
     private userService: UserService,
     private authService: AuthService,
-    ) {
-      this.privateForm = this.fb.group({
-        title: new FormControl('', [
-          Validators.required,
-        ]),
-        note: new FormControl('', [
-        ]),
-      });
+  ) {
+    this.privateForm = this.fb.group({
+      title: new FormControl('', [
+        Validators.required,
+      ]),
+      note: new FormControl('', [
+      ]),
+    });
   }
 
-   // convenience getter for easy access to form fields
-   get f() { return this.privateForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.privateForm.controls; }
 
   ngOnInit() {
 
-    if(typeof(this.navParams.get('doc')) !== 'undefined'){
+    if (typeof (this.navParams.get('doc')) !== 'undefined') {
       this.existingDoc = this.navParams.get('doc');
       this.title = this.existingDoc.title;
       this.note = this.existingDoc.message;
