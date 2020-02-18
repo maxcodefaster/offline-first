@@ -65,6 +65,7 @@ export class Tab2Page implements OnInit {
 
   async presentActionSheet(doc) {
     let canClick = 'actionSheetButtonInvisible';
+    console.log(this.user);
     if (doc.author === this.user.user_id) {
       canClick = '';
     }
@@ -100,6 +101,7 @@ export class Tab2Page implements OnInit {
 
   async presentDeleteConfirm(doc) {
     const alert = await this.alertController.create({
+      translucent: true,
       header: 'Delete',
       message: 'Do you want to delete <strong>' + doc.title + '</strong> ?',
       buttons: [

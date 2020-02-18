@@ -100,6 +100,7 @@ export class Tab1Page implements OnInit {
 
   async presentDeleteConfirm(doc) {
     const alert = await this.alertController.create({
+      translucent: true,
       header: 'Delete',
       message: 'Do you want to delete <strong>' + doc.title + '</strong> ?',
       buttons: [
