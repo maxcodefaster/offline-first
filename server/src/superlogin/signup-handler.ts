@@ -25,6 +25,7 @@ export const signupHandler = (userDoc, provider) => {
                     console.log('user-resources: ' + err.reason)
                 } else {
                     console.log('user-resources database created');
+                    // insert private db design docs
                     const resources = couch.use('user-resources');
                     for (let doc of privateDesignDocuments) {
                         resources.insert(doc).then(

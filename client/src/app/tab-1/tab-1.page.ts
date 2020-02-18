@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrivateDocService } from '../services/private-doc.service';
-import { ModalController, LoadingController, NavController, ActionSheetController } from '@ionic/angular';
+import { ModalController, LoadingController, NavController, ActionSheetController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { EditDocPage } from '../modals/edit-doc/edit-doc.page';
 
@@ -21,6 +21,7 @@ export class Tab1Page implements OnInit {
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
+    public alertController: AlertController,
     public actionSheetController: ActionSheetController,
     private modalController: ModalController
   ) {
@@ -81,7 +82,7 @@ export class Tab1Page implements OnInit {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+            this.presentDeleteConfirm(doc);
           }
         }, {
           text: 'Cancel',
@@ -92,6 +93,31 @@ export class Tab1Page implements OnInit {
         }]
     });
     await actionSheet.present();
+  }
+
+  async presentDeleteConfirm(doc) {
+    const alert = await this.alertController.create({
+      header: 'Delete',
+      message: 'Do you want to delete <strong>' + doc.title +'</strong> ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.deleteDoc(doc);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  deleteDoc(doc) {
+    this.privateDocService.deletePrivateDoc(doc);
   }
 
   logout(): void {
