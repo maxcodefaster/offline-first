@@ -62,20 +62,9 @@ export const signupHandler = (userDoc, provider) => {
         }
     });
 
-    // opts for replication
-    const opts = {
-        continuous: true,
-        create_target: true,
-        // exclude design documents
-        selector: {
-            "_id": {
-                "$regex": "^(?!_design\/)",
-            }
-        }
-    };
 
     // get private DB name
-    const regex = /^private\$.+$/;
+    const regex = /^private\$(.+)$/;
     let privateDB;
     for (let dbs in userDoc.personalDBs) {
         if (regex.test(dbs)) {
@@ -93,20 +82,52 @@ export const signupHandler = (userDoc, provider) => {
     });
 
     // give admin rights to edit documents
-    let privateDBList = [];
-    if (userDoc.role == 'admin') {
+    if (userDoc.role === 'admin') {
+        // opts for user to admin db replication
+        const optsUserToAdminRep = {
+            continuous: true,
+            create_target: true,
+            // exclude design documents
+            selector: {
+                "_id": {
+                    "$regex": "^(?!_design\/)",
+                }
+            }
+        };
         couch.db.list().then((body) => {
             body.forEach((db) => {
-                if (regex.test(db) && db !== privateDB) {
-                    privateDBList.push(db);
+                let matchResult = db.match(regex);
+                if (matchResult && db !== privateDB) {
+                    let userName = matchResult[1];
+                    // opts for admin to replication
+                    const optsAdminToUserRep = {
+                        continuous: true,
+                        // only include relevant user documents & exclude design documents
+                        selector: {
+                            "_id": {
+                                "$regex": "^(?!_design\/)",
+                            },
+                            "author": {
+                                "$eq": userName,
+                            }
+                        }
+                    };
                     // enable replication from private DB to admin privateDB
-                    couch.db.replication.enable(db, privateDB, opts).then((body) => {
+                    couch.db.replication.enable(db, privateDB, optsUserToAdminRep).then((body) => {
                         return couch.db.replication.query(body.id);
                     }).then((response) => {
                         // console.log(response);
                     }).catch((err) => {
                         console.log(err);
-                    });;
+                    });
+                    // enable replication from private DB to admin privateDB
+                    couch.db.replication.enable(privateDB, db, optsAdminToUserRep).then((body) => {
+                        return couch.db.replication.query(body.id);
+                    }).then((response) => {
+                        // console.log(response);
+                    }).catch((err) => {
+                        console.log(err);
+                    });
                 }
             });
         })
