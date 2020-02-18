@@ -1,4 +1,4 @@
-<ion-header translucent>
+<ion-header translucent="true">
     <ion-toolbar>
         <ion-buttons *ngIf="user" slot="secondary">
             <ion-button fill="clear" class="avatar-button">
@@ -40,7 +40,7 @@
     </ion-list>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" form="privateForm">
-    <ion-fab-button (click)="openModal()">
+    <ion-fab-button (click)="openModal()" translucent="true">
         <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
 </ion-fab>

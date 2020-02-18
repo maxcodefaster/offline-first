@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedDocService } from '../services/shared-doc.service';
-import { ModalController, LoadingController, NavController, ActionSheetController } from '@ionic/angular';
+import { ModalController, LoadingController, NavController, ActionSheetController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { EditDocPage } from '../modals/edit-doc/edit-doc.page';
 import { UserService } from '../services/user.service';
@@ -22,6 +22,7 @@ export class Tab2Page implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private loadingCtrl: LoadingController,
+    public alertController: AlertController,
     public actionSheetController: ActionSheetController,
     private navCtrl: NavController,
     private modalController: ModalController
@@ -63,28 +64,28 @@ export class Tab2Page implements OnInit {
   }
 
   async presentActionSheet(doc) {
+    let canClick = 'actionSheetButtonInvisible';
+    if (doc.author === this.user.user_id) {
+      canClick = '';
+    }
     const actionSheet = await this.actionSheetController.create({
+      translucent: true,
       header: doc.title + ' - ' + doc.type + ' by ' + doc.author,
       buttons: [
         {
           text: 'Edit',
+          cssClass: canClick,
           icon: 'pencil',
           handler: () => {
             this.openModal(doc);
           }
         }, {
-          text: 'Move to shared',
-          icon: 'share',
-          handler: () => {
-            console.log('Share clicked');
-          }
-        },
-        {
           text: 'Delete',
           role: 'destructive',
+          cssClass: canClick,
           icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+            this.presentDeleteConfirm(doc);
           }
         }, {
           text: 'Cancel',
@@ -95,6 +96,30 @@ export class Tab2Page implements OnInit {
         }]
     });
     await actionSheet.present();
+  }
+
+  async presentDeleteConfirm(doc) {
+    const alert = await this.alertController.create({
+      header: 'Delete',
+      message: 'Do you want to delete <strong>' + doc.title + '</strong> ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.deleteDoc(doc);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  deleteDoc(doc) {
+    this.sharedDocService.deleteSharedDoc(doc);
   }
 
   logout(): void {
