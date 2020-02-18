@@ -52,13 +52,6 @@ export const signupHandler = (userDoc, provider) => {
                     );
                 }
             });
-            couch.db.get('admin-database', function (err, body) {
-                if (err) {
-                    couch.db.create('admin-database', function (err, data) {
-                        (err) ? console.log('admin-database: ' + err.reason) : console.log('admin database created');
-                    });
-                }
-            });
             couch.db.get('_replicator', function (err, body) {
                 if (err) {
                     couch.db.create('_replicator', function (err, data) {
@@ -99,24 +92,23 @@ export const signupHandler = (userDoc, provider) => {
         console.log(err);
     });
 
-    if (userDoc.role == 'Admin') {
-        // Replicate AdminDB to AdminUsers
-        couch.db.replication.enable('admin-database', privateDB, opts).then((body) => {
-            return couch.db.replication.query(body.id);
-        }).then((response) => {
-            // console.log(response);
-        }).catch((err) => {
-            console.log(err);
-        });;
-    } else {
-        // Enable replication from userDB to adminDB
-        couch.db.replication.enable(privateDB, 'admin-database', opts).then((body) => {
-            return couch.db.replication.query(body.id);
-        }).then((response) => {
-            // console.log(response);
-        }).catch((err) => {
-            console.log(err);
-        });;
+    // give admin rights to edit documents
+    let privateDBList = [];
+    if (userDoc.role == 'admin') {
+        couch.db.list().then((body) => {
+            body.forEach((db) => {
+                if (regex.test(db) && db !== privateDB) {
+                    privateDBList.push(db);
+                    // enable replication from private DB to admin privateDB
+                    couch.db.replication.enable(db, privateDB, opts).then((body) => {
+                        return couch.db.replication.query(body.id);
+                    }).then((response) => {
+                        // console.log(response);
+                    }).catch((err) => {
+                        console.log(err);
+                    });;
+                }
+            });
+        })
     }
-
 }

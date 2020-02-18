@@ -77,6 +77,10 @@ export class RegisterPage implements OnInit {
       }).then((overlay) => {
         this.loading = overlay;
         this.loading.present();
+        // check if value was given for role else set default - this needs to be fixed in front end and maybe be dynamic
+        if (!this.registerForm.value.role) {
+          this.registerForm.value.role = 'user';
+        };
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
           if (typeof (res.token) !== 'undefined') {
             this.dataService.initDatabase(res);
