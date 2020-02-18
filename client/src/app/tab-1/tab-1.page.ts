@@ -3,6 +3,7 @@ import { PrivateDocService } from '../services/private-doc.service';
 import { ModalController, LoadingController, NavController, ActionSheetController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { EditDocPage } from '../modals/edit-doc/edit-doc.page';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class Tab1Page implements OnInit {
   constructor(
     private privateDocService: PrivateDocService,
     private authService: AuthService,
+    private userService: UserService,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     public alertController: AlertController,
@@ -39,6 +41,7 @@ export class Tab1Page implements OnInit {
         this.privateDocService.getPrivateDocs().subscribe((docs) => {
           this.privateDocs = docs;
         });
+        this.user = this.userService.currentUser;
         this.loading.dismiss();
       }, (err) => {
         this.loading.dismiss();

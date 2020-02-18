@@ -1,8 +1,16 @@
 <ion-header translucent>
     <ion-toolbar>
+        <ion-buttons *ngIf="user" slot="secondary">
+            <ion-button fill="clear" class="avatar-button">
+                <ion-avatar slot="start" class="ion-padding">
+                    <img src="https://api.adorable.io/avatars/100/{{user.user_id}}">
+                </ion-avatar>
+                {{user.user_id | titlecase}}
+            </ion-button>
+        </ion-buttons>
         <ion-title>Private docs</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="logout()" class="logout-button">
+            <ion-button (click)="logout()">
                 <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
             </ion-button>
         </ion-buttons>

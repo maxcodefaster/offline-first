@@ -3,6 +3,7 @@ import { SharedDocService } from '../services/shared-doc.service';
 import { ModalController, LoadingController, NavController, ActionSheetController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { EditDocPage } from '../modals/edit-doc/edit-doc.page';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -14,11 +15,12 @@ export class Tab2Page implements OnInit {
 
   public sharedDocs: object[] = [];
   public loading: any;
-  user;
+  private user;
 
   constructor(
     private sharedDocService: SharedDocService,
     private authService: AuthService,
+    private userService: UserService,
     private loadingCtrl: LoadingController,
     public actionSheetController: ActionSheetController,
     private navCtrl: NavController,
@@ -38,6 +40,7 @@ export class Tab2Page implements OnInit {
         this.sharedDocService.getSharedDocs().subscribe((docs) => {
           this.sharedDocs = docs;
         });
+        this.user = this.userService.currentUser;
         this.loading.dismiss();
       }, (err) => {
         this.loading.dismiss();
