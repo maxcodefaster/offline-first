@@ -85,6 +85,7 @@ export class RegisterPage implements OnInit {
         passwordMismatch: true
       };
     }
+    console.log(validation)
     return validation;
   }
 
