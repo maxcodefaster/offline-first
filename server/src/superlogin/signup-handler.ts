@@ -31,7 +31,7 @@ export const signupHandler = async (userDoc, provider) => {
         let adminUserDoc;
         users.get(privateDB.match(regex)[1]).then((body) => {
             adminUserDoc = body;
-            adminUserDoc.roles.push('_admin');
+            adminUserDoc.roles.splice(0, 1, 'admin');
             users.insert(adminUserDoc).then(
                 result => {
                     // console.log(result);
@@ -89,7 +89,6 @@ export const signupHandler = async (userDoc, provider) => {
     };
 
     if (userDoc.role === 'admin') {
-        console.log('letsGo')
         regularUsers.forEach((user) => {
             // opts for admin to replication
             const optsAdminToUserRep = {

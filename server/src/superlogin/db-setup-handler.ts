@@ -8,10 +8,10 @@ const couch: any = nano({
 });
 
 export const dbSetup = async () => {
-    // give time for superlogin to set dbs
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // give time for superlogin to set up dbs
+    await new Promise(resolve => setTimeout(resolve, 250));
 
-    //Dev option to destroy all databases ! Use with caution ! Delete those lines in production
+    // Dev option to destroy all databases ! Use with caution ! Delete those lines in production
     // couch.db.list().then((body) => {
     //     body.forEach((db) => {
     //         couch.db.destroy(db).then((body) => {
