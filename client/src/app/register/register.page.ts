@@ -4,6 +4,8 @@ import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { DataService } from '../services/data.service';
+import { UsernameValidator } from '../validators/username';
+import { EmailValidator } from '../validators/email';
 
 @Component({
   selector: 'app-register',
@@ -23,32 +25,44 @@ export class RegisterPage implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private dataService: DataService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private usernameValidator: UsernameValidator,
+    private emailValidator: EmailValidator,
   ) {
     this.registerForm = this.fb.group({
-      username: new FormControl('', [
-        Validators.maxLength(16),
-        Validators.pattern('[a-zA-Z0-9]*'),
-        Validators.required
-      ]),
-      email: new FormControl('', [
-        Validators.maxLength(30),
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl('', [
-        Validators.minLength(6),
-        Validators.maxLength(30),
-        Validators.required
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.minLength(6),
-        Validators.maxLength(30),
-        Validators.required
-      ]),
-      role: new FormControl(false, [
-        Validators.required
-      ])
+      username: ['',
+        Validators.compose([
+          Validators.maxLength(16),
+          Validators.pattern('[a-zA-Z0-9]*'),
+          Validators.required
+        ]),
+        usernameValidator.checkUsername.bind(usernameValidator)
+      ],
+      email: ['',
+        Validators.compose([
+          Validators.maxLength(30),
+          Validators.required
+        ]),
+        emailValidator.checkEmail.bind(emailValidator)
+      ],
+      password: ['',
+        Validators.compose([
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          Validators.required
+        ])],
+      confirmPassword: ['',
+        Validators.compose([
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          Validators.required
+        ])],
+      role: ['user',
+        Validators.compose([
+          Validators.required
+        ])]
+    }, {
+      validator: this.confirmPassword
     });
   }
 
@@ -62,25 +76,26 @@ export class RegisterPage implements OnInit {
     });
   }
 
-  hasFormError(formField) {
-    if (!this.f[formField].valid && this.submitted) {
-      return true;
+  confirmPassword(form) {
+    let password = form.get('password');
+    let confirmPassword = form.get('confirmPassword');
+    let validation = {};
+    if ((password.touched || confirmPassword.touched) && password.value !== confirmPassword.value) {
+      validation = {
+        passwordMismatch: true
+      };
     }
-    return false;
+    return validation;
   }
 
   createAccount(): void {
     this.submitted = true;
-    if (!this.registerForm.invalid) {
+    if (this.registerForm.valid) {
       this.loadingCtrl.create({
         message: 'Creating Account...'
       }).then((overlay) => {
         this.loading = overlay;
         this.loading.present();
-        // check if value was given for role else set default - this needs to be fixed in front end and maybe be dynamic
-        if (!this.registerForm.value.role) {
-          this.registerForm.value.role = 'user';
-        };
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
           if (typeof (res.token) !== 'undefined') {
             this.dataService.initDatabase(res);

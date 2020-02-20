@@ -1,0 +1,7 @@
+<div class="async-pending" *ngIf="control.pending">
+	<ion-spinner></ion-spinner>
+	Checking...
+</div>
+<div *ngIf="errorMessage !== null">
+	<span class="errMsg">{{errorMessage}}</span>
+</div>

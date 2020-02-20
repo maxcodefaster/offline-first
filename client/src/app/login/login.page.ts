@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
 
   login(): void {
     this.submitted = true;
-    if (!this.loginForm.invalid) {
+    if (this.loginForm.valid) {
       this.loadingCtrl.create({
         translucent: true,
         message: 'Authenticating...'
