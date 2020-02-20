@@ -4,17 +4,7 @@ const couch: any = nano({
     url: 'http://admin:couchdb@localhost:5984'
 });
 
-export const signupHandler = (userDoc, provider) => {
-    //Dev option to destroy all databases ! Use with caution ! Delete those lines in production
-    // couch.db.list().then((body) => {
-    //     body.forEach((db) => {
-    //         couch.db.destroy(db).then((body) => {
-    //             console.log(db + 'destroyed');
-    //         })
-    //     });
-    // });
-    // return;
-
+export const signupHandler = async (userDoc, provider) => {
     // define couchDB variables
     const users = couch.use('users');
 
@@ -60,7 +50,7 @@ export const signupHandler = (userDoc, provider) => {
     // Replication handler, fetches admins and respective admin dbs and creates master<->master replications
     // fetch admin users
     let adminUsers = [];
-    users.view('userDoc', 'admin_users', {
+    await users.view('userDoc', 'admin_users', {
         'include_docs': true
     }).then((body) => {
         body.rows.forEach((doc) => {
@@ -73,7 +63,7 @@ export const signupHandler = (userDoc, provider) => {
 
     // fetch regular users
     let regularUsers = [];
-    users.view('userDoc', 'regular_users', {
+    await users.view('userDoc', 'regular_users', {
         'include_docs': true
     }).then((body) => {
         body.rows.forEach((doc) => {

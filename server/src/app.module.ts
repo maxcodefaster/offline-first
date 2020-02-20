@@ -19,7 +19,7 @@ import { signupHandler } from './superlogin/signup-handler';
 export class AppModule {
 
   constructor(@Inject('superlogin') private superlogin: any) {
-    dbSetup();
     this.superlogin.on('signup', signupHandler);
+    dbSetup();
   }
 }
