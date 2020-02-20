@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { superloginConfig } from './config/superlogin-config';
 import { SuperloginModule } from './superlogin/superlogin-module';
+import { dbSetup } from './superlogin/db-setup-handler';
 import { signupHandler } from './superlogin/signup-handler';
 
 @Module({
@@ -18,6 +19,7 @@ import { signupHandler } from './superlogin/signup-handler';
 export class AppModule {
 
   constructor(@Inject('superlogin') private superlogin: any) {
+    dbSetup();
     this.superlogin.on('signup', signupHandler);
   }
 }

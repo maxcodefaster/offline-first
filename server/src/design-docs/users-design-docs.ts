@@ -1,6 +1,6 @@
 export const usersDesignDocuments = [
     {
-        _id: '_design/userdDoc',
+        _id: '_design/userDoc',
         language: 'javascript',
         views: {
             admin_users: {
