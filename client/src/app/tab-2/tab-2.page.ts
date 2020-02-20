@@ -65,8 +65,7 @@ export class Tab2Page implements OnInit {
 
   async presentActionSheet(doc) {
     let canClick = 'actionSheetButtonInvisible';
-    console.log(this.user);
-    if (doc.author === this.user.user_id) {
+    if (doc.author === this.user.user_id || this.user.roles[0] === 'admin') {
       canClick = '';
     }
     const actionSheet = await this.actionSheetController.create({

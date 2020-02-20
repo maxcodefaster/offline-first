@@ -65,7 +65,7 @@ export class Tab1Page implements OnInit {
 
   async presentActionSheet(doc) {
     let canClick = 'actionSheetButtonInvisible';
-    if (doc.author === this.user.user_id) {
+    if (doc.author === this.user.user_id || this.user.roles[0] === 'admin') {
       canClick = '';
     }
     const actionSheet = await this.actionSheetController.create({

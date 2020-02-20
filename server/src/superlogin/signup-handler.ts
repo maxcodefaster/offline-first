@@ -26,7 +26,7 @@ export const signupHandler = async (userDoc, provider) => {
         console.log(err);
     });
 
-    // add _admin role to admin user doc
+    // add admin role to admin user doc
     if (userDoc.role === 'admin') {
         let adminUserDoc;
         users.get(privateDB.match(regex)[1]).then((body) => {
@@ -45,8 +45,6 @@ export const signupHandler = async (userDoc, provider) => {
         });
     }
 
-    console.log(privateDB);
-
     // Replication handler, fetches admins and respective admin dbs and creates master<->master replications
     // fetch admin users
     let adminUsers = [];
@@ -56,7 +54,6 @@ export const signupHandler = async (userDoc, provider) => {
         body.rows.forEach((doc) => {
             adminUsers.push(doc.id);
         })
-        console.log(adminUsers);
     }).catch((err) => {
         console.log(err);
     });
@@ -69,13 +66,11 @@ export const signupHandler = async (userDoc, provider) => {
         body.rows.forEach((doc) => {
             regularUsers.push(doc.id);
         })
-        console.log(regularUsers);
     }).catch((err) => {
         console.log(err);
     });
 
     // handle replications
-
     // opts for user to admin db replication
     const optsUserToAdminRep = {
         continuous: true,
