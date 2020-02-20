@@ -45,6 +45,7 @@ export class EditDocPage implements OnInit {
 
   ngOnInit() {
     this.loadingCtrl.create({
+      translucent: true,
       message: 'Authenticating...'
     }).then((overlay) => {
       this.loading = overlay;

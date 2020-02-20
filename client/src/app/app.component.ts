@@ -5,6 +5,7 @@ import { DataService } from './services/data.service';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,13 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private dataService: DataService,
-    private zone: NgZone
+    private zone: NgZone,
+    private theme: ThemeService,
   ) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    if (prefersDark.matches) {
+      this.theme.enableDark();
+    }
     this.initializeApp();
   }
 

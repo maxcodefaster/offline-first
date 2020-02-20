@@ -32,6 +32,7 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.loadingCtrl.create({
+      translucent: true,
       message: 'Authenticating...'
     }).then((overlay) => {
       this.loading = overlay;

@@ -1,7 +1,7 @@
 <ion-header translucent="true">
     <ion-toolbar>
         <ion-buttons *ngIf="user" slot="secondary" collapse="true">
-            <ion-button fill="clear" class="avatar-button">
+            <ion-button fill="clear" class="avatar-button" [routerLink]="['/settings']">
                 <ion-avatar slot="start" class="header-avatar">
                     <img src="https://api.adorable.io/avatars/100/{{user.user_id}}">
                 </ion-avatar>
@@ -32,7 +32,7 @@
             <ion-title size="large">Shared Docs</ion-title>
         </ion-toolbar>
     </ion-header>
-    <ion-list>
+    <ion-list class="no-bg-list">
         <ion-card *ngFor="let doc of sharedDocs">
             <ion-item>
                 <ion-avatar slot="start">

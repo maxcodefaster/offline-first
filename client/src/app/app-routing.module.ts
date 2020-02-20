@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'tab-2', loadChildren: () => import('./tab-2/tab-2.module').then(m => m.Tab2PageModule) },
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },
   { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule) },
-  { path: 'edit-doc', loadChildren: './modals/edit-doc/edit-doc.module#EditDocPageModule' },
+  { path: 'edit-doc', loadChildren: () => import('./modals/edit-doc/edit-doc.module').then(m => m.EditDocPageModule) },
+  { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule) },
 ];
 
 @NgModule({
