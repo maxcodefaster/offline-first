@@ -1,21 +1,33 @@
 <ion-content class="ion-padding">
-  <div class="aligner">
-      <div class="aligner-item">
-          <h1 class="brand">
-              <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
-          </h1>
+    <div class="aligner">
+        <div class="aligner-item">
+            <h1 class="brand">
+                <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
+            </h1>
 
-          
+            <form [formGroup]="forgotPwdForm" id="forgotPwdForm">
+                <ion-item class="ion-no-padding dark-bg">
+                    <ion-input type="text" formControlName="email" placeholder="E-mail"></ion-input>
+                    <ion-icon color="medium" slot="end" name="mail-outline"></ion-icon>
+                </ion-item>
+                <ion-note>
+                </ion-note>
 
-          <hr class="hr-text"/>
+                <ion-button expand="block" color="primary" fill="solid" class="ion-margin-top" type="submit"
+                    (click)="requestPwdReset()">
+                    Request new password
+                </ion-button>
+                <ion-note *ngIf="errMessage" class="fadeInWarn" color="tertiary">
+                    {{errMessage}}
+                </ion-note>
+            </form>
 
-          <ion-button color="secondary" expand="block" fill="outline" type="button" [routerLink]="['/login']" >
-              Create an Account
-          </ion-button>
+            <hr class="hr-text" data-content="All good?" />
 
-          <div class="ion-text-center ion-padding">
-              <a [routerLink]="['/forgot-pwd']" class="forgot-pwd">Forgot password?</a>
-          </div>
-      </div>
-  </div>
+            <ion-button color="secondary" expand="block" fill="outline" type="button" [routerLink]="['/login']">
+                Login
+            </ion-button>
+
+        </div>
+    </div>
 </ion-content>

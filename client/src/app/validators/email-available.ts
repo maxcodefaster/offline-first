@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
     providedIn: 'root'
 })
-export class EmailValidator {
+export class EmailAvailableValidator {
 
     debouncer: any;
 
@@ -24,7 +24,7 @@ export class EmailValidator {
                             resolve(null);
                         }
                     }, (err) => {
-                        resolve({ 'emailInUse': true });
+                        resolve({ 'emailAvailable': true });
                     });
                 }, 1000);
             });

@@ -15,12 +15,12 @@ export const superloginConfig = {
         loginOnRegistration: true,
     },
     mailer: {
-        fromEmail: 'gmail.user@gmail.com',
+        fromEmail: 'max.heichling@gmail.com',
         options: {
             service: 'Gmail',
             auth: {
-                user: 'gmail.user@gmail.com',
-                pass: 'userpass'
+                user: 'max.heichling@gmail.com',
+                pass: 'pomodoro25'
             }
         }
     },

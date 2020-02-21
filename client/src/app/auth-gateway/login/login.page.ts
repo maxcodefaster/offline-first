@@ -54,10 +54,6 @@ export class LoginPage implements OnInit {
     return false;
   }
 
-  openRegisterPage(): void {
-    this.navCtrl.navigateBack('/register');
-  }
-
   login(): void {
     this.submitted = true;
     if (this.loginForm.valid) {

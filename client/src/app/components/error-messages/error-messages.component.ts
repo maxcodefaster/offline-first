@@ -14,7 +14,8 @@ export class ErrorMessagesComponent {
   constructor(public zone: NgZone) {
     this.errorMessages = {
       'required': 'This field must not be empty',
-      'emailInUse': 'You can\'t use this email address',
+      'emailNotAvailable': 'You can\'t use this email address',
+      'emailExists': 'You can\'t use this email address',
       'usernameInUse': 'You can\'t use this username',
       'maxlength': 'Must be less than 30 characters',
       'minlength': 'Must be more than 6 characters',

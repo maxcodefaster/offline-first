@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
 import { UsernameValidator } from '../../validators/username';
-import { EmailValidator } from '../../validators/email';
+import { EmailAvailableValidator } from '../../validators/email-available';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +27,7 @@ export class RegisterPage implements OnInit {
     private dataService: DataService,
     private loadingCtrl: LoadingController,
     private usernameValidator: UsernameValidator,
-    private emailValidator: EmailValidator,
+    private emailValidator: EmailAvailableValidator,
   ) {
     this.registerForm = this.fb.group({
       username: ['',
