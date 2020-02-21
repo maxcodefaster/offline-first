@@ -13,13 +13,13 @@
                 <ion-note>
                 </ion-note>
 
-                <ion-button expand="block" color="primary" fill="solid" class="ion-margin-top" type="submit"
+                <ion-button expand="block" [disabled]="!forgotPwdForm.valid"  color="primary" fill="solid" class="ion-margin-top" type="submit"
                     (click)="requestPwdReset()">
                     Request new password
                 </ion-button>
-                <ion-note *ngIf="errMessage" class="fadeInWarn" color="tertiary">
+                <div *ngIf="errMessage" class="fadeInWarn ion-text-center ion-padding" color="tertiary">
                     {{errMessage}}
-                </ion-note>
+                </div>
             </form>
 
             <hr class="hr-text" data-content="All good?" />

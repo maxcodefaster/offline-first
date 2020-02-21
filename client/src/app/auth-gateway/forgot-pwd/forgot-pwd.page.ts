@@ -55,14 +55,10 @@ export class ForgotPwdPage implements OnInit {
         this.loading = overlay;
         this.loading.present();
         this.authService.forgotPassword(this.forgotPwdForm.value).subscribe((res: any) => {
-          if (typeof (res.token) !== 'undefined') {
-            this.dataService.initDatabase(res);
-            this.userService.saveUserData(res);
-            this.navCtrl.navigateRoot('/home/tab-1');
-          }
+          this.errMessage = res.success;
           this.loading.dismiss();
         }, (err) => {
-          this.errMessage = Object.values(err.error.validationErrors)[0];
+          this.errMessage = 'This email is not valid';
           this.loading.dismiss();
         });
       });

@@ -54,9 +54,8 @@ export class AuthService {
     return this.http.get(SERVER_ADDRESS + 'auth/validate-email/' + encodedEmail);
   }
 
-  forgotPassword(rektEmail) {
-    console.log(rektEmail);
-    return this.http.post(SERVER_ADDRESS + 'auth/forgot-password', rektEmail);
+  forgotPassword(email) {
+    return this.http.post(SERVER_ADDRESS + 'auth/forgot-password', email);
   }
 
   reauthenticate() {
