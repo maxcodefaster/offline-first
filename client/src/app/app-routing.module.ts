@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule) },
   { path: 'forgot-pwd', loadChildren: './auth-gateway/forgot-pwd/forgot-pwd.module#ForgotPwdPageModule' },
   { path: 'reset-pwd/:token', loadChildren: './auth-gateway/reset-pwd/reset-pwd.module#ResetPwdPageModule' },
+  { path: 'signup-verification', loadChildren: './auth-gateway/signup-verification/signup-verification.module#SignupVerificationPageModule' },
 ];
 
 @NgModule({

@@ -14,8 +14,13 @@ export const superloginConfig = {
         maxFailedLogins: 5,
         lockoutTime: 600,
         tokenLife: 604800, // one week
-        loginOnRegistration: true,
+        loginOnRegistration: false,
     },
+    local: {
+        sendConfirmEmail: true,
+        requireEmailConfirm: true,
+        confirmEmailRedirectURL: 'http://localhost:8100/signup-verification',
+      },
     mailer: {
         fromEmail: 'max.heichling@gmail.com',
         options: {
