@@ -4,13 +4,13 @@
   line-height: 1em;
   position: relative;
   border: 0;
-  color: var(--ion-text-color);
+  color: var(--ion-color-medium);
   text-align: center;
   height: 1.5em;
 
   &:before {
     content: "";
-    background: var(--ion-text-color);
+    background: var(--ion-color-medium);
     position: absolute;
     left: 0;
     top: 50%;
@@ -45,6 +45,10 @@
   margin: auto;
 }
 
+.dark-bg {
+  --background: var(--ion-background-color);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -57,7 +61,6 @@
 .fadeInWarn {
   animation-name: fadeIn;
   animation-duration: 1s;
-  padding-left: 15px;
   padding-top: 3px;
 }
 

@@ -1,4 +1,4 @@
-<ion-content class="ion-padding">
+<ion-content>
     <div class="aligner">
         <div class="aligner-item">
             <h1 class="brand">
@@ -6,7 +6,7 @@
             </h1>
 
             <form [formGroup]="registerForm" id="registerForm">
-                <ion-item>
+                <ion-item class="ion-no-padding dark-bg">
                     <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
                     <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
                 </ion-item>
@@ -14,7 +14,7 @@
                     <error-messages [control]="registerForm.controls.username"></error-messages>
                 </ion-note>
 
-                <ion-item>
+                <ion-item class="ion-no-padding dark-bg">
                     <ion-input type="text" formControlName="email" placeholder="E-mail"></ion-input>
                     <ion-icon color="medium" slot="end" name="mail-outline"></ion-icon>
                 </ion-item>
@@ -22,7 +22,7 @@
                     <error-messages [control]="registerForm.controls.email"></error-messages>
                 </ion-note>
 
-                <ion-item>
+                <ion-item class="ion-no-padding dark-bg">
                     <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
                     <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
                 </ion-item>
@@ -30,16 +30,16 @@
                     <error-messages [control]="registerForm.controls.password"></error-messages>
                 </ion-note>
 
-                <ion-item *ngIf="f['password'].dirty" class="fadeIn">
+                <ion-item *ngIf="f['password'].dirty" class="fadeIn ion-no-padding dark-bg">
                     <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm password">
                     </ion-input>
                     <ion-icon color="medium" slot="end" name="key"></ion-icon>
                 </ion-item>
-                <ion-note>
+                <ion-note *ngIf="f['password'].dirty">
                     <error-messages [control]="registerForm"></error-messages>
                 </ion-note>
 
-                <ion-item>
+                <ion-item class="ion-no-padding dark-bg">
                     <ion-label color="medium">Role</ion-label>
                     <ion-select formControlName="role" value="user" placeholder="User">
                         <ion-select-option value="user">User</ion-select-option>

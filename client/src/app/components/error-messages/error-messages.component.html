@@ -1,9 +1,7 @@
-<div class="error-bg">
-	<div class="async-pending" *ngIf="control.pending">
-		<ion-spinner></ion-spinner>
-		Checking...
-	</div>
-	<div *ngIf="errorMessage !== null">
-		<span class="errMsg">{{errorMessage}}</span>
-	</div>
+<div class="async-pending" *ngIf="control.pending">
+	<ion-spinner class="ion-no-padding"></ion-spinner>
+	Checking...
+</div>
+<div *ngIf="errorMessage !== null">
+	<span class="errMsg">{{errorMessage}}</span>
 </div>

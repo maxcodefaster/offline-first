@@ -6,7 +6,7 @@
             </h1>
 
             <form [formGroup]="loginForm" id="loginForm">
-                <ion-item [ngClass]="{error_warn : hasFormError('username')}">
+                <ion-item class="ion-no-padding dark-bg">
                     <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
                     <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
                 </ion-item>
@@ -14,15 +14,15 @@
                     Please enter your username
                 </ion-note>
 
-                <ion-item [ngClass]="{error_warn : hasFormError('password')}">
+                <ion-item class="ion-no-padding dark-bg">
                     <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
                     <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
                 </ion-item>
                 <ion-note *ngIf="hasFormError('password')" class="fadeInWarn" color="tertiary">
                     Please enter your password
                 </ion-note>
-                
-                <ion-button expand="block" color="primary" fill="solid" class="login-button" type="submit"
+
+                <ion-button expand="block" color="primary" fill="solid" class="ion-no-padding dark-bg" type="submit"
                     (click)="login()">
                     Log In
                 </ion-button>

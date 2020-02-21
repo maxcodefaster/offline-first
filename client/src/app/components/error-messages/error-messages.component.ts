@@ -25,7 +25,6 @@ export class ErrorMessagesComponent {
 
   get errorMessage() {
     for (let error in this.control.errors) {
-      console.log(error)
       if (this.control.errors.hasOwnProperty(error) && (this.control.touched || (this.control.asyncValidator !== null && !this.control.pristine))) {
         return this.errorMessages[error];
       }
