@@ -1,9 +1,9 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { NavController, LoadingController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { DataService } from '../services/data.service';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../../services/auth.service';
+import { DataService } from '../../services/data.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
