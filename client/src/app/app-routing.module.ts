@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'edit-doc', loadChildren: () => import('./modals/edit-doc/edit-doc.module').then(m => m.EditDocPageModule) },
   { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule) },
   { path: 'forgot-pwd', loadChildren: './auth-gateway/forgot-pwd/forgot-pwd.module#ForgotPwdPageModule' },
+  { path: 'reset-pwd/:token', loadChildren: './auth-gateway/reset-pwd/reset-pwd.module#ResetPwdPageModule' },
 ];
 
 @NgModule({

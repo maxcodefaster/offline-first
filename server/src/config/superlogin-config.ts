@@ -1,3 +1,5 @@
+import * as path from 'path';
+
 export const superloginConfig = {
     dbServer: {
         protocol: 'http://',
@@ -22,6 +24,18 @@ export const superloginConfig = {
                 user: 'max.heichling@gmail.com',
                 pass: 'pomodoro25'
             }
+        }
+    },
+    emails: {
+        confirmEmail: {
+            subject: 'Please confirm your email',
+            template: path.join(__dirname, '../assets/email-templates/confirm-email.ejs'),
+            format: 'text'
+        },
+        forgotPassword: {
+            subject: 'Your password reset link',
+            template: path.join(__dirname, '../assets/email-templates/forgot-password.ejs'),
+            format: 'text'
         }
     },
     userDBs: {
