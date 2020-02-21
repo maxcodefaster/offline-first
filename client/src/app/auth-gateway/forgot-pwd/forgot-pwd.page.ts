@@ -21,8 +21,6 @@ export class ForgotPwdPage implements OnInit {
     private navCtrl: NavController,
     private fb: FormBuilder,
     private authService: AuthService,
-    private userService: UserService,
-    private dataService: DataService,
     private loadingCtrl: LoadingController,
   ) {
     this.forgotPwdForm = this.fb.group({
@@ -35,9 +33,6 @@ export class ForgotPwdPage implements OnInit {
       ],
     });
   }
-
-  // convenience getter for easy access to form fields
-  get f() { return this.forgotPwdForm.controls; }
 
   ngOnInit() {
     this.authService.reauthenticate().then((res) => {

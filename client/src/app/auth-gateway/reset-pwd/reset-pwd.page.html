@@ -1,9 +1,43 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>reset-pwd</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <div class="aligner">
+    <div class="aligner-item">
+      <h1 class="brand">
+        <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
+      </h1>
 
-<ion-content>
+      <form *ngIf="!success" [formGroup]="resetPwdForm" id="resetPwdForm">
+        <ion-item class="ion-no-padding standard-bg">
+          <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+          <ion-icon color="medium" slot="end" name="key-outline"></ion-icon>
+        </ion-item>
+        <ion-note>
+          <error-messages [control]="resetPwdForm.controls.password"></error-messages>
+        </ion-note>
 
+        <ion-item class="fadeIn ion-no-padding standard-bg">
+          <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm password">
+          </ion-input>
+          <ion-icon color="medium" slot="end" name="key"></ion-icon>
+        </ion-item>
+        <ion-note *ngIf="f['password'].dirty">
+          <error-messages [control]="resetPwdForm"></error-messages>
+        </ion-note>
+
+        <ion-button expand="block" [disabled]="!resetPwdForm.valid" color="primary" fill="solid" class="ion-margin-top"
+          type="submit" (click)="resetPwd()">
+          Reset Password
+        </ion-button>
+      </form>
+      <div *ngIf="errMessage" class="fadeInWarn ion-text-center ion-padding" color="tertiary">
+        {{errMessage}}
+      </div>
+
+      <hr *ngIf="success" class="hr-text" data-content="All done!" />
+
+      <ion-button *ngIf="success" color="primary" expand="block" fill="solid" type="button" [routerLink]="['/login']">
+        Login
+      </ion-button>
+
+    </div>
+  </div>
 </ion-content>

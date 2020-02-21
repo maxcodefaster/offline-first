@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
 import { ResetPwdPage } from './reset-pwd.page';
+import { ErrorMessagesComponent } from 'src/app/components/error-messages/error-messages.component';
 
 const routes: Routes = [
   {
@@ -18,9 +19,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ResetPwdPage]
+  declarations: [ResetPwdPage, ErrorMessagesComponent]
 })
 export class ResetPwdPageModule {}

@@ -50,7 +50,7 @@ ion-item {
   --inner-padding-end: 0px;
 }
 
-.dark-bg {
+.standard-bg {
   --background: var(--ion-background-color);
 }
 
@@ -63,7 +63,13 @@ ion-item {
   }
 }
 
-.fadeIn {
+.fadeInWarn {
   animation-name: fadeIn;
   animation-duration: 1s;
+  color: var(--ion-color-tertiary);
+}
+
+.forgot-pwd {
+  color: var(--ion-color-medium);
+  font-size: 14px;
 }
