@@ -1,6 +1,6 @@
-import { sharedDesignDocuments } from '../design-docs/shared-design-docs';
-import { privateDesignDocuments } from '../design-docs/private-design-docs';
-import { usersDesignDocuments } from '../design-docs/users-design-docs';
+import { sharedDesignDocuments } from './design-docs/shared-design-docs';
+import { privateDesignDocuments } from './design-docs/private-design-docs';
+import { usersDesignDocuments } from './design-docs/users-design-docs';
 import * as nano from 'nano';
 
 const couch: any = nano({

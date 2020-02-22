@@ -6,7 +6,7 @@ import { join } from 'path';
 
 import { superloginConfig } from './config/superlogin-config';
 import { SuperloginModule } from './superlogin/superlogin-module';
-import { dbSetup } from './superlogin/db-setup-handler';
+import { dbSetup } from './db-setup';
 import { signupHandler } from './superlogin/signup-handler';
 
 @Module({
