@@ -5,7 +5,7 @@
                 <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
             </h1>
 
-            <form [formGroup]="registerForm" id="registerForm">
+            <form *ngIf="!success" [formGroup]="registerForm" id="registerForm">
                 <ion-item class="ion-no-padding standard-bg">
                     <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
                     <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
@@ -56,7 +56,15 @@
                 </ion-note>
             </form>
 
-            <hr class="hr-text" data-content="Already have an account?" />
+            <div *ngIf="success" class="success-wrapper">
+                <h2 class="success-message">
+                    {{success}}
+                </h2>
+            </div>
+
+            <hr *ngIf="!success" class="hr-text" data-content="Already have an account?" />
+
+            <hr *ngIf="success" class="hr-text" data-content="Account already confirmed?" />
 
             <ion-button color="secondary" expand="block" fill="outline" [routerLink]="['/login']">
                 Login

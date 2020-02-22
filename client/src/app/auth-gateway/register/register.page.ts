@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
-import { DataService } from '../../services/data.service';
 import { UsernameValidator } from '../../validators/username';
 import { EmailAvailableValidator } from '../../validators/email-available';
 
@@ -17,14 +15,13 @@ export class RegisterPage implements OnInit {
   public registerForm: any;
   private loading: any;
   submitted = false;
+  success;
   errMessage;
 
   constructor(
     private navCtrl: NavController,
     private fb: FormBuilder,
     private authService: AuthService,
-    private userService: UserService,
-    private dataService: DataService,
     private loadingCtrl: LoadingController,
     private usernameValidator: UsernameValidator,
     private emailValidator: EmailAvailableValidator,
@@ -97,11 +94,7 @@ export class RegisterPage implements OnInit {
         this.loading = overlay;
         this.loading.present();
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
-          if (typeof (res.token) !== 'undefined') {
-            this.dataService.initDatabase(res);
-            this.userService.saveUserData(res);
-            this.navCtrl.navigateRoot('/home/tab-1');
-          }
+          this.success = 'Hurray! Your account has been created. Check your email inbox to confirm your account.';
           this.loading.dismiss();
         }, (err) => {
           this.errMessage = Object.values(err.error.validationErrors)[0];

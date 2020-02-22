@@ -63,6 +63,16 @@ ion-item {
   }
 }
 
+.success-wrapper {
+  max-width: 350px;
+  text-align: center;
+}
+
+.success-message {
+  text-align: center;
+  color: var(--ion-color-success);
+}
+
 .fadeInWarn {
   animation-name: fadeIn;
   animation-duration: 1s;

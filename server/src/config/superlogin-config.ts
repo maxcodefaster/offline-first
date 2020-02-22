@@ -22,7 +22,7 @@ export const superloginConfig = {
         confirmEmailRedirectURL: 'http://localhost:8100/signup-verification',
       },
     mailer: {
-        fromEmail: 'max.heichling@gmail.com',
+        fromEmail: 'noreply@offline-first.com',
         options: {
             service: 'Gmail',
             auth: {
