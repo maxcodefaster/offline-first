@@ -2,7 +2,6 @@ import { Module, Inject } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { join } from 'path';
 
 import { superloginConfig } from './config/superlogin-config';
 import { SuperloginModule } from './superlogin/superlogin-module';

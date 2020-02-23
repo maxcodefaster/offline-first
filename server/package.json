@@ -22,7 +22,7 @@
   "dependencies": {
     "@maxcodefaster/superlogin": "github:maxcodefaster/superlogin",
     "@nestjs/common": "^6.11.8",
-    "@nestjs/config": "^0.2.3",
+    "@nestjs/config": "^0.2.4",
     "@nestjs/core": "^6.11.8",
     "@nestjs/platform-express": "^6.11.8",
     "@wwoods/superlogin": "github:maxcodefaster/superlogin",
@@ -54,7 +54,7 @@
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.8.2"
   },
   "jest": {
     "moduleFileExtensions": [

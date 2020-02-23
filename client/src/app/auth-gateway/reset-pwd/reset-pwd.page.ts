@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
-import { DataService } from '../../services/data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
