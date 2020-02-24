@@ -3,13 +3,10 @@
 [A more detailed documentation is available here](https://maxperience.blog/post/webdev-endgame-2020/)
 
 This project is a template to build an offline first web application with authentication, that can be ported easily to other platforms (Android, iOS, Electron). It runs on the **CAIN Stack** which consists of following technologies:
-- Ionic Angular as frontend framework
+- CouchDB as remote server database /PouchDB as local database
+- Angular as frontend framework
+- Ionic for cross platform components
 - NestJS as backend framework
-- CouchDB as remote server database
-- PouchDB as local database
-- Superlogin for user authentication and roles
-- Nano for business logic
-- Capacitor as native app wrapper
 
 ## Installation
 Requirements: Installed Ionic Cli, NodeJS, NestJS and CouchDB locally. Disable the cors policy in couchdb and register an admin (credentials can be edited in the .env file, have a look at the env.config.json in the server/config folder).
