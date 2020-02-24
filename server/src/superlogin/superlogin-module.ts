@@ -1,10 +1,6 @@
 import { INestApplication, Module, DynamicModule } from "@nestjs/common";
 import * as SuperLogin from '@maxcodefaster/superlogin';
 import { json } from "body-parser";
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
-import path = require("path");
-import { ConfigService } from "@nestjs/config";
 
 @Module({})
 export class SuperloginModule {
