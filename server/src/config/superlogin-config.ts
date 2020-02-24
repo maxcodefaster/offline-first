@@ -3,9 +3,9 @@ import * as path from 'path';
 export const superloginConfig = {
     dbServer: {
         protocol: 'http://',
-        host: 'localhost:5984',
-        user: 'admin',
-        password: 'couchdb',
+        host: process.env.COUCHDB_HOST + ':' + process.env.COUCHDB_PORT,
+        user: process.env.COUCHDB_USR,
+        password: process.env.COUCHDB_PW,
         cloudant: false,
         userDB: 'users',
         couchAuthDB: '_users'
@@ -26,8 +26,8 @@ export const superloginConfig = {
         options: {
             service: 'Gmail',
             auth: {
-                user: 'max.heichling@gmail.com',
-                pass: 'pomodoro25'
+                user: process.env.MAILER_USR,
+                pass: process.env.MAILER_PW
             }
         }
     },

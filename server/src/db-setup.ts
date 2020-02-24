@@ -1,13 +1,14 @@
+import * as nano from 'nano';
 import { sharedDesignDocuments } from './design-docs/shared-design-docs';
 import { privateDesignDocuments } from './design-docs/private-design-docs';
 import { usersDesignDocuments } from './design-docs/users-design-docs';
-import * as nano from 'nano';
-
-const couch: any = nano({
-    url: 'http://admin:couchdb@localhost:5984'
-});
 
 export const dbSetup = async () => {
+    
+    const couch: any = nano({
+        url: 'http://' + process.env.COUCHDB_USR + ':' + process.env.COUCHDB_PW + '@' + process.env.COUCHDB_HOST + ':' + process.env.COUCHDB_PORT
+    });
+
     // give time for superlogin to set up dbs
     await new Promise(resolve => setTimeout(resolve, 250));
 

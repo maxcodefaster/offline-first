@@ -1,10 +1,11 @@
 import * as nano from 'nano';
 
-const couch: any = nano({
-    url: 'http://admin:couchdb@localhost:5984'
-});
-
 export const signupHandler = async (userDoc, provider) => {
+
+    const couch: any = nano({
+        url: 'http://' + process.env.COUCHDB_USR + ':' + process.env.COUCHDB_PW + '@' + process.env.COUCHDB_HOST + ':' + process.env.COUCHDB_PORT
+    });
+
     // define couchDB variables
     const users = couch.use('users');
 

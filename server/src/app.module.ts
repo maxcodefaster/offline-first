@@ -10,7 +10,9 @@ import { signupHandler } from './superlogin/signup-handler';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     SuperloginModule.forRoot(superloginConfig),
   ],
   controllers: [AppController],
