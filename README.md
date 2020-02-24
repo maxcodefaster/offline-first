@@ -2,7 +2,7 @@
 
 [A more detailed documentation is available here](https://maxperience.blog/post/webdev-endgame-2020/)
 
-This project is a template to build an offline first web application with authentication, that can be ported easily to other platforms (Android, iOS, Electron). It runs on the following technologies:
+This project is a template to build an offline first web application with authentication, that can be ported easily to other platforms (Android, iOS, Electron). It runs on the **CAIN Stack** which consists of following technologies:
 - Ionic Angular as frontend framework
 - NestJS as backend framework
 - CouchDB as remote server database
@@ -16,3 +16,14 @@ Requirements: Installed Ionic Cli, NodeJS, NestJS and CouchDB locally. Disable t
 
 Install the client dependencies by `cd client` and running `npm install`. To install server dependencies you have to include the `--no-optional` flag to the npm install command. Start the client framework by running `ionic serve`, the server can be started by running `npm run start:dev`.
 
+## .env
+
+Put a .env file into the root of the server folder
+
+DOMAIN=
+COUCHDB_HOST=
+COUCHDB_PORT=
+COUCHDB_USR=
+COUCHDB_PW=
+MAILER_USR=
+MAILER_PW=
