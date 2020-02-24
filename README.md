@@ -19,7 +19,7 @@ Install the client dependencies by `cd client` and running `npm install`. To ins
 ## .env
 
 Put a .env file into the root of the server folder
-
+```
 DOMAIN=
 COUCHDB_HOST=
 COUCHDB_PORT=
@@ -27,3 +27,4 @@ COUCHDB_USR=
 COUCHDB_PW=
 MAILER_USR=
 MAILER_PW=
+```
