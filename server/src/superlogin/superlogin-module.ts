@@ -9,14 +9,6 @@ import { ConfigService } from "@nestjs/config";
 @Module({})
 export class SuperloginModule {
 
-    private readonly envConfig;
-
-    constructor() {
-        // const filePath = `${process.env.NODE_ENV || 'development'}.env`;
-        // const envFile = path.resolve(__dirname, '../../', filePath);
-        // this.envConfig = dotenv.parse(fs.readFileSync(envFile));
-    }
-
     static forRoot(options: any): DynamicModule {
         const prov = {
             provide: 'superlogin',
