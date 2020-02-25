@@ -5,7 +5,7 @@
                 <ion-icon name="cloud-offline"></ion-icon><br>Offline First Template
             </h1>
 
-            <form *ngIf="!success" [formGroup]="registerForm" id="registerForm">
+            <form *ngIf="!success" [formGroup]="registerForm" id="registerForm" onsubmit="createAccount()">
                 <ion-item class="ion-no-padding standard-bg">
                     <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
                     <ion-icon color="medium" slot="end" name="person-outline"></ion-icon>
